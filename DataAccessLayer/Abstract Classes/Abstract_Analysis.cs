@@ -28,7 +28,8 @@ namespace DataAccessLayer.Abstract_Classes
                 User.IsAdmin = true;
             else
                 User.IsAdmin = false;
-                return true;
+            db.SaveChanges();
+            return true;
         }
 
         public void Dispose()
