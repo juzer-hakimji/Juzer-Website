@@ -1,0 +1,644 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="JuzerWebsiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DEV_Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DEV_Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DEV_Menu">
+          <Key>
+            <PropertyRef Name="MenuItemId" />
+          </Key>
+          <Property Name="MenuItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuItemName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAdminMenu" Type="bit" Nullable="false" />
+          <Property Name="MenuURL" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DEV_TypeOfTransaction">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MST_UserInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TRN_Expense">
+          <Key>
+            <PropertyRef Name="ExpenseId" />
+          </Key>
+          <Property Name="ExpenseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TRN_Income">
+          <Key>
+            <PropertyRef Name="IncomeId" />
+          </Key>
+          <Property Name="IncomeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TRN_Notes">
+          <Key>
+            <PropertyRef Name="NoteId" />
+          </Key>
+          <Property Name="NoteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="NoteText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsImportant" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DEV_Category_DEV_TypeOfTransaction">
+          <End Role="DEV_TypeOfTransaction" Type="Self.DEV_TypeOfTransaction" Multiplicity="1" />
+          <End Role="DEV_Category" Type="Self.DEV_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEV_TypeOfTransaction">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="DEV_Category">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MST_UserInfo_DEV_Country">
+          <End Role="DEV_Country" Type="Self.DEV_Country" Multiplicity="1" />
+          <End Role="MST_UserInfo" Type="Self.MST_UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEV_Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="MST_UserInfo">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_Expense_DEV_Category">
+          <End Role="DEV_Category" Type="Self.DEV_Category" Multiplicity="1" />
+          <End Role="TRN_Expense" Type="Self.TRN_Expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEV_Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="TRN_Expense">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_Expense_MST_UserInfo">
+          <End Role="MST_UserInfo" Type="Self.MST_UserInfo" Multiplicity="1" />
+          <End Role="TRN_Expense" Type="Self.TRN_Expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TRN_Expense">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_Income_DEV_Category">
+          <End Role="DEV_Category" Type="Self.DEV_Category" Multiplicity="1" />
+          <End Role="TRN_Income" Type="Self.TRN_Income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEV_Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="TRN_Income">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_Income_MST_UserInfo">
+          <End Role="MST_UserInfo" Type="Self.MST_UserInfo" Multiplicity="1" />
+          <End Role="TRN_Income" Type="Self.TRN_Income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TRN_Income">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_Notes_MST_UserInfo">
+          <End Role="MST_UserInfo" Type="Self.MST_UserInfo" Multiplicity="1" />
+          <End Role="TRN_Notes" Type="Self.TRN_Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TRN_Notes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="usp_GetExpenseList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_GetIncomesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_GetNotesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="JuzerWebsiteModelStoreContainer">
+          <EntitySet Name="DEV_Category" EntityType="Self.DEV_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DEV_Country" EntityType="Self.DEV_Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DEV_Menu" EntityType="Self.DEV_Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DEV_TypeOfTransaction" EntityType="Self.DEV_TypeOfTransaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MST_UserInfo" EntityType="Self.MST_UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRN_Expense" EntityType="Self.TRN_Expense" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRN_Income" EntityType="Self.TRN_Income" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRN_Notes" EntityType="Self.TRN_Notes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DEV_Category_DEV_TypeOfTransaction" Association="Self.FK_DEV_Category_DEV_TypeOfTransaction">
+            <End Role="DEV_TypeOfTransaction" EntitySet="DEV_TypeOfTransaction" />
+            <End Role="DEV_Category" EntitySet="DEV_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MST_UserInfo_DEV_Country" Association="Self.FK_MST_UserInfo_DEV_Country">
+            <End Role="DEV_Country" EntitySet="DEV_Country" />
+            <End Role="MST_UserInfo" EntitySet="MST_UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_Expense_DEV_Category" Association="Self.FK_TRN_Expense_DEV_Category">
+            <End Role="DEV_Category" EntitySet="DEV_Category" />
+            <End Role="TRN_Expense" EntitySet="TRN_Expense" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_Expense_MST_UserInfo" Association="Self.FK_TRN_Expense_MST_UserInfo">
+            <End Role="MST_UserInfo" EntitySet="MST_UserInfo" />
+            <End Role="TRN_Expense" EntitySet="TRN_Expense" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_Income_DEV_Category" Association="Self.FK_TRN_Income_DEV_Category">
+            <End Role="DEV_Category" EntitySet="DEV_Category" />
+            <End Role="TRN_Income" EntitySet="TRN_Income" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_Income_MST_UserInfo" Association="Self.FK_TRN_Income_MST_UserInfo">
+            <End Role="MST_UserInfo" EntitySet="MST_UserInfo" />
+            <End Role="TRN_Income" EntitySet="TRN_Income" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_Notes_MST_UserInfo" Association="Self.FK_TRN_Notes_MST_UserInfo">
+            <End Role="MST_UserInfo" EntitySet="MST_UserInfo" />
+            <End Role="TRN_Notes" EntitySet="TRN_Notes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JuzerWebsiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DEV_Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DEV_TypeOfTransaction" Relationship="Self.FK_DEV_Category_DEV_TypeOfTransaction" FromRole="DEV_Category" ToRole="DEV_TypeOfTransaction" />
+          <NavigationProperty Name="TRN_Expense" Relationship="Self.FK_TRN_Expense_DEV_Category" FromRole="DEV_Category" ToRole="TRN_Expense" />
+          <NavigationProperty Name="TRN_Income" Relationship="Self.FK_TRN_Income_DEV_Category" FromRole="DEV_Category" ToRole="TRN_Income" />
+        </EntityType>
+        <EntityType Name="DEV_Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MST_UserInfo" Relationship="Self.FK_MST_UserInfo_DEV_Country" FromRole="DEV_Country" ToRole="MST_UserInfo" />
+        </EntityType>
+        <EntityType Name="DEV_Menu">
+          <Key>
+            <PropertyRef Name="MenuItemId" />
+          </Key>
+          <Property Name="MenuItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsAdminMenu" Type="Boolean" Nullable="false" />
+          <Property Name="MenuURL" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DEV_TypeOfTransaction">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DEV_Category" Relationship="Self.FK_DEV_Category_DEV_TypeOfTransaction" FromRole="DEV_TypeOfTransaction" ToRole="DEV_Category" />
+        </EntityType>
+        <EntityType Name="MST_UserInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DEV_Country" Relationship="Self.FK_MST_UserInfo_DEV_Country" FromRole="MST_UserInfo" ToRole="DEV_Country" />
+          <NavigationProperty Name="TRN_Expense" Relationship="Self.FK_TRN_Expense_MST_UserInfo" FromRole="MST_UserInfo" ToRole="TRN_Expense" />
+          <NavigationProperty Name="TRN_Income" Relationship="Self.FK_TRN_Income_MST_UserInfo" FromRole="MST_UserInfo" ToRole="TRN_Income" />
+          <NavigationProperty Name="TRN_Notes" Relationship="Self.FK_TRN_Notes_MST_UserInfo" FromRole="MST_UserInfo" ToRole="TRN_Notes" />
+        </EntityType>
+        <EntityType Name="TRN_Expense">
+          <Key>
+            <PropertyRef Name="ExpenseId" />
+          </Key>
+          <Property Name="ExpenseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DEV_Category" Relationship="Self.FK_TRN_Expense_DEV_Category" FromRole="TRN_Expense" ToRole="DEV_Category" />
+          <NavigationProperty Name="MST_UserInfo" Relationship="Self.FK_TRN_Expense_MST_UserInfo" FromRole="TRN_Expense" ToRole="MST_UserInfo" />
+        </EntityType>
+        <EntityType Name="TRN_Income">
+          <Key>
+            <PropertyRef Name="IncomeId" />
+          </Key>
+          <Property Name="IncomeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DEV_Category" Relationship="Self.FK_TRN_Income_DEV_Category" FromRole="TRN_Income" ToRole="DEV_Category" />
+          <NavigationProperty Name="MST_UserInfo" Relationship="Self.FK_TRN_Income_MST_UserInfo" FromRole="TRN_Income" ToRole="MST_UserInfo" />
+        </EntityType>
+        <EntityType Name="TRN_Notes">
+          <Key>
+            <PropertyRef Name="NoteId" />
+          </Key>
+          <Property Name="NoteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NoteText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsImportant" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MST_UserInfo" Relationship="Self.FK_TRN_Notes_MST_UserInfo" FromRole="TRN_Notes" ToRole="MST_UserInfo" />
+        </EntityType>
+        <Association Name="FK_DEV_Category_DEV_TypeOfTransaction">
+          <End Role="DEV_TypeOfTransaction" Type="Self.DEV_TypeOfTransaction" Multiplicity="1" />
+          <End Role="DEV_Category" Type="Self.DEV_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEV_TypeOfTransaction">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="DEV_Category">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_Expense_DEV_Category">
+          <End Role="DEV_Category" Type="Self.DEV_Category" Multiplicity="1" />
+          <End Role="TRN_Expense" Type="Self.TRN_Expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEV_Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="TRN_Expense">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_Income_DEV_Category">
+          <End Role="DEV_Category" Type="Self.DEV_Category" Multiplicity="1" />
+          <End Role="TRN_Income" Type="Self.TRN_Income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEV_Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="TRN_Income">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MST_UserInfo_DEV_Country">
+          <End Role="DEV_Country" Type="Self.DEV_Country" Multiplicity="1" />
+          <End Role="MST_UserInfo" Type="Self.MST_UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEV_Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="MST_UserInfo">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_Expense_MST_UserInfo">
+          <End Role="MST_UserInfo" Type="Self.MST_UserInfo" Multiplicity="1" />
+          <End Role="TRN_Expense" Type="Self.TRN_Expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TRN_Expense">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_Income_MST_UserInfo">
+          <End Role="MST_UserInfo" Type="Self.MST_UserInfo" Multiplicity="1" />
+          <End Role="TRN_Income" Type="Self.TRN_Income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TRN_Income">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_Notes_MST_UserInfo">
+          <End Role="MST_UserInfo" Type="Self.MST_UserInfo" Multiplicity="1" />
+          <End Role="TRN_Notes" Type="Self.TRN_Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_UserInfo">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TRN_Notes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JuzerWebsiteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DEV_Category" EntityType="Self.DEV_Category" />
+          <EntitySet Name="DEV_Country" EntityType="Self.DEV_Country" />
+          <EntitySet Name="DEV_Menu" EntityType="Self.DEV_Menu" />
+          <EntitySet Name="DEV_TypeOfTransaction" EntityType="Self.DEV_TypeOfTransaction" />
+          <EntitySet Name="MST_UserInfo" EntityType="Self.MST_UserInfo" />
+          <EntitySet Name="TRN_Expense" EntityType="Self.TRN_Expense" />
+          <EntitySet Name="TRN_Income" EntityType="Self.TRN_Income" />
+          <EntitySet Name="TRN_Notes" EntityType="Self.TRN_Notes" />
+          <AssociationSet Name="FK_DEV_Category_DEV_TypeOfTransaction" Association="Self.FK_DEV_Category_DEV_TypeOfTransaction">
+            <End Role="DEV_TypeOfTransaction" EntitySet="DEV_TypeOfTransaction" />
+            <End Role="DEV_Category" EntitySet="DEV_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_Expense_DEV_Category" Association="Self.FK_TRN_Expense_DEV_Category">
+            <End Role="DEV_Category" EntitySet="DEV_Category" />
+            <End Role="TRN_Expense" EntitySet="TRN_Expense" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_Income_DEV_Category" Association="Self.FK_TRN_Income_DEV_Category">
+            <End Role="DEV_Category" EntitySet="DEV_Category" />
+            <End Role="TRN_Income" EntitySet="TRN_Income" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MST_UserInfo_DEV_Country" Association="Self.FK_MST_UserInfo_DEV_Country">
+            <End Role="DEV_Country" EntitySet="DEV_Country" />
+            <End Role="MST_UserInfo" EntitySet="MST_UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_Expense_MST_UserInfo" Association="Self.FK_TRN_Expense_MST_UserInfo">
+            <End Role="MST_UserInfo" EntitySet="MST_UserInfo" />
+            <End Role="TRN_Expense" EntitySet="TRN_Expense" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_Income_MST_UserInfo" Association="Self.FK_TRN_Income_MST_UserInfo">
+            <End Role="MST_UserInfo" EntitySet="MST_UserInfo" />
+            <End Role="TRN_Income" EntitySet="TRN_Income" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_Notes_MST_UserInfo" Association="Self.FK_TRN_Notes_MST_UserInfo">
+            <End Role="MST_UserInfo" EntitySet="MST_UserInfo" />
+            <End Role="TRN_Notes" EntitySet="TRN_Notes" />
+          </AssociationSet>
+          <FunctionImport Name="usp_GetExpenseList" ReturnType="Collection(JuzerWebsiteModel.usp_GetExpenseList_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetIncomesList" ReturnType="Collection(JuzerWebsiteModel.usp_GetIncomesList_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetNotesList" ReturnType="Collection(JuzerWebsiteModel.usp_GetNotesList_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="usp_GetExpenseList_Result">
+          <Property Type="Int32" Name="ExpenseId" Nullable="false" />
+          <Property Type="Int32" Name="CategoryId" Nullable="false" />
+          <Property Type="Int32" Name="Amount" Nullable="false" />
+          <Property Type="String" Name="Note" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_GetIncomesList_Result">
+          <Property Type="Int32" Name="IncomeId" Nullable="false" />
+          <Property Type="Int32" Name="CategoryId" Nullable="false" />
+          <Property Type="Int32" Name="Amount" Nullable="false" />
+          <Property Type="String" Name="Note" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_GetNotesList_Result">
+          <Property Type="Int32" Name="NoteId" Nullable="false" />
+          <Property Type="String" Name="Subject" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="NoteText" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Boolean" Name="IsImportant" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JuzerWebsiteModelStoreContainer" CdmEntityContainer="JuzerWebsiteEntities">
+          <EntitySetMapping Name="DEV_Category">
+            <EntityTypeMapping TypeName="JuzerWebsiteModel.DEV_Category">
+              <MappingFragment StoreEntitySet="DEV_Category">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEV_Country">
+            <EntityTypeMapping TypeName="JuzerWebsiteModel.DEV_Country">
+              <MappingFragment StoreEntitySet="DEV_Country">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEV_Menu">
+            <EntityTypeMapping TypeName="JuzerWebsiteModel.DEV_Menu">
+              <MappingFragment StoreEntitySet="DEV_Menu">
+                <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
+                <ScalarProperty Name="MenuItemName" ColumnName="MenuItemName" />
+                <ScalarProperty Name="IsAdminMenu" ColumnName="IsAdminMenu" />
+                <ScalarProperty Name="MenuURL" ColumnName="MenuURL" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEV_TypeOfTransaction">
+            <EntityTypeMapping TypeName="JuzerWebsiteModel.DEV_TypeOfTransaction">
+              <MappingFragment StoreEntitySet="DEV_TypeOfTransaction">
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MST_UserInfo">
+            <EntityTypeMapping TypeName="JuzerWebsiteModel.MST_UserInfo">
+              <MappingFragment StoreEntitySet="MST_UserInfo">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRN_Expense">
+            <EntityTypeMapping TypeName="JuzerWebsiteModel.TRN_Expense">
+              <MappingFragment StoreEntitySet="TRN_Expense">
+                <ScalarProperty Name="ExpenseId" ColumnName="ExpenseId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRN_Income">
+            <EntityTypeMapping TypeName="JuzerWebsiteModel.TRN_Income">
+              <MappingFragment StoreEntitySet="TRN_Income">
+                <ScalarProperty Name="IncomeId" ColumnName="IncomeId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRN_Notes">
+            <EntityTypeMapping TypeName="JuzerWebsiteModel.TRN_Notes">
+              <MappingFragment StoreEntitySet="TRN_Notes">
+                <ScalarProperty Name="NoteId" ColumnName="NoteId" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="NoteText" ColumnName="NoteText" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsImportant" ColumnName="IsImportant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetExpenseList" FunctionName="JuzerWebsiteModel.Store.usp_GetExpenseList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JuzerWebsiteModel.usp_GetExpenseList_Result">
+                <ScalarProperty Name="ExpenseId" ColumnName="ExpenseId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetIncomesList" FunctionName="JuzerWebsiteModel.Store.usp_GetIncomesList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JuzerWebsiteModel.usp_GetIncomesList_Result">
+                <ScalarProperty Name="IncomeId" ColumnName="IncomeId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetNotesList" FunctionName="JuzerWebsiteModel.Store.usp_GetNotesList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JuzerWebsiteModel.usp_GetNotesList_Result">
+                <ScalarProperty Name="NoteId" ColumnName="NoteId" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="NoteText" ColumnName="NoteText" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsImportant" ColumnName="IsImportant" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuzerWebsite", "JuzerWebsite\JuzerWebsite.csproj", "{9AD58750-2466-40C6-A9D9-16EA2EBA7198}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "View And Controller", "View And Controller", "{86883101-74D6-4AEE-8A32-3431555B5A7B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{A8328197-9585-432E-BE23-2F56B7ABAE81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModel", "ViewModel", "{1528B84A-416E-495D-B0F3-75C37C6853F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Access Layer", "Data Access Layer", "{C8F29B5C-C9F6-4E0C-962D-87AFDDDF39E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{C526403F-43AC-402B-B9C5-BD00E6D66EDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{C2DFAC34-E21E-46BE-BD94-DCD84CEF6A83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessEntities", "BusinessEntities\BusinessEntities.csproj", "{D5652D30-4DDC-42DD-BF1A-CC0B3F8ACD28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{A67EA745-F8DF-4657-94BC-8551357C9096}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9AD58750-2466-40C6-A9D9-16EA2EBA7198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AD58750-2466-40C6-A9D9-16EA2EBA7198}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AD58750-2466-40C6-A9D9-16EA2EBA7198}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AD58750-2466-40C6-A9D9-16EA2EBA7198}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C526403F-43AC-402B-B9C5-BD00E6D66EDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C526403F-43AC-402B-B9C5-BD00E6D66EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C526403F-43AC-402B-B9C5-BD00E6D66EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C526403F-43AC-402B-B9C5-BD00E6D66EDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2DFAC34-E21E-46BE-BD94-DCD84CEF6A83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2DFAC34-E21E-46BE-BD94-DCD84CEF6A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2DFAC34-E21E-46BE-BD94-DCD84CEF6A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2DFAC34-E21E-46BE-BD94-DCD84CEF6A83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5652D30-4DDC-42DD-BF1A-CC0B3F8ACD28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5652D30-4DDC-42DD-BF1A-CC0B3F8ACD28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5652D30-4DDC-42DD-BF1A-CC0B3F8ACD28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5652D30-4DDC-42DD-BF1A-CC0B3F8ACD28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A67EA745-F8DF-4657-94BC-8551357C9096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A67EA745-F8DF-4657-94BC-8551357C9096}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A67EA745-F8DF-4657-94BC-8551357C9096}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A67EA745-F8DF-4657-94BC-8551357C9096}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9AD58750-2466-40C6-A9D9-16EA2EBA7198} = {86883101-74D6-4AEE-8A32-3431555B5A7B}
+		{C526403F-43AC-402B-B9C5-BD00E6D66EDA} = {C8F29B5C-C9F6-4E0C-962D-87AFDDDF39E4}
+		{C2DFAC34-E21E-46BE-BD94-DCD84CEF6A83} = {A8328197-9585-432E-BE23-2F56B7ABAE81}
+		{D5652D30-4DDC-42DD-BF1A-CC0B3F8ACD28} = {A8328197-9585-432E-BE23-2F56B7ABAE81}
+		{A67EA745-F8DF-4657-94BC-8551357C9096} = {1528B84A-416E-495D-B0F3-75C37C6853F5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD46085F-C417-4B5B-ADA7-A7EB09E2F860}
+	EndGlobalSection
+EndGlobal
