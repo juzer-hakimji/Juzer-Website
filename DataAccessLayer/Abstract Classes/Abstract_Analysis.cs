@@ -11,6 +11,9 @@ namespace DataAccessLayer.Abstract_Classes
     {
         JuzerWebsiteEntities db;
 
+
+
+
         public Abstract_Analysis()
         {
             db = new JuzerWebsiteEntities();
