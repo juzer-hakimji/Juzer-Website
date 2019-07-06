@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Base_Classes
 {
-    public abstract class BaseSpending
+    public abstract class BaseDAL
     {
         public bool ExecuteDALMethod<T>(JuzerWebsiteEntities db, Func<JuzerWebsiteEntities, T, bool> Func, T Obj)
         {

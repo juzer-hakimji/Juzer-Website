@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract_Classes
 {
-    public abstract class Abstract_Spending : BaseSpending, IDisposable
+    public abstract class Abstract_Spending : BaseDAL, IDisposable
     {
 
         JuzerWebsiteEntities db;

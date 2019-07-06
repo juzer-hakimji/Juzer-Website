@@ -1,4 +1,5 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
+using DataAccessLayer.Base_Classes;
 using DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract_Classes
 {
-    public abstract class Abstract_Notes : IBasicOperationsNotes , IDisposable
+    public abstract class Abstract_Notes : BaseDAL , IBasicOperationsNotes , IDisposable
     {
         JuzerWebsiteEntities db;
 
@@ -24,29 +25,42 @@ namespace DataAccessLayer.Abstract_Classes
 
         public bool Insert(TRN_Notes p_TRN_Notes)
         {
-            db.TRN_Notes.Add(p_TRN_Notes);
-            db.SaveChanges();
-            return true;
+            return this.ExecuteDALMethod<TRN_Notes>(db, (DataContext, P_TRN_Notes) =>
+            {
+                db.TRN_Notes.Add(P_TRN_Notes);
+                db.SaveChanges();
+                return true;
+            }, p_TRN_Notes);
+
+            
         }
 
         public bool Update(TRN_Notes p_TRN_Notes)
         {
-            TRN_Notes Obj = db.TRN_Notes.Find(p_TRN_Notes.NoteId);
-            Obj.Subject = p_TRN_Notes.Subject;
-            Obj.NoteText = p_TRN_Notes.NoteText;
-            Obj.CreatedDate = p_TRN_Notes.CreatedDate;
-            Obj.ModifiedDate = p_TRN_Notes.ModifiedDate;
-            Obj.IsImportant = p_TRN_Notes.IsImportant;
-            db.SaveChanges();
-            return true;
+            return this.ExecuteDALMethod<TRN_Notes>(db, (DataContext, P_TRN_Notes) =>
+            {
+                TRN_Notes Obj = DataContext.TRN_Notes.Find(P_TRN_Notes.NoteId);
+                Obj.Subject = P_TRN_Notes.Subject;
+                Obj.NoteText = P_TRN_Notes.NoteText;
+                Obj.CreatedDate = P_TRN_Notes.CreatedDate;
+                Obj.ModifiedDate = P_TRN_Notes.ModifiedDate;
+                Obj.IsImportant = P_TRN_Notes.IsImportant;
+                DataContext.SaveChanges();
+                return true;
+            }, p_TRN_Notes);
         }
 
         public bool Delete(int p_NoteId)
         {
-            TRN_Notes Obj = db.TRN_Notes.Find(p_NoteId);
-            Obj.IsActive = false;
-            db.SaveChanges();
-            return true;
+            TRN_Notes TRN_Notes = new TRN_Notes();
+            TRN_Notes.NoteId = p_NoteId;
+            return this.ExecuteDALMethod<TRN_Notes>(db, (DataContext, P_TRN_Notes) =>
+            {
+                TRN_Notes Obj = DataContext.TRN_Notes.Find(P_TRN_Notes.NoteId);
+                Obj.IsActive = false;
+                DataContext.SaveChanges();
+                return true;
+            }, TRN_Notes);
         }
 
         public void Dispose()
