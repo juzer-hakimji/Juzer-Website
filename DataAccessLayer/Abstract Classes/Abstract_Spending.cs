@@ -14,22 +14,22 @@ namespace DataAccessLayer.Abstract_Classes
 
         JuzerWebsiteEntities db;
 
-        public Abstract_Spending()
+        protected Abstract_Spending()
         {
             db = new JuzerWebsiteEntities();
         }
 
-        public List<usp_GetExpenseList_Result> SelectExpense(int p_UserId)
+        protected List<usp_GetExpenseList_Result> SelectExpense(int p_UserId)
         {
             return db.usp_GetExpenseList(p_UserId).ToList();
         }
 
-        public List<usp_GetIncomesList_Result> SelectIncome(int p_UserId)
+        protected List<usp_GetIncomesList_Result> SelectIncome(int p_UserId)
         {
             return db.usp_GetIncomesList(p_UserId).ToList();
         }
 
-        public bool InsertExpense(TRN_Expense p_TRN_Expense)
+        protected bool InsertExpense(TRN_Expense p_TRN_Expense)
         {
             return this.ExecuteDALMethod<TRN_Expense>(db, (DataContext, P_TRN_Expense) =>
             {
@@ -39,7 +39,7 @@ namespace DataAccessLayer.Abstract_Classes
             }, p_TRN_Expense);
         }
 
-        public bool InsertIncome(TRN_Income p_TRN_Income)
+        protected bool InsertIncome(TRN_Income p_TRN_Income)
         {
             return this.ExecuteDALMethod<TRN_Income>(db, (DataContext, P_TRN_Income) =>
             {
@@ -49,7 +49,7 @@ namespace DataAccessLayer.Abstract_Classes
             }, p_TRN_Income);
         }
 
-        public bool UpdateExpense(TRN_Expense p_TRN_Expense)
+        protected bool UpdateExpense(TRN_Expense p_TRN_Expense)
         {
             return this.ExecuteDALMethod<TRN_Expense>(db, (DataContext, P_TRN_Expense) =>
             {
@@ -64,7 +64,7 @@ namespace DataAccessLayer.Abstract_Classes
             }, p_TRN_Expense);
         }
 
-        public bool UpdateIncome(TRN_Income p_TRN_Income)
+        protected bool UpdateIncome(TRN_Income p_TRN_Income)
         {
             return this.ExecuteDALMethod<TRN_Income>(db, (DataContext, P_TRN_Income) =>
             {
@@ -79,7 +79,7 @@ namespace DataAccessLayer.Abstract_Classes
             }, p_TRN_Income);
         }
 
-        public bool DeleteExpense(int p_ExpenseId)
+        protected bool DeleteExpense(int p_ExpenseId)
         {
             TRN_Expense TRN_Expense = new TRN_Expense();
             TRN_Expense.ExpenseId = p_ExpenseId;
@@ -92,7 +92,7 @@ namespace DataAccessLayer.Abstract_Classes
             }, TRN_Expense);
         }
 
-        public bool DeleteIncome(int p_IncomeId)
+        protected bool DeleteIncome(int p_IncomeId)
         {
             TRN_Income TRN_Income = new TRN_Income();
             TRN_Income.IncomeId = p_IncomeId;

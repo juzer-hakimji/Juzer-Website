@@ -45,7 +45,8 @@
     <Compile Include="Business Logic Classes\BL_Home.cs" />
     <Compile Include="Business Logic Classes\BL_Notes.cs" />
     <Compile Include="Business Logic Classes\BL_Spending.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="Business Logic Classes\BL_User.cs" />
+    <Compile Include="MD5 Hash Class\MD5Hashing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +58,11 @@
       <Project>{c526403f-43ac-402b-b9c5-bd00e6d66eda}</Project>
       <Name>DataAccessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{a67ea745-f8df-4657-94bc-8551357c9096}</Project>
+      <Name>ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -21,15 +21,22 @@ namespace DataAccessLayer.Abstract_Classes
             //get number of users and new users monthwise and yearwise using stored procedure
         }
 
-        public bool AddOrRemoveAdmin(int UserId, bool IsAdmin)
+        public bool AddOrRemoveAdmin(int p_UserId, bool p_IsAdmin)
         {
-            MST_UserInfo User = db.MST_UserInfo.Find(UserId);
-            if (IsAdmin)
-                User.IsAdmin = true;
-            else
-                User.IsAdmin = false;
-            db.SaveChanges();
-            return true;
+            try
+            {
+                MST_UserInfo User = db.MST_UserInfo.Find(p_UserId);
+                if (p_IsAdmin)
+                    User.IsAdmin = true;
+                else
+                    User.IsAdmin = false;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public void Dispose()

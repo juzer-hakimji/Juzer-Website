@@ -12,7 +12,7 @@ namespace DataAccessLayer.Base_Classes
 {
     public abstract class BaseDAL
     {
-        public bool ExecuteDALMethod<T>(JuzerWebsiteEntities db, Func<JuzerWebsiteEntities, T, bool> Func, T Obj)
+        protected bool ExecuteDALMethod<T>(JuzerWebsiteEntities db, Func<JuzerWebsiteEntities, T, bool> Func, T Obj)
         {
             try
             {

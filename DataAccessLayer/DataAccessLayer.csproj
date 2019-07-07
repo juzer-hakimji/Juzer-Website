@@ -46,13 +46,15 @@
     <Compile Include="Abstract Classes\Abstract_Home.cs" />
     <Compile Include="Abstract Classes\Abstract_Notes.cs" />
     <Compile Include="Abstract Classes\Abstract_Spending.cs" />
+    <Compile Include="Abstract Classes\Abstract_User.cs" />
     <Compile Include="Base Classes\BaseDAL.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Data Access Classes\DAL_Analysis.cs" />
     <Compile Include="Data Access Classes\DAL_Home.cs" />
     <Compile Include="Data Access Classes\DAL_Notes.cs" />
     <Compile Include="Data Access Classes\DAL_Spending.cs" />
+    <Compile Include="Data Access Classes\DAL_User.cs" />
     <Compile Include="Interfaces\IBasicOperationsNotes.cs" />
+    <Compile Include="Interfaces\IBasicOperationsUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
