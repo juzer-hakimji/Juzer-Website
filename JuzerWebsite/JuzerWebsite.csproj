@@ -126,7 +126,7 @@
     <Compile Include="Areas\Spending\SpendingAreaRegistration.cs" />
     <Compile Include="Controllers\AnalysisController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -138,6 +138,21 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\HomePage\animate.css" />
+    <Content Include="Content\HomePage\font-awesome.min.css" />
+    <Content Include="Content\HomePage\magnific-popup.css" />
+    <Content Include="Content\HomePage\style.css" />
+    <Content Include="Content\Images\instagram-image1.jpg" />
+    <Content Include="Content\Images\instagram-image2.jpg" />
+    <Content Include="Content\Images\instagram-image3.jpg" />
+    <Content Include="Content\Images\instagram-image4.jpg" />
+    <Content Include="Content\Images\instagram-image5.jpg" />
+    <Content Include="Content\Images\profile-image.jpg" />
+    <Content Include="Content\Images\work-1.jpg" />
+    <Content Include="Content\Images\work-2.jpg" />
+    <Content Include="Content\Images\work-3.jpg" />
+    <Content Include="Content\Images\work-4.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -146,11 +161,25 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Notes\Views\web.config" />
     <Content Include="Areas\Spending\Views\web.config" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Content\fonts\.DS_Store" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\HomePage\jquery.js" />
+    <Content Include="Scripts\HomePage\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\HomePage\magnific-popup-options.js" />
+    <Content Include="Scripts\HomePage\script.js" />
+    <Content Include="Scripts\HomePage\smoothscroll.js" />
+    <Content Include="Scripts\HomePage\wow.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -168,8 +197,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -195,8 +222,6 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">

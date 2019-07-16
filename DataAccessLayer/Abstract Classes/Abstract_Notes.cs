@@ -25,7 +25,7 @@ namespace DataAccessLayer.Abstract_Classes
 
         public bool Insert(TRN_Notes p_TRN_Notes)
         {
-            return this.ExecuteDALMethod<TRN_Notes>(db, (DataContext, P_TRN_Notes) =>
+            return this.ExecuteDALMethod<TRN_Notes,bool>(db, (DataContext, P_TRN_Notes) =>
             {
                 db.TRN_Notes.Add(P_TRN_Notes);
                 db.SaveChanges();
@@ -35,7 +35,7 @@ namespace DataAccessLayer.Abstract_Classes
 
         public bool Update(TRN_Notes p_TRN_Notes)
         {
-            return this.ExecuteDALMethod<TRN_Notes>(db, (DataContext, P_TRN_Notes) =>
+            return this.ExecuteDALMethod<TRN_Notes, bool>(db, (DataContext, P_TRN_Notes) =>
             {
                 TRN_Notes NoteObj = DataContext.TRN_Notes.Find(P_TRN_Notes.NoteId);
                 NoteObj.Subject = P_TRN_Notes.Subject;
@@ -52,7 +52,7 @@ namespace DataAccessLayer.Abstract_Classes
         {
             TRN_Notes NoteObj = new TRN_Notes();
             NoteObj.NoteId = p_NoteId;
-            return this.ExecuteDALMethod<TRN_Notes>(db, (DataContext, P_TRN_Notes) =>
+            return this.ExecuteDALMethod<TRN_Notes, bool>(db, (DataContext, P_TRN_Notes) =>
             {
                 TRN_Notes Obj = DataContext.TRN_Notes.Find(P_TRN_Notes.NoteId);
                 Obj.IsActive = false;

@@ -21,20 +21,22 @@ namespace BusinessEntities.Entities.Entity_Model
             : base("name=JuzerWebsiteEntities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<DEV_Category> DEV_Category { get; set; }
         public virtual DbSet<DEV_Country> DEV_Country { get; set; }
         public virtual DbSet<DEV_Menu> DEV_Menu { get; set; }
         public virtual DbSet<DEV_TypeOfTransaction> DEV_TypeOfTransaction { get; set; }
         public virtual DbSet<MST_UserInfo> MST_UserInfo { get; set; }
+        public virtual DbSet<Pract> Practs { get; set; }
         public virtual DbSet<TRN_Expense> TRN_Expense { get; set; }
         public virtual DbSet<TRN_Income> TRN_Income { get; set; }
         public virtual DbSet<TRN_Notes> TRN_Notes { get; set; }
+        public virtual DbSet<TypeQuestion> TypeQuestions { get; set; }
     
         public virtual ObjectResult<usp_GetExpenseList_Result> usp_GetExpenseList(Nullable<int> userId)
         {
@@ -61,6 +63,15 @@ namespace BusinessEntities.Entities.Entity_Model
                 new ObjectParameter("UserId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetNotesList_Result>("usp_GetNotesList", userIdParameter);
+        }
+    
+        public virtual ObjectResult<string> AskMe(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("AskMe", idParameter);
         }
     }
 }

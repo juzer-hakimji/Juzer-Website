@@ -12,7 +12,7 @@ namespace DataAccessLayer.Base_Classes
 {
     public abstract class BaseDAL
     {
-        protected bool ExecuteDALMethod<T>(JuzerWebsiteEntities db, Func<JuzerWebsiteEntities, T, bool> Func, T Obj)
+        protected U ExecuteDALMethod<T,U>(JuzerWebsiteEntities db, Func<JuzerWebsiteEntities, T, U> Func, T Obj)
         {
             try
             {
@@ -20,19 +20,19 @@ namespace DataAccessLayer.Base_Classes
             }
             catch (DbUpdateException ex)
             {
-                return false;
+                return (U)Convert.ChangeType(false, typeof(U));
             }
             catch (DbEntityValidationException ex)
             {
-                return false;
+                return (U)Convert.ChangeType(false, typeof(U));
             }
             catch (SqlException ex)
             {
-                return false;
+                return (U)Convert.ChangeType(false, typeof(U));
             }
             catch (Exception ex)
             {
-                return false;
+                return (U)Convert.ChangeType(false, typeof(U));
             }
         }
     }

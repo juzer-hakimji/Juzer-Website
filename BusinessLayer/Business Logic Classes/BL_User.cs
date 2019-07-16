@@ -1,5 +1,6 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
 using BusinessLayer.MD5_Hash_Class;
+using BusinessLayer.User_Status;
 using DataAccessLayer.Data_Access_Classes;
 using DataAccessLayer.Interfaces;
 using System;
@@ -16,34 +17,36 @@ namespace BusinessLayer.Business_Logic_Classes
         private IBasicOperationsUser IUserObj { get; set; }
         private MST_UserInfo UserObj { get; set; }
 
-        BL_User()
+        public BL_User()
         {
             IUserObj = new DAL_User();
         }
 
-        public bool BL_SaveUser(UserVM p_UserVM)
+        public bool BL_SaveUser(UserDetailsVM p_UserVM)
         {
-            UserObj = new MST_UserInfo();
-            UserObj.FirstName = p_UserVM.FirstName;
-            UserObj.LastName = p_UserVM.LastName;
-            UserObj.CountryId = p_UserVM.CountryId;
-            UserObj.Email = p_UserVM.Email;
-            UserObj.UserName = p_UserVM.UserName;
-            UserObj.Password = new MD5Hashing().GetMd5Hash(p_UserVM.Password);
-            UserObj.IsActive = true;
-            UserObj.IsAdmin = false;
-            UserObj.CreatedDate = DateTime.Now;
+            UserObj = new MST_UserInfo
+            {
+                FirstName = p_UserVM.FirstName,
+                LastName = p_UserVM.LastName,
+                CountryId = p_UserVM.CountryId,
+                Email = p_UserVM.Email,
+                Password = new MD5Hashing().GetMd5Hash(p_UserVM.Password),
+                IsActive = true,
+                IsAdmin = false,
+                CreatedDate = DateTime.UtcNow
+            };
             return IUserObj.Insert(UserObj);
         }
 
-        public bool BL_UpdateUser(UserVM p_UserVM)
+        public bool BL_UpdateUser(UserDetailsVM p_UserVM)
         {
-            UserObj = new MST_UserInfo();
-            UserObj.FirstName = p_UserVM.FirstName;
-            UserObj.LastName = p_UserVM.LastName;
-            UserObj.CountryId = p_UserVM.CountryId;
-            UserObj.Email = p_UserVM.Email;
-            UserObj.UserName = p_UserVM.UserName;
+            UserObj = new MST_UserInfo
+            {
+                FirstName = p_UserVM.FirstName,
+                LastName = p_UserVM.LastName,
+                CountryId = p_UserVM.CountryId,
+                Email = p_UserVM.Email
+            };
             return IUserObj.Update(UserObj);
         }
 
@@ -52,5 +55,21 @@ namespace BusinessLayer.Business_Logic_Classes
             return IUserObj.Delete(p_UserId);
         }
 
+        public UserStatus BL_GetUserValidity(UserLoginVM p_UserLoginVM)
+        {
+            MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_UserLoginVM.Email);
+            if (p_UserLoginVM.Password.Equals(UserObj.Password) && UserObj.IsAdmin == true)
+            {
+                return UserStatus.AuthenticatedAdmin;
+            }
+            else if (p_UserLoginVM.Password.Equals(UserObj.Password) && UserObj.IsAdmin == false)
+            {
+                return UserStatus.AuthenticatedUser;
+            }
+            else
+            {
+                return UserStatus.NonAuthenticatedUser;
+            }
+        }
     }
 }

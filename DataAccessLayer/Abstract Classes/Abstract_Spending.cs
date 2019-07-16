@@ -31,7 +31,7 @@ namespace DataAccessLayer.Abstract_Classes
 
         protected bool InsertExpense(TRN_Expense p_TRN_Expense)
         {
-            return this.ExecuteDALMethod<TRN_Expense>(db, (DataContext, P_TRN_Expense) =>
+            return this.ExecuteDALMethod<TRN_Expense, bool>(db, (DataContext, P_TRN_Expense) =>
             {
                 DataContext.TRN_Expense.Add(P_TRN_Expense);
                 DataContext.SaveChanges();
@@ -41,7 +41,7 @@ namespace DataAccessLayer.Abstract_Classes
 
         protected bool InsertIncome(TRN_Income p_TRN_Income)
         {
-            return this.ExecuteDALMethod<TRN_Income>(db, (DataContext, P_TRN_Income) =>
+            return this.ExecuteDALMethod<TRN_Income, bool>(db, (DataContext, P_TRN_Income) =>
             {
                 DataContext.TRN_Income.Add(P_TRN_Income);
                 DataContext.SaveChanges();
@@ -51,7 +51,7 @@ namespace DataAccessLayer.Abstract_Classes
 
         protected bool UpdateExpense(TRN_Expense p_TRN_Expense)
         {
-            return this.ExecuteDALMethod<TRN_Expense>(db, (DataContext, P_TRN_Expense) =>
+            return this.ExecuteDALMethod<TRN_Expense, bool>(db, (DataContext, P_TRN_Expense) =>
             {
                 TRN_Expense Obj = DataContext.TRN_Expense.Find(P_TRN_Expense.ExpenseId);
                 Obj.CategoryId = P_TRN_Expense.CategoryId;
@@ -66,7 +66,7 @@ namespace DataAccessLayer.Abstract_Classes
 
         protected bool UpdateIncome(TRN_Income p_TRN_Income)
         {
-            return this.ExecuteDALMethod<TRN_Income>(db, (DataContext, P_TRN_Income) =>
+            return this.ExecuteDALMethod<TRN_Income, bool>(db, (DataContext, P_TRN_Income) =>
             {
                 TRN_Income Obj = DataContext.TRN_Income.Find(P_TRN_Income.IncomeId);
                 Obj.CategoryId = P_TRN_Income.CategoryId;
@@ -83,7 +83,7 @@ namespace DataAccessLayer.Abstract_Classes
         {
             TRN_Expense TRN_Expense = new TRN_Expense();
             TRN_Expense.ExpenseId = p_ExpenseId;
-            return this.ExecuteDALMethod<TRN_Expense>(db, (DataContext, P_TRN_Expense) =>
+            return this.ExecuteDALMethod<TRN_Expense, bool>(db, (DataContext, P_TRN_Expense) =>
             {
                 TRN_Expense Obj = DataContext.TRN_Expense.Find(P_TRN_Expense.ExpenseId);
                 Obj.IsActive = false;
@@ -96,7 +96,7 @@ namespace DataAccessLayer.Abstract_Classes
         {
             TRN_Income TRN_Income = new TRN_Income();
             TRN_Income.IncomeId = p_IncomeId;
-            return this.ExecuteDALMethod<TRN_Income>(db, (DataContext, P_TRN_Income) =>
+            return this.ExecuteDALMethod<TRN_Income, bool>(db, (DataContext, P_TRN_Income) =>
             {
                 TRN_Income Obj = DataContext.TRN_Income.Find(P_TRN_Income.IncomeId);
                 Obj.IsActive = false;
