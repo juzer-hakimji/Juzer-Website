@@ -9,18 +9,18 @@ namespace BusinessLayer.MD5_Hash_Class
 {
     public class MD5Hashing
     {
-        private MD5 md5Hash { get; set; }
+        private MD5 MD5Hash { get; set; }
          
         public MD5Hashing()
         {
-            md5Hash = MD5.Create();
+            MD5Hash = MD5.Create();
         }
 
         public string GetMd5Hash(string input)
         {
 
             // Convert the input string to a byte array and compute the hash.
-            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+            byte[] data = MD5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
             // Create a new Stringbuilder to collect the bytes
             // and create a string.
@@ -58,7 +58,7 @@ namespace BusinessLayer.MD5_Hash_Class
 
         ~MD5Hashing()
         {
-            md5Hash.Dispose();
+            MD5Hash.Dispose();
         }
     }
 }

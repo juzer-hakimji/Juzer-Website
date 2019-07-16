@@ -27,11 +27,13 @@ namespace BusinessLayer.Business_Logic_Classes
             List<usp_GetNotesList_Result> NotesList = INotesObj.Select(p_UserId);
             foreach (usp_GetNotesList_Result Note in NotesList)
             {
-                NotesVM NotesObj = new NotesVM();
-                NotesObj.NoteId = Note.NoteId;
-                NotesObj.Subject = Note.Subject;
-                NotesObj.CreatedDate = Note.CreatedDate.ToString();
-                NotesObj.NoteText = Note.NoteText;
+                NotesVM NotesObj = new NotesVM
+                {
+                    NoteId = Note.NoteId,
+                    Subject = Note.Subject,
+                    CreatedDate = Note.CreatedDate.ToString(),
+                    NoteText = Note.NoteText
+                };
                 NotesVMList.Add(NotesObj);
             }
             return NotesVMList;
@@ -39,22 +41,26 @@ namespace BusinessLayer.Business_Logic_Classes
 
         public bool BL_SaveNote(NotesVM p_NotesVM)
         {
-            NoteObj = new TRN_Notes();
-            NoteObj.Subject = p_NotesVM.Subject;
-            NoteObj.CreatedDate = Convert.ToDateTime(p_NotesVM.CreatedDate, CultureInfo.InvariantCulture);
-            NoteObj.NoteText = p_NotesVM.NoteText;
-            NoteObj.IsActive = true;
-            NoteObj.IsImportant = false;
+            NoteObj = new TRN_Notes
+            {
+                Subject = p_NotesVM.Subject,
+                CreatedDate = Convert.ToDateTime(p_NotesVM.CreatedDate, CultureInfo.InvariantCulture),
+                NoteText = p_NotesVM.NoteText,
+                IsActive = true,
+                IsImportant = false
+            };
             return INotesObj.Insert(NoteObj);
         }
 
         public bool BL_UpdateNote(NotesVM p_NotesVM)
         {
-            NoteObj = new TRN_Notes();
-            NoteObj.NoteId = p_NotesVM.NoteId;
-            NoteObj.Subject = p_NotesVM.Subject;
-            NoteObj.CreatedDate = Convert.ToDateTime(p_NotesVM.CreatedDate, CultureInfo.InvariantCulture);
-            NoteObj.NoteText = p_NotesVM.NoteText;
+            NoteObj = new TRN_Notes
+            {
+                NoteId = p_NotesVM.NoteId,
+                Subject = p_NotesVM.Subject,
+                CreatedDate = Convert.ToDateTime(p_NotesVM.CreatedDate, CultureInfo.InvariantCulture),
+                NoteText = p_NotesVM.NoteText
+            };
             return INotesObj.Update(NoteObj);
         }
 

@@ -50,8 +50,10 @@ namespace DataAccessLayer.Abstract_Classes
 
         public bool Delete(int p_NoteId)
         {
-            TRN_Notes NoteObj = new TRN_Notes();
-            NoteObj.NoteId = p_NoteId;
+            TRN_Notes NoteObj = new TRN_Notes
+            {
+                NoteId = p_NoteId
+            };
             return this.ExecuteDALMethod<TRN_Notes, bool>(db, (DataContext, P_TRN_Notes) =>
             {
                 TRN_Notes Obj = DataContext.TRN_Notes.Find(P_TRN_Notes.NoteId);
