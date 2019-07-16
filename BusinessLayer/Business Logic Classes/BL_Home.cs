@@ -29,11 +29,13 @@ namespace BusinessLayer.Business_Logic_Classes
             List<TRN_Notes> NotesList = DALObj.DAL_GetImportantNotes(p_UserId);
             foreach (TRN_Notes Note in NotesList)
             {
-                NotesVM NotesObj = new NotesVM();
-                NotesObj.NoteId = Note.NoteId;
-                NotesObj.Subject = Note.Subject;
-                NotesObj.CreatedDate = Note.CreatedDate.ToString();
-                NotesObj.NoteText = Note.NoteText;
+                NotesVM NotesObj = new NotesVM
+                {
+                    NoteId = Note.NoteId,
+                    Subject = Note.Subject,
+                    CreatedDate = Note.CreatedDate.ToString(),
+                    NoteText = Note.NoteText
+                };
                 NotesVMList.Add(NotesObj);
             }
             return NotesVMList;

@@ -81,8 +81,10 @@ namespace DataAccessLayer.Abstract_Classes
 
         protected bool DeleteExpense(int p_ExpenseId)
         {
-            TRN_Expense TRN_Expense = new TRN_Expense();
-            TRN_Expense.ExpenseId = p_ExpenseId;
+            TRN_Expense TRN_Expense = new TRN_Expense
+            {
+                ExpenseId = p_ExpenseId
+            };
             return this.ExecuteDALMethod<TRN_Expense, bool>(db, (DataContext, P_TRN_Expense) =>
             {
                 TRN_Expense Obj = DataContext.TRN_Expense.Find(P_TRN_Expense.ExpenseId);
@@ -94,8 +96,10 @@ namespace DataAccessLayer.Abstract_Classes
 
         protected bool DeleteIncome(int p_IncomeId)
         {
-            TRN_Income TRN_Income = new TRN_Income();
-            TRN_Income.IncomeId = p_IncomeId;
+            TRN_Income TRN_Income = new TRN_Income
+            {
+                IncomeId = p_IncomeId
+            };
             return this.ExecuteDALMethod<TRN_Income, bool>(db, (DataContext, P_TRN_Income) =>
             {
                 TRN_Income Obj = DataContext.TRN_Income.Find(P_TRN_Income.IncomeId);
