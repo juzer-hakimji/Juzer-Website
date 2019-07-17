@@ -15,7 +15,7 @@ namespace JuzerWebsite.Controllers
     {
         private BL_User BLUser { get; set; }
 
-        AuthenticationController()
+        public AuthenticationController()
         {
             BLUser = new BL_User();
         }
