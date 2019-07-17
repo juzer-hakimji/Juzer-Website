@@ -1,17 +1,33 @@
-﻿using System;
+﻿using BusinessLayer.Business_Logic_Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ViewModel;
 
 namespace JuzerWebsite.Controllers
 {
     public class UserController : Controller
     {
-        // GET: User
-        public ActionResult Index()
+        private BL_User BLUser { get; set; }
+
+        public UserController()
         {
-            return View();
+            BLUser = new BL_User();
+        }
+        // GET: User
+        public ActionResult Save(UserDetailsVM p_UserVM)
+        {
+            if (ModelState.IsValid)
+            {
+                bool result = BLUser.BL_SaveUser(p_UserVM);
+                return RedirectToAction("UserHome");
+            }
+            else
+            {
+                return Json( new { result = false } );
+            }
         }
     }
 }
