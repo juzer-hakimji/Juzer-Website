@@ -12,7 +12,7 @@ namespace JuzerWebsite.Controllers
     {
         private BL_User BLUser { get; set; }
 
-        public UserController()
+        UserController()
         {
             BLUser = new BL_User();
         }
