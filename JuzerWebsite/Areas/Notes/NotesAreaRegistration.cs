@@ -16,6 +16,12 @@ namespace JuzerWebsite.Areas.Notes
         {
             context.MapRoute(
                 "Notes_default",
+                "Notes/{action}/{id}",
+                new { Controller = "Notes",action = "List", id = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
+                "Notes_default",
                 "Notes/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );

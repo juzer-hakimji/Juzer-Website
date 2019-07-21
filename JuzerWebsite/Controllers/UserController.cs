@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Business_Logic_Classes;
+﻿using BusinessEntities.Entities.Entity_Model;
+using BusinessLayer.Business_Logic_Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,8 @@ namespace JuzerWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = BLUser.BL_SaveUser(p_UserVM);
+                MST_UserInfo MST_UserInfo = BLUser.BL_SaveUser(p_UserVM);
+                Session["MST_UserInfo"] = MST_UserInfo;
                 return RedirectToAction("UserHome");
             }
             else

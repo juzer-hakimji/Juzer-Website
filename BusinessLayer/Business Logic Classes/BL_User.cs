@@ -22,7 +22,7 @@ namespace BusinessLayer.Business_Logic_Classes
             IUserObj = new DAL_User();
         }
 
-        public bool BL_SaveUser(UserDetailsVM p_UserVM)
+        public MST_UserInfo BL_SaveUser(UserDetailsVM p_UserVM)
         {
             UserObj = new MST_UserInfo
             {
@@ -55,21 +55,22 @@ namespace BusinessLayer.Business_Logic_Classes
             return IUserObj.Delete(p_UserId);
         }
 
-        public UserStatus BL_GetUserValidity(UserLoginVM p_UserLoginVM)
+        public MST_UserInfo BL_GetUserValidity(UserLoginVM p_UserLoginVM)
         {
             MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_UserLoginVM.Email);
             if (p_UserLoginVM.Password.Equals(UserObj.Password) && UserObj.IsAdmin == true)
             {
-                return UserStatus.AuthenticatedAdmin;
+                UserObj.UserStatus = MST_UserInfo.EnumUserStatus.AuthenticatedAdmin;
             }
             else if (p_UserLoginVM.Password.Equals(UserObj.Password) && UserObj.IsAdmin == false)
             {
-                return UserStatus.AuthenticatedUser;
+                UserObj.UserStatus = MST_UserInfo.EnumUserStatus.AuthenticatedUser;
             }
             else
             {
-                return UserStatus.NonAuthenticatedUser;
+                UserObj.UserStatus = MST_UserInfo.EnumUserStatus.NonAuthenticatedUser;
             }
+            return UserObj;
         }
     }
 }

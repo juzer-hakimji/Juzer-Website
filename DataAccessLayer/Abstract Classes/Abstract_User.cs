@@ -18,13 +18,13 @@ namespace DataAccessLayer.Abstract_Classes
             db = new JuzerWebsiteEntities();
         }
 
-        public bool Insert(MST_UserInfo p_MST_UserInfo)
+        public MST_UserInfo Insert(MST_UserInfo p_MST_UserInfo)
         {
-            return this.ExecuteDALMethod<MST_UserInfo, bool>(db, (DataContext, P_MST_UserInfo) =>
+            return this.ExecuteDALMethod<MST_UserInfo, MST_UserInfo>(db, (DataContext, P_MST_UserInfo) =>
             {
                 db.MST_UserInfo.Add(P_MST_UserInfo);
                 db.SaveChanges();
-                return true;
+                return db.MST_UserInfo.LastOrDefault();
             }, p_MST_UserInfo);
         }
 
@@ -62,8 +62,8 @@ namespace DataAccessLayer.Abstract_Classes
         {
             return this.ExecuteDALMethod<string,MST_UserInfo>(db,(DataContext,P_Email) => 
             {
-                var UserObj = DataContext.MST_UserInfo.Where(x => x.Email == P_Email).Select(x => new { x.UserId,x.Password, x.IsAdmin }).SingleOrDefault();
-                return new MST_UserInfo { Password = UserObj.Password , IsAdmin = UserObj.IsAdmin };
+                MST_UserInfo UserObj = DataContext.MST_UserInfo.SingleOrDefault(x => x.Email.Equals(P_Email));
+                return UserObj;
             },p_Email);
         }
 

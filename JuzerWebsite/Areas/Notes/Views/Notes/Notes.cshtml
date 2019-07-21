@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Notes";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles
+{
+    <link href="~/Content/CustomCss/Notes.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+}
+
+<table id="tblNotesList" class="display">
+    <thead>
+        <tr>
+            <th>Edit</th>
+            <th>Important</th>
+            <th>Created Date</th>
+            <th>Subject</th>
+            <th>Note</th>
+        </tr>
+    </thead>
+</table>
+
+@section scripts
+{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="~/Scripts/CustomJSScripts/jsNotes.js"></script>
+}

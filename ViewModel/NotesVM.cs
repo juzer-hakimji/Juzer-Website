@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace ViewModel
 {
-    public class NotesVM
+    public class NotesVM : BaseViewModel
     {
         public int NoteId { get; set; }
         public string Subject { get; set; }
         public string CreatedDate { get; set; }
         public string NoteText { get; set; }
+        public bool IsImportant { get; set; }
     }
 }
