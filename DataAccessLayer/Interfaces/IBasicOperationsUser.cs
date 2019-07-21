@@ -9,7 +9,7 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IBasicOperationsUser
     {
-        bool Insert(MST_UserInfo p_Obj);
+        MST_UserInfo Insert(MST_UserInfo p_Obj);
         bool Update(MST_UserInfo p_Obj);
         bool Delete(int p_UserId);
     }

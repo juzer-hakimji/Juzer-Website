@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Business_Logic_Classes;
+﻿using BusinessEntities.Entities.Entity_Model;
+using BusinessLayer.Business_Logic_Classes;
 using BusinessLayer.User_Status;
 using System;
 using System.Collections.Generic;
@@ -26,13 +27,13 @@ namespace JuzerWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserStatus status = BLUser.BL_GetUserValidity(p_UserLoginVM);
+                MST_UserInfo MST_UserInfo = BLUser.BL_GetUserValidity(p_UserLoginVM);
                 bool IsAdmin = false;
-                if (status == UserStatus.AuthenticatedAdmin)
+                if (MST_UserInfo.UserStatus == MST_UserInfo.EnumUserStatus.AuthenticatedAdmin)
                 {
                     IsAdmin = true;
                 }
-                else if (status == UserStatus.AuthenticatedUser)
+                else if (MST_UserInfo.UserStatus == MST_UserInfo.EnumUserStatus.AuthenticatedUser)
                 {
                     IsAdmin = false;
                 }
@@ -43,6 +44,7 @@ namespace JuzerWebsite.Controllers
                 }
                 FormsAuthentication.SetAuthCookie(p_UserLoginVM.Email, false);
                 Session["IsAdmin"] = IsAdmin;
+                Session["MST_UserInfo"] = MST_UserInfo;
                 return RedirectToAction("Index", "Employee");
             }
             else

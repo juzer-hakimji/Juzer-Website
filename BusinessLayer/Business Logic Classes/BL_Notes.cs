@@ -16,7 +16,7 @@ namespace BusinessLayer.Business_Logic_Classes
         private IBasicOperationsNotes INotesObj { get; set; }
         private TRN_Notes NoteObj { get; set; }
 
-        BL_Notes()
+        public BL_Notes()
         {
             INotesObj = new DAL_Notes();
         }
@@ -32,7 +32,8 @@ namespace BusinessLayer.Business_Logic_Classes
                     NoteId = Note.NoteId,
                     Subject = Note.Subject,
                     CreatedDate = Note.CreatedDate.ToString(),
-                    NoteText = Note.NoteText
+                    NoteText = Note.NoteText,
+                    IsImportant = Note.IsImportant
                 };
                 NotesVMList.Add(NotesObj);
             }

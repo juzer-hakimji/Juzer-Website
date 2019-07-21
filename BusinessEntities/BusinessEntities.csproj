@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Entities\Entity Extra Properties\MST_UserInfo.cs" />
     <Compile Include="Entities\Entity Model\DEV_Category.cs">
       <DependentUpon>JuzerWebsiteModel.tt</DependentUpon>
     </Compile>
@@ -135,8 +136,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\Entity Extra Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

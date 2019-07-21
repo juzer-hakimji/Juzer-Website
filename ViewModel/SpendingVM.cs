@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ViewModel
 {
-    public class SpendingVM
+    public class SpendingVM : BaseViewModel
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }
