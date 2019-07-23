@@ -171,6 +171,7 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\Notes\Views\Notes\Notes.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\CustomJSScripts\Common.js" />
     <Content Include="Scripts\CustomJSScripts\jsAnalysis.js" />
     <Content Include="Scripts\CustomJSScripts\jsNotes.js" />
     <Content Include="Scripts\CustomJSScripts\jsSpending.js" />
@@ -205,6 +206,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\_Login.cshtml" />
+    <Content Include="Views\Home\_SignUp.cshtml" />
+    <Content Include="Views\Home\_ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

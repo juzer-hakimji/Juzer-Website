@@ -40,12 +40,12 @@ namespace JuzerWebsite.Controllers
                 else
                 {
                     ModelState.AddModelError("CredentialError", "Invalid Username or Password");
-                    return View("Login");
+                    return RedirectToAction("Index","Home");
                 }
                 FormsAuthentication.SetAuthCookie(p_UserLoginVM.Email, false);
                 Session["IsAdmin"] = IsAdmin;
                 Session["MST_UserInfo"] = MST_UserInfo;
-                return RedirectToAction("Index", "Employee");
+                return RedirectToAction("Notes", "List");
             }
             else
             {

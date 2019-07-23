@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using ViewModel
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,12 +35,12 @@
                     </span>
                 </button>
                 <!-- lOGO TEXT HERE -->
-                <a href="index.html" class="navbar-brand">Homene.</a>
+                <a href="index.html" class="navbar-brand">Juzer Hakimji</a>
             </div>
             <div class="collapse navbar-collapse main-nav">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="smoothScroll" href="#home">Home</a></li>
-                    <li><a class="smoothScroll" href="#about">About Jack Doe</a></li>
+                    <li><a class="smoothScroll" href="#about">About Juzer Hakimji</a></li>
                     <li><a class="smoothScroll" href="#work">My Works</a></li>
                     <li><a class="smoothScroll" href="#contact">Contact</a></li>
                     <li><a class="cd-signin" href="#0">Sign in/Sign up</a></li>
@@ -54,107 +56,14 @@
                 <li><a href="#0">Sign in</a></li>
                 <li><a href="#0">New account</a></li>
             </ul>
-            <div id="cd-login">
-                <!-- log in form -->
-                <form class="cd-form">
-                    <p class="fieldset">
-                        <label class="image-replace cd-email" for="signin-email">
-                            E-mail
-                        </label>
-                        <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
-                        <span class="cd-error-message">Error message here!</span>
-                    </p>
-                    <p class="fieldset">
-                        <label class="image-replace cd-password" for="signin-password">
-                            Password
-                        </label>
-                        <input class="full-width has-padding has-border" id="signin-password" type="text"
-                               placeholder="Password">
-                        <a href="#0" class="hide-password">Hide</a> <span class="cd-error-message">
-                            Error message
-                            here!
-                        </span>
-                    </p>
-                    <p class="fieldset">
-                        <input type="checkbox" id="remember-me" checked>
-                        <label for="remember-me">
-                            Remember me
-                        </label>
-                    </p>
-                    <p class="fieldset">
-                        <input class="full-width" type="submit" value="Login">
-                    </p>
-                </form>
-                <p class="cd-form-bottom-message">
-                    <a href="#0">Forgot your password?</a>
-                </p>
-                <!-- <a href="#0" class="cd-close-form">Close</a> -->
-            </div>
+            <!-- log in form -->
+            @Html.Partial("_Login", new UserLoginVM())
             <!-- cd-login -->
-            <div id="cd-signup">
-                <!-- sign up form -->
-                <form class="cd-form">
-                    <p class="fieldset">
-                        <label class="image-replace cd-username" for="signup-username">
-                            Username
-                        </label>
-                        <input class="full-width has-padding has-border" id="signup-username" type="text"
-                               placeholder="Username">
-                        <span class="cd-error-message">Error message here!</span>
-                    </p>
-                    <p class="fieldset">
-                        <label class="image-replace cd-email" for="signup-email">
-                            E-mail
-                        </label>
-                        <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
-                        <span class="cd-error-message">Error message here!</span>
-                    </p>
-                    <p class="fieldset">
-                        <label class="image-replace cd-password" for="signup-password">
-                            Password
-                        </label>
-                        <input class="full-width has-padding has-border" id="signup-password" type="text"
-                               placeholder="Password">
-                        <a href="#0" class="hide-password">Hide</a> <span class="cd-error-message">
-                            Error message
-                            here!
-                        </span>
-                    </p>
-                    <p class="fieldset">
-                        <input type="checkbox" id="accept-terms">
-                        <label for="accept-terms">
-                            I agree to the <a href="#0">Terms</a>
-                        </label>
-                    </p>
-                    <p class="fieldset">
-                        <input class="full-width has-padding" type="submit" value="Create account">
-                    </p>
-                </form>
-                <!-- <a href="#0" class="cd-close-form">Close</a> -->
-            </div>
+            <!-- sign up form -->
+            @Html.Partial("_SignUp", new UserDetailsVM())
             <!-- cd-signup -->
-            <div id="cd-reset-password">
-                <!-- reset password form -->
-                <p class="cd-form-message">
-                    Lost your password? Please enter your email address. You will receive a link to
-                    create a new password.
-                </p>
-                <form class="cd-form">
-                    <p class="fieldset">
-                        <label class="image-replace cd-email" for="reset-email">
-                            E-mail
-                        </label>
-                        <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
-                        <span class="cd-error-message">Error message here!</span>
-                    </p>
-                    <p class="fieldset">
-                        <input class="full-width has-padding" type="submit" value="Reset password">
-                    </p>
-                </form>
-                <p class="cd-form-bottom-message">
-                    <a href="#0">Back to log-in</a>
-                </p>
-            </div>
+            <!-- reset password form -->
+            @Html.Partial("_ResetPassword", new ResetPasswordVM())
             <!-- cd-reset-password -->
             <a href="#0" class="cd-close-form">Close</a>
         </div>
@@ -169,7 +78,7 @@
                     <img src="~/Content/Images/profile-image.jpg" class="wow fadeInUp img-responsive img-circle" data-wow-delay="0.2s" alt="about image">
                 </div>
                 <div class="col-md-8 col-sm-8">
-                    <h1 class="wow fadeInUp" data-wow-delay="0.6s">Hey there, My name is Jack Doe and I'm a Senior Interactive Designer & Web Developer.</h1>
+                    <h1 class="wow fadeInUp" data-wow-delay="0.6s">Hey there, My name is Juzer Hakimji and I'm a Web Developer.</h1>
                     <a href="#" class="wow fadeInUp btn btn-default section-btn" data-wow-delay="1s">Download Resume</a>
                 </div>
             </div>
@@ -183,7 +92,7 @@
                     <div class="about-thumb">
                         <div class="wow fadeInUp section-title" data-wow-delay="0.6s">
                             <h2>A Little Bit Of My Story</h2>
-                            <p><strong>Senior Interactive Designer & Web Developer at yourdreamjob.com</strong></p>
+                            <p><strong>Senior Interactive Designer & Web Developer at xanthus.in</strong></p>
                         </div>
                         <div class="wow fadeInUp" data-wow-delay="0.8s">
                             <p>Award winning interdisciplinary Designer & Art director. We have a team who specialise in coding websites and themes perfect blend of style and function for a wide range of interactive product design.</p>
@@ -345,6 +254,9 @@
     </section>
     <!-- SCRIPTS -->
     <script src="~/Scripts/HomePage/jquery.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="~/Scripts/HomePage/magnific-popup-options.js"></script>
     <script src="~/Scripts/HomePage/jquery.magnific-popup.min.js"></script>
@@ -353,6 +265,5 @@
     <script src="~/Scripts/HomePage/smoothscroll.js"></script>
     <script src="~/Scripts/HomePage/wow.min.js"></script>
     <script src="~/Scripts/HomePage/script.js"></script>
-
 </body>
 </html>

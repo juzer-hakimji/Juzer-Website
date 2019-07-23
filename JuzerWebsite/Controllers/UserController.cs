@@ -24,7 +24,7 @@ namespace JuzerWebsite.Controllers
             {
                 MST_UserInfo MST_UserInfo = BLUser.BL_SaveUser(p_UserVM);
                 Session["MST_UserInfo"] = MST_UserInfo;
-                return RedirectToAction("UserHome");
+                return RedirectToAction("Notes", "List");
             }
             else
             {
