@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel;
+using System.Web.Security;
 
 namespace BusinessLayer.Business_Logic_Classes
 {
@@ -71,6 +72,18 @@ namespace BusinessLayer.Business_Logic_Classes
                 UserObj.UserStatus = MST_UserInfo.EnumUserStatus.NonAuthenticatedUser;
             }
             return UserObj;
+        }
+
+        public bool BL_CheckForEmailAvailability(string p_Email)
+        {
+            return new DAL_User().DAL_CheckForEmailAvailability(p_Email);
+        }
+
+        public string BL_GenerateNewPassword(int p_UserId)
+        {
+            string NewPassword = Membership.GeneratePassword(6, 1);
+            bool result = new DAL_User().DAL_SaveNewPassword(p_UserId, new MD5Hashing().GetMd5Hash(NewPassword));
+            return NewPassword;
         }
     }
 }

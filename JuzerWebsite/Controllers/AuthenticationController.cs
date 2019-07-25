@@ -40,7 +40,8 @@ namespace JuzerWebsite.Controllers
                 else
                 {
                     ModelState.AddModelError("CredentialError", "Invalid Username or Password");
-                    return RedirectToAction("Index","Home");
+                    return Json(new { result = false });
+                    //return RedirectToAction("Index","Home");
                 }
                 FormsAuthentication.SetAuthCookie(p_UserLoginVM.Email, false);
                 Session["IsAdmin"] = IsAdmin;
@@ -49,7 +50,7 @@ namespace JuzerWebsite.Controllers
             }
             else
             {
-                return View("Login");
+                return Json(new { result = false });
             }
         }
 

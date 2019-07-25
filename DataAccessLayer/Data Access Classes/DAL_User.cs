@@ -14,5 +14,15 @@ namespace DataAccessLayer.Data_Access_Classes
         {
             return this.GetUserValidity(p_Email);
         }
+
+        public bool DAL_CheckForEmailAvailability(string p_Email)
+        {
+            return this.CheckForEmailAvailability(p_Email);
+        }
+
+        public bool DAL_SaveNewPassword(int p_UserId,string NewHashedPassword)
+        {
+            return this.SaveNewPassword(p_UserId, NewHashedPassword);
+        }
     }
 }

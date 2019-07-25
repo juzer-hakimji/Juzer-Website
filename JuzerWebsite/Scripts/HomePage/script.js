@@ -182,7 +182,9 @@ jQuery(document).ready(function ($) {
                     data: SerializedObj,
                         dataType : 'json',
                             success: function(result) {
-
+                                if (result.result == false) {
+                                    $('#LoginValidate').text('Invalid Username or Password');
+                                }
                             });
     });
 
@@ -209,12 +211,15 @@ jQuery(document).ready(function ($) {
         if (!formValid) return false;
         $.ajax(function () {
             type: 'POST',
-                url : "User/Save",
+                url : "User/SendResetPasswordEmail",
                 data: $('#ResetEmail').val(),
                         dataType : 'json',
                             success: function(result) {
                                 if (result.result == false) {
-                                    alert("something went wrong");
+                                    alert("Please Enter Correct Email");
+                                }
+                                else {
+                                    alert("Email sent successfully");
                                 }
                             }
         }

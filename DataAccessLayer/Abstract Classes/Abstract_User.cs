@@ -67,6 +67,22 @@ namespace DataAccessLayer.Abstract_Classes
             },p_Email);
         }
 
+        public bool CheckForEmailAvailability(string p_Email)
+        {
+            return this.ExecuteDALMethod<string, bool>(db, (DataContext, P_Email) =>
+            {
+                return DataContext.MST_UserInfo.Any(x => x.Email.Equals(P_Email));
+            }, p_Email);
+        }
+
+        public bool SaveNewPassword(int p_UserId,string NewHashedPassword)
+        {
+            MST_UserInfo MST_UserInfo = db.MST_UserInfo.Find(p_UserId);
+            MST_UserInfo.Password = NewHashedPassword;
+            db.SaveChanges();
+            return true;
+        }
+
         public void Dispose()
         {
             db.Dispose();
