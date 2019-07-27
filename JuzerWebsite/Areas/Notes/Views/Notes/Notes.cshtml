@@ -1,4 +1,5 @@
-﻿
+﻿@model  ViewModel.NotesVM
+
 @{
     ViewBag.Title = "Notes";
     //Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,24 +7,52 @@
 
 @section styles
 {
-    <link href="~/Content/CustomCss/Notes.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<link href="~/Content/HomePage/style.css" rel="stylesheet" />
+<link href="~/Content/CustomCss/Notes.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 }
 
-<table id="tblNotesList" class="display">
-    <thead>
-        <tr>
-            <th>Edit</th>
-            <th>Important</th>
-            <th>Created Date</th>
-            <th>Subject</th>
-            <th>Note</th>
-        </tr>
-    </thead>
-</table>
+<div class="cd-user-modal">
+    <!-- this is the entire modal form, including the background -->
+    <div class="cd-user-modal-container">
+        <!-- this is the container wrapper -->
+        <ul class="cd-switcher">
+            <li><a href="#0">Sign in</a></li>
+            @*
+            <li><a href="#0">New account</a></li>*@
+        </ul>
+        <!-- sign up form -->
+        @Html.Partial("_AddNote", new UserDetailsVM())
+        <!-- cd-signup -->
+        <a href="#0" class="cd-close-form">Close</a>
+    </div>
+    <!-- cd-user-modal-container -->
+</div>
+<div class="row">
+    <div class="jumbotron ml-auto">
+        <h3><a id="AddNote" class="cd-signin" href="#0">Add Note</a></h3>
+    </div>
+</div>
+<div class="row">
+    <table id="tblNotesList" class="display">
+        <thead>
+            <tr>
+                <th>Edit</th>
+                <th>Important</th>
+                <th>Created Date</th>
+                <th>Subject</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
 
 @section scripts
 {
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-    <script src="~/Scripts/CustomJSScripts/jsNotes.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/CustomJSScripts/jsNotes.js"></script>
 }

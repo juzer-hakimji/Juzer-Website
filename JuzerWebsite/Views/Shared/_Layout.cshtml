@@ -28,6 +28,13 @@
                     <li>@Html.ActionLink("Spending", "About", "Home")</li>
                     <li>@Html.ActionLink("Notes", "Contact", "Home")</li>
                     <li @(Convert.ToBoolean(Session["IsAdmin"]) ? "hidden" : "")>@Html.ActionLink("Analysis", "Contact", "Home")</li>
+                    <li>
+                        <ul>
+                            <li>@Html.ActionLink("Change Password", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Delete Account", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Log Out", "Index", "Home")</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

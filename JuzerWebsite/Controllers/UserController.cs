@@ -41,8 +41,7 @@ namespace JuzerWebsite.Controllers
             {
                 if (BLUser.BL_CheckForEmailAvailability(p_Email))
                 {
-                    MST_UserInfo MST_UserInfo = Session["MST_UserInfo"] as MST_UserInfo;
-                    var NewPassword = BLUser.BL_GenerateNewPassword(MST_UserInfo.UserId);
+                    string NewPassword = BLUser.BL_GenerateNewPassword((Session["MST_UserInfo"] as MST_UserInfo).UserId);
                     var smtp = new SmtpClient
                     {
                         Host = "smtp.gmail.com",
@@ -52,7 +51,7 @@ namespace JuzerWebsite.Controllers
                         UseDefaultCredentials = false,
                         Credentials = new NetworkCredential("hakimjuzer@gmail.com", "9168511453")
                     };
-                    using (var message = new MailMessage(new MailAddress("hakimjuzer@gmail.com", "Juzer"), new MailAddress(p_Email, MST_UserInfo.FirstName))
+                    using (var message = new MailMessage(new MailAddress("hakimjuzer@gmail.com", "Juzer"), new MailAddress(p_Email, (Session["MST_UserInfo"] as MST_UserInfo).FirstName))
                     {
                         Subject = "Reset Password Request",
                         Body = "Hello \nyour new password is" + NewPassword + "\nThank you"

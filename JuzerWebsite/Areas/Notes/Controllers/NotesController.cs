@@ -32,5 +32,13 @@ namespace JuzerWebsite.Areas.Notes.Controllers
             List<NotesVM> NotesList= BLObj.BL_GetNotesList(Userobj.UserId);
             return Json(NotesList);
         }
+
+        [Route("Notes/Save")]
+        [HttpPost]
+        public JsonResult SaveNote(NotesVM P_NotesVM)
+        {
+            bool result = BLObj.BL_SaveNote(P_NotesVM);
+            return Json(new { result });
+        }
     }
 }
