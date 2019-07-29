@@ -20,11 +20,11 @@ namespace JuzerWebsite.Areas.Notes
                 new { Controller = "Notes",action = "List", id = UrlParameter.Optional }
             );
 
-            context.MapRoute(
-                "Notes_default",
-                "Notes/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+            //context.MapRoute(
+            //    "Notes_default_Second",
+            //    "Notes/{controller}/{action}/{id}",
+            //    new { action = "Index", id = UrlParameter.Optional }
+            //);
         }
     }
 }

@@ -1,0 +1,73 @@
+﻿@model ViewModel.UserDetailsVM
+
+<div id="cd-signup">
+    <form class="cd-form" id="cd-form-SignUp">
+        <p class="fieldset">
+            <label class="image-replace cd-username" for="FirstName">
+                First Name
+            </label>
+            @*<input class="full-width has-padding has-border" id="signup-username" type="text"
+                       placeholder="Username">
+                <span class="cd-error-message">Error message here!</span>*@
+            @Html.TextBoxFor(x => x.FirstName, new { @class = "full-width has-padding has-border" })
+            @Html.ValidationMessageFor(x => x.FirstName , null , new { @class = "cd-error-message" })
+        </p>
+        <p class="fieldset">
+            <label class="image-replace cd-username" for="LastName">
+                Last Name
+            </label>
+            @*<input class="full-width has-padding has-border" id="signup-username" type="text"
+                       placeholder="Username">
+                <span class="cd-error-message">Error message here!</span>*@
+            @Html.TextBoxFor(x => x.LastName, new { @class = "full-width has-padding has-border" })
+            @Html.ValidationMessageFor(x => x.LastName, null, new { @class = "cd-error-message" })
+        </p>
+        <p class="fieldset">
+            <label class="image-replace cd-username" for="CountryId">
+                Country
+            </label>
+            @*<input class="full-width has-padding has-border" id="signup-username" type="text"
+                       placeholder="Username">
+                <span class="cd-error-message">Error message here!</span>*@
+            @Html.TextBoxFor(x => x.CountryId, new { @class = "full-width has-padding has-border" })
+            @Html.ValidationMessageFor(x => x.CountryId, null, new { @class = "cd-error-message" })
+        </p>
+        <p class="fieldset">
+            <label class="image-replace cd-email" for="Email">
+                E-mail
+            </label>
+            @*<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
+        <span class="cd-error-message">Error message here!</span>*@
+            @Html.TextBoxFor(x => x.Email, new { @class = "full-width has-padding has-border" })
+            @Html.ValidationMessageFor(x => x.Email, null, new { @class = "cd-error-message" })
+        </p>
+        <p class="fieldset">
+            <label class="image-replace cd-password" for="Password">
+                Password
+            </label>
+            @*<input class="full-width has-padding has-border" id="signup-password" type="text"
+        placeholder="Password">*@
+            @Html.TextBoxFor(x => x.Password, new { @class = "full-width has-padding has-border" })
+            <a href="#0" class="hide-password">Hide</a>
+            @Html.ValidationMessageFor(x => x.Password, null, new { @class = "cd-error-message" })
+
+            @*<span class="cd-error-message">
+            Error message
+            here!
+        </span>*@
+        </p>
+        <p class="fieldset">
+            <input type="checkbox" id="accept-terms">
+            <label for="accept-terms">
+                I agree to the <a href="#0">Terms</a>
+            </label>
+        </p>
+        <p class="fieldset">
+            @*<input class="full-width has-padding" type="submit" value="Create account">*@
+            @*<button type="submit" id="btnCrtAcct" class="full-width has-padding">Create account</button>*@
+            <button id="btnCrtAcct" class="full-width has-padding">Create account</button>
+        </p>
+    </form>
+    <!-- <a href="#0" class="cd-close-form">Close</a> -->
+</div>
+
