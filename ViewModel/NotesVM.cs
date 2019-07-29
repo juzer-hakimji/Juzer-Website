@@ -9,7 +9,7 @@ namespace ViewModel
 {
     public class NotesVM : BaseViewModel
     {
-        public int NoteId { get; set; }
+        public int? NoteId { get; set; }
 
         [Required(ErrorMessage = "Please enter Email")]
         [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
