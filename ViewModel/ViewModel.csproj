@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalysisVM.cs" />
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="NotesVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

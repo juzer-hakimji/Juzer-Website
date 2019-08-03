@@ -57,7 +57,7 @@ namespace BusinessLayer.Business_Logic_Classes
         {
             NoteObj = new TRN_Notes
             {
-                NoteId = p_NotesVM.NoteId,
+                NoteId = p_NotesVM.NoteId ?? 0,
                 Subject = p_NotesVM.Subject,
                 CreatedDate = Convert.ToDateTime(p_NotesVM.CreatedDate, CultureInfo.InvariantCulture),
                 NoteText = p_NotesVM.NoteText
@@ -70,9 +70,9 @@ namespace BusinessLayer.Business_Logic_Classes
             return INotesObj.Delete(p_NoteId);
         }
 
-        public bool BL_MarkNoteImportant()
+        public bool BL_ChangeNoteImportance(int NoteId, bool IsImportant)
         {
-            return true;
+            return new DAL_Notes().DAL_ChangeNoteImportance(NoteId, IsImportant);
         }
     }
 }

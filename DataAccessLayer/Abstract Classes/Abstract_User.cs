@@ -22,9 +22,9 @@ namespace DataAccessLayer.Abstract_Classes
         {
             return this.ExecuteDALMethod<MST_UserInfo, MST_UserInfo>(db, (DataContext, P_MST_UserInfo) =>
             {
-                db.MST_UserInfo.Add(P_MST_UserInfo);
-                db.SaveChanges();
-                return db.MST_UserInfo.LastOrDefault();
+                DataContext.MST_UserInfo.Add(P_MST_UserInfo);
+                DataContext.SaveChanges();
+                return DataContext.MST_UserInfo.LastOrDefault();
             }, p_MST_UserInfo);
         }
 
