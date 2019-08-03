@@ -40,5 +40,12 @@ namespace JuzerWebsite.Areas.Notes.Controllers
             bool result = BLObj.BL_SaveNote(P_NotesVM);
             return Json(new { result });
         }
+
+        [HttpPost]
+        public JsonResult ChangeNoteImportance(int NoteId,bool IsImportant)
+        {
+            bool result = BLObj.BL_ChangeNoteImportance(NoteId, IsImportant);
+            return Json( new { result });
+        }
     }
 }

@@ -1,9 +1,11 @@
-﻿using DataAccessLayer.Data_Access_Classes;
+﻿using BusinessEntities.Entities.Entity_Model;
+using DataAccessLayer.Data_Access_Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel;
 
 namespace BusinessLayer.Business_Logic_Classes
 {
@@ -11,7 +13,7 @@ namespace BusinessLayer.Business_Logic_Classes
     {
         private DAL_Analysis DALObj { get; set; }
 
-        BL_Analysis()
+        public BL_Analysis()
         {
             DALObj = new DAL_Analysis();
         }
@@ -21,9 +23,20 @@ namespace BusinessLayer.Business_Logic_Classes
 
         }
 
-        public bool BL_AddOrRemoveAdmin(int p_UserId, bool p_IsAdmin)
+        public bool BL_AddOrRemoveAdmin(string p_UserIds, bool p_IsAdmin)
         {
-            return DALObj.AddOrRemoveAdmin(p_UserId, p_IsAdmin);
+            return DALObj.AddOrRemoveAdmin(p_UserIds, p_IsAdmin);
         }
+
+        public List<UserDetailsVM> BL_GetAddOrRemoveAdminList(bool IsAdd)
+        {
+            List<UserDetailsVM> UserList = new List<UserDetailsVM>();
+            foreach (var item in DALObj.DAL_GetAddOrRemoveAdminList(IsAdd))
+            {
+                UserList.Add(new UserDetailsVM { UserId = item.UserId,Email = item.Email });
+            }
+            return UserList;
+        }
+        
     }
 }

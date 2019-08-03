@@ -1,9 +1,9 @@
 ﻿var DataTable;
 $(document).ready(function () {
     var $form_modal = $('.cd-user-modal'),
-        $form_signup = $form_modal.find('#cd-signup'),
+        $form_AddNote = $form_modal.find('#cd-Notes'),
         //$tab_signup = $form_modal_tab.children('li').eq(1).children('a'),
-        $AddNoteBtn = $('#AddNote');
+        $AddNoteBtn = $('#btnAddNote');
 
     //DataTable = $('#tblNotesList').DataTable({
     //    "ajax": {
@@ -65,12 +65,33 @@ $(document).ready(function () {
 
     //Marked-unmarked Important
     $('.IsImp').on('click', function () {
+        var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
         if ($(this).children('i').attr("class") == 'fas fa-star') {
-            //ajax call to mark important
-            $(this).children('i').attr("class","far fa-star")
+            //To mark not important
+            $.ajax(function () {
+                type: 'POST',
+                    url : "Notes/ChangeNoteImportance",
+                        data: { NoteId = CurrentRowdata[0], IsImportant = false },
+                dataType: 'json',
+                    success: function(result) {
+                        if (result == true) {
+                            alert("Note Marked as Important");
+                        }
+                    });
+            $(this).children('i').attr("class", "far fa-star")
         }
         else {
-            //ajax call to mark unimportant
+            //To mark important
+            $.ajax(function () {
+                type: 'POST',
+                    url : "Notes/ChangeNoteImportance",
+                        data: { NoteId = CurrentRowdata[0], IsImportant = true },
+                dataType: 'json',
+                    success: function(result) {
+                        if (result == true) {
+                            alert("Note Marked as Not Important");
+                        }
+                    });
             $(this).children('i').attr("class", "fas fa-star")
         }
     });
@@ -140,7 +161,7 @@ $(document).ready(function () {
 
 function fn_OpenModal() {
     $form_modal.addClass('is-visible');
-    $form_signup.addClass('is-selected');
+    $form_AddNote.addClass('is-selected');
     $('#CreatedDate').datepicker({
         //dateFormat: "dd/M/yy",
         changeMonth: true,

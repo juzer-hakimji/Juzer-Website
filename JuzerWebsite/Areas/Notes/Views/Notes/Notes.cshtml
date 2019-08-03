@@ -19,12 +19,12 @@
     <div class="cd-user-modal-container">
         <!-- this is the container wrapper -->
         <ul class="cd-switcher">
-            <li><a href="#0">Sign in</a></li>
+            <li><a href="#0">Add Note</a></li>
             @*
                 <li><a href="#0">New account</a></li>*@
         </ul>
         <!-- sign up form -->
-        @Html.Partial("_AddNote", new UserDetailsVM())
+        @Html.Partial("_AddNote", Model)
         <!-- cd-signup -->
         <a href="#0" class="cd-close-form">Close</a>
     </div>

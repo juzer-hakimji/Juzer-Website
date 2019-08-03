@@ -1,0 +1,27 @@
+﻿@model  ViewModel.AnalysisVM
+
+@{
+    ViewBag.Title = "Analysis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="cd-user-modal">
+    <!-- this is the entire modal form, including the background -->
+    <div class="cd-user-modal-container">
+        <!-- Add Admin form -->
+        @Html.Partial("_AddAdmin")
+        <!-- cd-AddAdmin-->
+        <!-- Remove Admin form -->
+        @Html.Partial("_RemoveAdmin",Model)
+        <!-- cd-RemoveAdmin-->
+        <a href="#0" class="cd-close-form">Close</a>
+    </div>
+    <!-- cd-user-modal-container -->
+</div>
+
+<div class="row">
+    <div class="jumbotron ml-auto">
+        <span><a id="AddAdmin" class="cd-signin" href="#0">Make Admin</a></span>
+        <span><a id="RemoveAdmin" class="cd-signin" href="#0">Remove Admin</a></span>
+    </div>
+</div>
