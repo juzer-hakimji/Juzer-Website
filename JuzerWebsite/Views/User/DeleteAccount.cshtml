@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "DeleteAccount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles
+{
+
+}
+
+<div>
+    <div>
+        <h6>Note: If you delete your account all your information will be permanently deleted</h6>
+    </div>
+    <div>
+        <form class="cd-form" id="cd-form-Notes">
+            <p class="fieldset">
+                <label class="image-replace cd-password">Enter Password</label>
+                @Html.TextBox("txtPass", new { @class = "full-width has-padding has-border", placeholder = "Password" })
+            </p>
+            <p class="fieldset">
+                @*<input class="full-width has-padding" type="submit" value="Add Note">*@
+                @*<button id="btnClose" class="full-width has-padding">Close</button>*@
+                <button id="btnDeleteAccnt" class="full-width has-padding">Delete Account</button>
+                <span id="DeleteAccountValidate"></span>
+            </p>
+        </form>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script src="~/Scripts/CustomJSScripts/jsDeleteAccount.js"></script>
+}

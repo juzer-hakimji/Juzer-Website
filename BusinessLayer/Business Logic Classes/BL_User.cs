@@ -59,11 +59,11 @@ namespace BusinessLayer.Business_Logic_Classes
         public MST_UserInfo BL_GetUserValidity(UserLoginVM p_UserLoginVM)
         {
             MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_UserLoginVM.Email);
-            if (p_UserLoginVM.Password.Equals(UserObj.Password) && UserObj.IsAdmin == true)
+            if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.Password).Equals(UserObj.Password) && UserObj.IsAdmin == true)
             {
                 UserObj.UserStatus = MST_UserInfo.EnumUserStatus.AuthenticatedAdmin;
             }
-            else if (p_UserLoginVM.Password.Equals(UserObj.Password) && UserObj.IsAdmin == false)
+            else if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.Password).Equals(UserObj.Password) && UserObj.IsAdmin == false)
             {
                 UserObj.UserStatus = MST_UserInfo.EnumUserStatus.AuthenticatedUser;
             }
@@ -72,6 +72,19 @@ namespace BusinessLayer.Business_Logic_Classes
                 UserObj.UserStatus = MST_UserInfo.EnumUserStatus.NonAuthenticatedUser;
             }
             return UserObj;
+        }
+
+        public bool BL_ValidatePassword(UserLoginVM p_UserLoginVM)
+        {
+            MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_UserLoginVM.Email);
+            if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.Password).Equals(UserObj.Password))
+            {
+                return this.BL_DeleteUser(UserObj.UserId) ? true : false;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool BL_CheckForEmailAvailability(string p_Email)

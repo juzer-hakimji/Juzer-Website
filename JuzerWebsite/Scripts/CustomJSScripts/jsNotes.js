@@ -32,36 +32,7 @@ $(document).ready(function () {
     //    ]
     //});
 
-    DataTable = $('#tblNotesList').DataTable({
-        "ajax": {
-            url: "/Notes/GetListData",
-            dataSrc: ''
-        },
-        "columnDefs": [{
-            "targets": 0,
-            "data": null,
-            "defaultContent": '<span class="EditNote"><i class="fa fa - pencil" title="Edit" ></i></span>'
-        }],
-        "columns": [
-            { "data": "NoteId" },
-            {
-                "data": "IsImportant",
-                "render": function (data, type, row) {
-                    var strData = "";
-                    if (data.IsImportant == true) {
-                        strData = '<span class="IsImp"><i class="fas fa-star" title="Mark Important"></i></span>';
-                    }
-                    else {
-                        strData = '<span class="IsImp"><i class="far fa-star" title="Mark Important"></i></span>';
-                    }
-                    return strData;
-                }
-            },
-            { "data": "CreatedDate" },
-            { "data": "Subject" },
-            { "data": "NoteText" },
-        ]
-    });
+    DataTableInit();
 
     //Marked-unmarked Important
     $('.IsImp').on('click', function () {
@@ -106,6 +77,24 @@ $(document).ready(function () {
         fn_OpenModal();
     });
 
+    //Delete Note
+    $('.DeleteNote').on('click', function () {
+        var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
+        var NoteId = CurrentRowdata[0];
+
+        //Ask For Confirmation using confirm box
+        $.ajax(function () {
+            type: 'POST',
+                url : "Notes/Delete",
+                data: { p_NoteId = NoteId },
+                        dataType : 'json',
+                            success: function(result) {
+                                if (result == true) {
+                                    alert("Note Successfully deleted");
+                                    DataTableInit();
+                                }
+                            });
+    });
 
     //open modal
     $AddNoteBtn.on('click', function (event) {
@@ -169,6 +158,39 @@ function fn_OpenModal() {
         //yearRange: "-60:+0"
     });
 }
+
+function DataTableInit() {
+    DataTable = $('#tblNotesList').DataTable({
+        "ajax": {
+            url: "/Notes/GetListData",
+            dataSrc: ''
+        },
+        "columnDefs": [{
+            "targets": 0,
+            "data": null,
+            "defaultContent": '<span class=""><i class="fa fa - pencil EditNote" title="Edit" ></i>&nbsp;<i class="fa fa - trash DeleteNote" title="Delete"></i></span>'
+        }],
+        "columns": [
+            { "data": "NoteId" },
+            {
+                "data": "IsImportant",
+                "render": function (data, type, row) {
+                    var strData = "";
+                    if (data.IsImportant == true) {
+                        strData = '<span class="IsImp"><i class="fas fa-star" title="Mark Important"></i></span>';
+                    }
+                    else {
+                        strData = '<span class="IsImp"><i class="far fa-star" title="Mark Important"></i></span>';
+                    }
+                    return strData;
+                }
+            },
+            { "data": "CreatedDate" },
+            { "data": "Subject" },
+            { "data": "NoteText" },
+        ]
+    });
+} 
 
 //function signup_selected() {
 //    $form_login.removeClass('is-selected');

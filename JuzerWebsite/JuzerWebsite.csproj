@@ -223,6 +223,7 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\CustomJSScripts\Common.js" />
     <Content Include="Scripts\CustomJSScripts\jsAnalysis.js" />
+    <Content Include="Scripts\CustomJSScripts\jsDeleteAccount.js" />
     <Content Include="Scripts\CustomJSScripts\jsNotes.js" />
     <Content Include="Scripts\CustomJSScripts\jsSpending.js" />
     <Content Include="Scripts\CustomJSScripts\jsUserHome.js" />
@@ -264,6 +265,7 @@
     <Content Include="Views\Analysis\Analysis.cshtml" />
     <Content Include="Views\Analysis\_AddAdmin.cshtml" />
     <Content Include="Views\Analysis\_RemoveAdmin.cshtml" />
+    <Content Include="Views\User\DeleteAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -273,7 +275,6 @@
     <Folder Include="Areas\Spending\Views\List\" />
     <Folder Include="Areas\Spending\Views\Shared\" />
     <Folder Include="Views\Login\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

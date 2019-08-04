@@ -47,5 +47,13 @@ namespace JuzerWebsite.Areas.Notes.Controllers
             bool result = BLObj.BL_ChangeNoteImportance(NoteId, IsImportant);
             return Json( new { result });
         }
+
+        [Route("Notes/Delete")]
+        [HttpPost]
+        public JsonResult DeleteNote(int p_NoteId)
+        {
+            bool result = BLObj.BL_DeleteNote(p_NoteId);
+            return Json(new { result });
+        }
     }
 }

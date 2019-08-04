@@ -57,7 +57,13 @@ namespace JuzerWebsite.Controllers
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult ValidatePassword(string p_Password)
+        {
+            bool IsUserExists = BLUser.BL_ValidatePassword(new UserLoginVM { Email = (Session["MST_UserInfo"] as MST_UserInfo).Email, Password = p_Password });
+            return Json(new { IsUserExists });
         }
     }
 }

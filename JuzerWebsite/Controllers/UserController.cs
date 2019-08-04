@@ -72,5 +72,12 @@ namespace JuzerWebsite.Controllers
             }
         }
 
+        [Route("User/Delete")]
+        [HttpGet]
+        public ActionResult DeleteAccount()
+        {
+            return View("DeleteAccount");
+        }
+
     }
 }
