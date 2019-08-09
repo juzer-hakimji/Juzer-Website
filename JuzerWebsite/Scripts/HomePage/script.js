@@ -174,8 +174,9 @@ jQuery(document).ready(function ($) {
     $('#btnLogin').on('click', function () {
         var formValid = $("#cd-form-Login").validate().form();
         if (!formValid) return false;
-        var SerializedArray = $('#cd-form-Login').serializeArray();
-        var SerializedObj = objectifyForm(SerializedArray);
+        //var SerializedArray = $('#cd-form-Login').serializeArray();
+        //var SerializedObj = objectifyForm(SerializedArray);
+        var SerializedObj = $('#cd-form-Login').serialize();
         $.ajax(function () {
             type: 'POST',
                 url : "Authentication/Login",
@@ -191,8 +192,9 @@ jQuery(document).ready(function ($) {
     $('#btnCrtAcct').on('click', function () {
         var formValid = $("#cd-form-SignUp").validate().form();
         if (!formValid) return false;
-        var SerializedArray = $('#cd-form-SignUp').serializeArray();
-        var SerializedObj = objectifyForm(SerializedArray);
+        //var SerializedArray = $('#cd-form-SignUp').serializeArray();
+        //var SerializedObj = objectifyForm(SerializedArray);
+        var SerializedObj = $('#cd-form-SignUp').serialize();
         $.ajax(function () {
             type: 'POST',
                 url : "User/Save",

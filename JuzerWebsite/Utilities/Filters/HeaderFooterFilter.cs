@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ViewModel;
 
-namespace JuzerWebsite.Filters
+namespace JuzerWebsite.Utilities.Filters
 {
     public class HeaderFooterFilter : ActionFilterAttribute
     {

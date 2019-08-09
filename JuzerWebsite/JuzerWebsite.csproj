@@ -125,14 +125,18 @@
     <Compile Include="Areas\Spending\Controllers\ListController.cs" />
     <Compile Include="Areas\Spending\SpendingAreaRegistration.cs" />
     <Compile Include="Controllers\AnalysisController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Filters\HeaderFooterFilter.cs" />
+    <Compile Include="Utilities\Filters\HeaderFooterFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Filters\UserExceptionFilter.cs" />
+    <Compile Include="Utilities\Logger\DataBaseLogger.cs" />
+    <Compile Include="Utilities\Logger\FileLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -274,6 +278,7 @@
     <Folder Include="Areas\Spending\Models\" />
     <Folder Include="Areas\Spending\Views\List\" />
     <Folder Include="Areas\Spending\Views\Shared\" />
+    <Folder Include="Views\Error\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>

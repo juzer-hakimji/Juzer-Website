@@ -30,3 +30,7 @@ function CloseModalWhenEsc() {
         }
     });
 }
+
+function ShowResult(result) {
+    alert(result);
+}

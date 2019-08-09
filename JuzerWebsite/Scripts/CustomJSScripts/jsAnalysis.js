@@ -60,31 +60,37 @@ function CloseModalHandler(event) {
 
 function AddAdminHandler() {
     var UserIds = $('.UserListAdd').val();
-    $.ajax(function () {
-        type: 'POST',
-            url : "Analysis/AddOrRemoveAdmin",
-                data: { UserIds: UserIds, IsAdmin : true },
-        dataType: 'json',
-            success: function(result) {
-                if (result == true) {
-                    alert("Admin Creation successful");
-                    $('.cd-user-modal').removeClass('is-visible');
-                }
-            }
+    CallAjaxMethod("Analysis/AddOrRemoveAdmin", 'POST', { UserIds: UserIds, IsAdmin: true }).then(function (result) {
+        ShowResult(result); // It will show Dashboard
     });
+    //$.ajax(function () {
+    //    type: 'POST',
+    //        url : "Analysis/AddOrRemoveAdmin",
+    //            data: { UserIds: UserIds, IsAdmin : true },
+    //    dataType: 'json',
+    //        success: function(result) {
+    //            if (result == true) {
+    //                alert("Admin Creation successful");
+    //                $('.cd-user-modal').removeClass('is-visible');
+    //            }
+    //        }
+    //});
 }
 
 function RemoveAdminHandler() {
     var UserIds = $('.UserListRemove').val();
-    $.ajax(function () {
-        type: 'POST',
-            url : "Analysis/AddOrRemoveAdmin",
-                data: { UserIds: UserIds, IsAdmin : false },
-        dataType: 'json',
-            success: function(result) {
-                if (result == true) {
-                    alert("Admin Deletion successful");
-                    $('.cd-user-modal').removeClass('is-visible');
-                }
-            });
+    CallAjaxMethod("Analysis/AddOrRemoveAdmin", 'POST', { UserIds: UserIds, IsAdmin: false }).then(function (result) {
+        ShowResult(result);
+    });
+    //$.ajax(function () {
+    //    type: 'POST',
+    //        url : "Analysis/AddOrRemoveAdmin",
+    //            data: { UserIds: UserIds, IsAdmin : false },
+    //    dataType: 'json',
+    //        success: function(result) {
+    //            if (result == true) {
+    //                alert("Admin Deletion successful");
+    //                $('.cd-user-modal').removeClass('is-visible');
+    //            }
+    //        });
 }

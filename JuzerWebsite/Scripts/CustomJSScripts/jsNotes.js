@@ -73,30 +73,38 @@ function ChangeNoteImportanceHandler() {
     var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
     if ($(this).children('i').attr("class") == 'fas fa-star') {
         //To mark not important
-        $.ajax(function () {
-            type: 'POST',
-                url : "Notes/ChangeNoteImportance",
-                    data: { NoteId: CurrentRowdata[0], IsImportant : false },
-            dataType: 'json',
-                success: function(result) {
-                    if (result == true) {
-                        alert("Note Marked as Important");
-                    }
-                });
+        CallAjaxMethod("Notes/ChangeNoteImportance", 'POST', { NoteId: CurrentRowdata[0], IsImportant: false }).then(function (result) {
+            ShowResult(result);
+        });
+        //$.ajax(function () {
+        //    type: 'POST',
+        //        url : "Notes/ChangeNoteImportance",
+        //            data: { NoteId: CurrentRowdata[0], IsImportant : false },
+        //    dataType: 'json',
+        //        success: function(result) {
+        //            if (result == true) {
+        //                alert("Note Marked as Important");
+        //            }
+        //        }
+        //});
         $(this).children('i').attr("class", "far fa-star")
     }
     else {
         //To mark important
-        $.ajax(function () {
-            type: 'POST',
-                url : "Notes/ChangeNoteImportance",
-                    data: { NoteId: CurrentRowdata[0], IsImportant : true },
-            dataType: 'json',
-                success: function(result) {
-                    if (result == true) {
-                        alert("Note Marked as Not Important");
-                    }
-                });
+        CallAjaxMethod("Notes/ChangeNoteImportance", 'POST', { NoteId: CurrentRowdata[0], IsImportant: true }).then(function (result) {
+            ShowResult(result);
+        });
+        //$.ajax(function () {
+        //    type: 'POST',
+        //        url : "Notes/ChangeNoteImportance",
+        //            data: { NoteId: CurrentRowdata[0], IsImportant : true },
+        //    dataType: 'json',
+        //        success: function(result) {
+        //            if (result == true) {
+        //                alert("Note Marked as Not Important");
+        //            }
+        //        }
+        //});
         $(this).children('i').attr("class", "fas fa-star")
     }
 }
@@ -115,18 +123,22 @@ function DeleteNoteHandler() {
     var NoteId = CurrentRowdata[0];
 
     //Ask For Confirmation using confirm box
-    $.ajax(function () {
-        type: 'POST',
-            url : "Notes/Delete",
-                data: { p_NoteId: NoteId },
-        dataType: 'json',
-            success: function(result) {
-                if (result == true) {
-                    alert("Note Successfully deleted");
-                    DataTableInit();
-                }
-            }
+
+    CallAjaxMethod("Notes/Delete", 'POST', { p_NoteId: NoteId }).then(function (result) {
+        ShowResult(result);
     });
+    //$.ajax(function () {
+    //    type: 'POST',
+    //        url : "Notes/Delete",
+    //            data: { p_NoteId: NoteId },
+    //    dataType: 'json',
+    //        success: function(result) {
+    //            if (result == true) {
+    //                alert("Note Successfully deleted");
+    //                DataTableInit();
+    //            }
+    //        }
+    //});
 }
 
 function OpenAddNoteModalHandler() {
@@ -142,21 +154,25 @@ function CloseModalHandler() {
 function AddNoteHandler() {
     var formValid = $("#cd-form-Notes").validate().form();
     if (!formValid) return false;
-    var SerializedArray = $('#cd-form-Notes').serializeArray();
-    var SerializedObj = objectifyForm(SerializedArray);
+    //var SerializedArray = $('#cd-form-Notes').serializeArray();
+    //var SerializedObj = objectifyForm(SerializedArray);
+    var SerializedObj = $('#cd-form-Notes').serialize();
     SerializedObj["NoteId"] = $('#hdnEditNoteId').val() == "" ? null : $('#hdnEditNoteId').val();
-    $.ajax(function () {
-        type: 'POST',
-            url : "Notes/Save",
-                data: SerializedObj,
-                    dataType : 'json',
-                        success: function(result) {
-                            if (result == false) {
-                                $('#NotesSaveValidate').text('Invalid Note Details');
-                                $('.cd-user-modal').removeClass('is-visible');
-                            }
-                        }
+    CallAjaxMethod("Notes/Save", 'POST', SerializedObj).then(function (result) {
+        ShowResult(result);
     });
+    //$.ajax(function () {
+    //    type: 'POST',
+    //        url : "Notes/Save",
+    //            data: SerializedObj,
+    //                dataType : 'json',
+    //                    success: function(result) {
+    //                        if (result == false) {
+    //                            $('#NotesSaveValidate').text('Invalid Note Details');
+    //                            $('.cd-user-modal').removeClass('is-visible');
+    //                        }
+    //                    }
+    //});
 }
 
 
