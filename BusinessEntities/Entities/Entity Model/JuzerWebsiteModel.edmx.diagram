@@ -10,11 +10,9 @@
         <EntityTypeShape EntityType="JuzerWebsiteModel.DEV_Menu" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="JuzerWebsiteModel.DEV_TypeOfTransaction" Width="1.5" PointX="3.75" PointY="1.625" />
         <EntityTypeShape EntityType="JuzerWebsiteModel.MST_UserInfo" Width="1.5" PointX="3" PointY="4.625" />
-        <EntityTypeShape EntityType="JuzerWebsiteModel.Pract" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="JuzerWebsiteModel.TRN_Expense" Width="1.5" PointX="8.25" PointY="4.875" />
         <EntityTypeShape EntityType="JuzerWebsiteModel.TRN_Income" Width="1.5" PointX="5.25" PointY="4.875" />
         <EntityTypeShape EntityType="JuzerWebsiteModel.TRN_Notes" Width="1.5" PointX="5.25" PointY="12.375" />
-        <EntityTypeShape EntityType="JuzerWebsiteModel.TypeQuestion" Width="1.5" PointX="5.75" PointY="8.75" />
         <AssociationConnector Association="JuzerWebsiteModel.FK_DEV_Category_DEV_TypeOfTransaction" />
         <AssociationConnector Association="JuzerWebsiteModel.FK_TRN_Expense_DEV_Category" />
         <AssociationConnector Association="JuzerWebsiteModel.FK_TRN_Income_DEV_Category" />
@@ -22,6 +20,7 @@
         <AssociationConnector Association="JuzerWebsiteModel.FK_TRN_Expense_MST_UserInfo" />
         <AssociationConnector Association="JuzerWebsiteModel.FK_TRN_Income_MST_UserInfo" />
         <AssociationConnector Association="JuzerWebsiteModel.FK_TRN_Notes_MST_UserInfo" />
+        <EntityTypeShape EntityType="JuzerWebsiteModel.WebsiteErrorLog" Width="1.5" PointX="8.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

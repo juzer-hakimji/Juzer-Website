@@ -1,4 +1,5 @@
-﻿using JuzerWebsite.Utilities.Logger;
+﻿using BusinessLayer.Business_Logic_Classes;
+using JuzerWebsite.Utilities.Logger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace JuzerWebsite.Utilities.Filters
     {
         public override void OnException(ExceptionContext filterContext)
         {
-            new FileLogger().LogException(filterContext.Exception);
-
+            new FileLogger().LogExceptionToFile(filterContext.Exception);
+            new BL_Error().BL_LogExceptionToDataBase(filterContext.Exception);
             base.OnException(filterContext);
         }
     }

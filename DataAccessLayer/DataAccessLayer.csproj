@@ -49,6 +49,7 @@
     <Compile Include="Abstract Classes\Abstract_User.cs" />
     <Compile Include="Base Classes\BaseDAL.cs" />
     <Compile Include="Data Access Classes\DAL_Analysis.cs" />
+    <Compile Include="Data Access Classes\DAL_Error.cs" />
     <Compile Include="Data Access Classes\DAL_Home.cs" />
     <Compile Include="Data Access Classes\DAL_Notes.cs" />
     <Compile Include="Data Access Classes\DAL_Spending.cs" />

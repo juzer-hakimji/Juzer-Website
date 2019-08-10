@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business Logic Classes\BL_Analysis.cs" />
+    <Compile Include="Business Logic Classes\BL_Error.cs" />
     <Compile Include="Business Logic Classes\BL_Home.cs" />
     <Compile Include="Business Logic Classes\BL_Notes.cs" />
     <Compile Include="Business Logic Classes\BL_Spending.cs" />
