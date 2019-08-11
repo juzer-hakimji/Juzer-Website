@@ -26,7 +26,7 @@ namespace BusinessLayer.Business_Logic_Classes
         public List<NotesVM> BL_GetImportantNotes(int p_UserId)
         {
             List<NotesVM> NotesVMList = new List<NotesVM>();
-            List<TRN_Notes> NotesList = DALObj.DAL_GetImportantNotes(p_UserId);
+            List<TRN_Notes> NotesList = DALObj.DAL_GetImportantNotes(p_UserId).Data;
             foreach (TRN_Notes Note in NotesList)
             {
                 NotesVM NotesObj = new NotesVM

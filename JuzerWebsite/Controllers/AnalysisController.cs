@@ -24,7 +24,7 @@ namespace JuzerWebsite.Controllers
             return View("Analysis", AnalysisVM);
         }
 
-        public ActionResult BL_AddOrRemoveAdmin(string UserIds,bool IsAdmin)
+        public ActionResult AddOrRemoveAdmin(string UserIds,bool IsAdmin)
         {
             bool Result = BLAnalysis.BL_AddOrRemoveAdmin(UserIds, IsAdmin);
             return Json(new { Result });

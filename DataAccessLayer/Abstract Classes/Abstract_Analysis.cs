@@ -1,5 +1,7 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
 using DataAccessLayer.Base_Classes;
+using DataAccessLayer.Data_Model;
+using DataAccessLayer.Database_Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,13 +39,14 @@ namespace DataAccessLayer.Abstract_Classes
             }
             catch (Exception ex)
             {
+                new LogError(ex);
                 return false;
             }
         }
 
-        public List<MST_UserInfo> GetAddOrRemoveAdminList(bool p_IsAdd)
+        public DBContextResult<List<MST_UserInfo>> GetAddOrRemoveAdminList(bool p_IsAdd)
         {
-            return this.ExecuteDALMethod<bool, List<MST_UserInfo>>(db, (DataContext, IsAdd) =>
+            return ExecuteDALMethod(db, (DataContext, IsAdd) =>
             {
                 return IsAdd ? DataContext.MST_UserInfo.Where(x => x.IsAdmin == false).ToList() : DataContext.MST_UserInfo.Where(x => x.IsAdmin == true).ToList();
             }, p_IsAdd);

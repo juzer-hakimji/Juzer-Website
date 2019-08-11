@@ -1,6 +1,6 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
 using BusinessLayer.Business_Logic_Classes;
-using JuzerWebsite.Filters;
+using JuzerWebsite.Utilities.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;

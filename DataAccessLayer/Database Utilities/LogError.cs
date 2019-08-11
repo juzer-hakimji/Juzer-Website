@@ -6,20 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Business_Logic_Classes
+namespace DataAccessLayer.Database_Utilities
 {
-    public class BL_Error
+    public class LogError
     {
-        public DAL_Error DALObj { get; set; }
-
-        public BL_Error()
+        public LogError(Exception ex)
         {
-            DALObj = new DAL_Error();
-        }
-
-        public void BL_LogExceptionToDataBase(Exception ex)
-        {
-            DALObj.DAL_LogExceptionToDataBase(new WebsiteErrorLog
+            new DAL_Error().DAL_LogExceptionToDataBase(new WebsiteErrorLog
             {
                 Message = ex.Message,
                 StackTrace = ex.StackTrace,

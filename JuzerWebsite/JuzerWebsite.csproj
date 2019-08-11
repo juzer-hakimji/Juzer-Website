@@ -135,7 +135,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Filters\UserExceptionFilter.cs" />
-    <Compile Include="Utilities\Logger\DataBaseLogger.cs" />
     <Compile Include="Utilities\Logger\FileLogger.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +226,7 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\CustomJSScripts\Common.js" />
     <Content Include="Scripts\CustomJSScripts\jsAnalysis.js" />
+    <Content Include="Scripts\CustomJSScripts\jsChangePassword.js" />
     <Content Include="Scripts\CustomJSScripts\jsDeleteAccount.js" />
     <Content Include="Scripts\CustomJSScripts\jsNotes.js" />
     <Content Include="Scripts\CustomJSScripts\jsSpending.js" />
@@ -270,6 +270,7 @@
     <Content Include="Views\Analysis\_AddAdmin.cshtml" />
     <Content Include="Views\Analysis\_RemoveAdmin.cshtml" />
     <Content Include="Views\User\DeleteAccount.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

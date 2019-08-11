@@ -1,5 +1,7 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
 using DataAccessLayer.Base_Classes;
+using DataAccessLayer.Data_Model;
+using DataAccessLayer.Database_Utilities;
 using DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract_Classes
 {
-    public class Abstract_User : BaseDAL , IBasicOperationsUser , IDisposable
+    public class Abstract_User : BaseDAL, IBasicOperationsUser, IDisposable
     {
         private JuzerWebsiteEntities db;
 
@@ -18,9 +20,9 @@ namespace DataAccessLayer.Abstract_Classes
             db = new JuzerWebsiteEntities();
         }
 
-        public MST_UserInfo Insert(MST_UserInfo p_MST_UserInfo)
+        public DBContextResult<MST_UserInfo> Insert(MST_UserInfo p_MST_UserInfo)
         {
-            return this.ExecuteDALMethod<MST_UserInfo, MST_UserInfo>(db, (DataContext, P_MST_UserInfo) =>
+            return ExecuteDALMethod(db, (DataContext, P_MST_UserInfo) =>
             {
                 DataContext.MST_UserInfo.Add(P_MST_UserInfo);
                 DataContext.SaveChanges();
@@ -28,9 +30,9 @@ namespace DataAccessLayer.Abstract_Classes
             }, p_MST_UserInfo);
         }
 
-        public bool Update(MST_UserInfo p_MST_UserInfo)
+        public DBContextResult<object> Update(MST_UserInfo p_MST_UserInfo)
         {
-            return this.ExecuteDALMethod<MST_UserInfo, bool>(db, (DataContext, P_MST_UserInfo) =>
+            return ExecuteDALMethod<MST_UserInfo, object>(db, (DataContext, P_MST_UserInfo) =>
             {
                 MST_UserInfo UserObj = DataContext.MST_UserInfo.Find(P_MST_UserInfo.UserId);
                 UserObj.FirstName = P_MST_UserInfo.FirstName;
@@ -39,48 +41,52 @@ namespace DataAccessLayer.Abstract_Classes
                 UserObj.Email = P_MST_UserInfo.Email;
                 UserObj.Password = P_MST_UserInfo.Password;
                 DataContext.SaveChanges();
-                return true;
+                return null;
             }, p_MST_UserInfo);
         }
 
-        public bool Delete(int p_UserId)
+        public DBContextResult<object> Delete(int p_UserId)
         {
-            MST_UserInfo UserObj = new MST_UserInfo
-            {
-                UserId = p_UserId
-            };
-            return this.ExecuteDALMethod<MST_UserInfo,bool>(db, (DataContext, P_MST_UserInfo) =>
-            {
-                MST_UserInfo Obj = DataContext.MST_UserInfo.Find(P_MST_UserInfo.UserId);
-                Obj.IsActive = false;
-                DataContext.SaveChanges();
-                return true;
-            }, UserObj);
+            return ExecuteDALMethod<int, object>(db, (DataContext, P_UserId) =>
+             {
+                 MST_UserInfo Obj = DataContext.MST_UserInfo.Find(P_UserId);
+                 Obj.IsActive = false;
+                 DataContext.SaveChanges();
+                 return null;
+             }, p_UserId);
         }
 
-        public MST_UserInfo GetUserValidity(string p_Email)
+        public DBContextResult<MST_UserInfo> GetUserValidity(string p_Email)
         {
-            return this.ExecuteDALMethod<string,MST_UserInfo>(db,(DataContext,P_Email) => 
-            {
-                MST_UserInfo UserObj = DataContext.MST_UserInfo.SingleOrDefault(x => x.Email.Equals(P_Email));
-                return UserObj;
-            },p_Email);
+            return ExecuteDALMethod(db, (DataContext, P_Email) =>
+             {
+                 MST_UserInfo UserObj = DataContext.MST_UserInfo.SingleOrDefault(x => x.Email.Equals(P_Email));
+                 return UserObj;
+             }, p_Email);
         }
 
-        public bool CheckForEmailAvailability(string p_Email)
+        public DBContextResult<bool> CheckForEmailAvailability(string p_Email)
         {
-            return this.ExecuteDALMethod<string, bool>(db, (DataContext, P_Email) =>
+            return ExecuteDALMethod(db, (DataContext, P_Email) =>
             {
                 return DataContext.MST_UserInfo.Any(x => x.Email.Equals(P_Email));
             }, p_Email);
         }
 
-        public bool SaveNewPassword(int p_UserId,string NewHashedPassword)
+        public bool SaveNewPassword(int p_UserId, string NewHashedPassword)
         {
-            MST_UserInfo MST_UserInfo = db.MST_UserInfo.Find(p_UserId);
-            MST_UserInfo.Password = NewHashedPassword;
-            db.SaveChanges();
-            return true;
+            try
+            {
+                MST_UserInfo MST_UserInfo = db.MST_UserInfo.Find(p_UserId);
+                MST_UserInfo.Password = NewHashedPassword;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                new LogError(ex);
+                return false;
+            }
         }
 
         public void Dispose()

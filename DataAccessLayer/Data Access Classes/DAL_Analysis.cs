@@ -1,5 +1,6 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
 using DataAccessLayer.Abstract_Classes;
+using DataAccessLayer.Data_Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,12 @@ namespace DataAccessLayer.Data_Access_Classes
 
         public bool DAL_AddOrRemoveAdmin(string p_UserIds, bool p_IsAdmin)
         {
-            return this.AddOrRemoveAdmin(p_UserIds, p_IsAdmin);
+            return AddOrRemoveAdmin(p_UserIds, p_IsAdmin);
         }
 
-        public List<MST_UserInfo> DAL_GetAddOrRemoveAdminList(bool IsAdd)
+        public DBContextResult<List<MST_UserInfo>> DAL_GetAddOrRemoveAdminList(bool IsAdd)
         {
-            return this.GetAddOrRemoveAdminList(IsAdd);
+            return GetAddOrRemoveAdminList(IsAdd);
         }
     }
 }

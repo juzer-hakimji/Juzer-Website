@@ -50,6 +50,7 @@
     <Compile Include="Business Logic Classes\BL_User.cs" />
     <Compile Include="MD5 Hash Class\MD5Hashing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransactionResultModel\TransactionResultModel.cs" />
     <Compile Include="User Status\UserStatus.cs" />
   </ItemGroup>
   <ItemGroup>

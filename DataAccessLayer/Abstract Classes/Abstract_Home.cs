@@ -1,4 +1,6 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
+using DataAccessLayer.Base_Classes;
+using DataAccessLayer.Data_Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract_Classes
 {
-    public abstract class Abstract_Home : IDisposable
+    public abstract class Abstract_Home : BaseDAL, IDisposable
     {
         JuzerWebsiteEntities db;
 
@@ -21,10 +23,12 @@ namespace DataAccessLayer.Abstract_Classes
             //get total of incomes and total of expenses for current month and year using stored procedure
         }
 
-        protected List<TRN_Notes> GetImportantNotes(int p_UserId)
+        protected DBContextResult<List<TRN_Notes>> GetImportantNotes(int p_UserId)
         {
-            List<TRN_Notes> List = db.TRN_Notes.Where(x =>x.UserId == p_UserId && x.IsImportant == true && x.IsActive != false ).ToList();
-            return List;
+            return ExecuteDALMethod<int,List<TRN_Notes>>(db, (DataContext, P_UserId) =>
+            {
+                return db.TRN_Notes.Where(x => x.UserId == p_UserId && x.IsImportant == true && x.IsActive != false).ToList();
+            }, p_UserId);
         }
 
         public void Dispose()

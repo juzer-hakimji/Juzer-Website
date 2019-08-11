@@ -45,4 +45,14 @@ namespace ViewModel
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
         public string ResetEmail { get; set; }
     }
+
+    public class ChangePasswordVM
+    {
+        [Required(ErrorMessage = "Please enter Old Password")]
+        public string OldPassword { get; set; }
+
+        [Required(ErrorMessage = "Please enter New Password")]
+        [Range(7,25, ErrorMessage = "Password should contain more than 7 characters")]
+        public string NewPassword { get; set; }
+    }
 }

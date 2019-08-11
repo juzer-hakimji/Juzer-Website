@@ -1,5 +1,6 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
 using DataAccessLayer.Abstract_Classes;
+using DataAccessLayer.Data_Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace DataAccessLayer.Data_Access_Classes
 
         }
 
-        public List<TRN_Notes> DAL_GetImportantNotes(int p_UserId)
+        public DBContextResult<List<TRN_Notes>> DAL_GetImportantNotes(int p_UserId)
         {
-            return this.GetImportantNotes(p_UserId);
+            return GetImportantNotes(p_UserId);
         }
     }
 }

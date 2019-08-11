@@ -1,4 +1,5 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
+using DataAccessLayer.Data_Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IBasicOperationsUser
     {
-        MST_UserInfo Insert(MST_UserInfo p_Obj);
-        bool Update(MST_UserInfo p_Obj);
-        bool Delete(int p_UserId);
+        DBContextResult<MST_UserInfo> Insert(MST_UserInfo p_Obj);
+        DBContextResult<object> Update(MST_UserInfo p_Obj);
+        DBContextResult<object> Delete(int p_UserId);
     }
 }

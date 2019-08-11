@@ -1,5 +1,6 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
 using BusinessLayer.Business_Logic_Classes;
+using BusinessLayer.TransactionResultModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,5 +80,24 @@ namespace JuzerWebsite.Controllers
             return View("DeleteAccount");
         }
 
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View("ChangePassword");
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordVM p_Obj)
+        {
+            TransactionResult result = BLUser.BL_ChangePassword(p_Obj, (Session["MST_UserInfo"] as MST_UserInfo).Email);
+            if (result.Success)
+            {
+                return RedirectToAction("Notes", "List");
+            }
+            else
+            {
+                return Json(new { result = result.Message }); 
+            }
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace BusinessLayer.Business_Logic_Classes
         public List<NotesVM> BL_GetNotesList(int p_UserId)
         {
             List<NotesVM> NotesVMList = new List<NotesVM>();
-            List<usp_GetNotesList_Result> NotesList = INotesObj.Select(p_UserId);
+            List<usp_GetNotesList_Result> NotesList = INotesObj.Select(p_UserId).Data;
             foreach (usp_GetNotesList_Result Note in NotesList)
             {
                 NotesVM NotesObj = new NotesVM
@@ -50,7 +50,7 @@ namespace BusinessLayer.Business_Logic_Classes
                 IsActive = true,
                 IsImportant = false
             };
-            return INotesObj.Insert(NoteObj);
+            return INotesObj.Insert(NoteObj).TransactionResult;
         }
 
         public bool BL_UpdateNote(NotesVM p_NotesVM)
@@ -62,17 +62,17 @@ namespace BusinessLayer.Business_Logic_Classes
                 CreatedDate = Convert.ToDateTime(p_NotesVM.CreatedDate, CultureInfo.InvariantCulture),
                 NoteText = p_NotesVM.NoteText
             };
-            return INotesObj.Update(NoteObj);
+            return INotesObj.Update(NoteObj).TransactionResult;
         }
 
         public bool BL_DeleteNote(int p_NoteId)
         {
-            return INotesObj.Delete(p_NoteId);
+            return INotesObj.Delete(p_NoteId).TransactionResult;
         }
 
         public bool BL_ChangeNoteImportance(int NoteId, bool IsImportant)
         {
-            return new DAL_Notes().DAL_ChangeNoteImportance(NoteId, IsImportant);
+            return new DAL_Notes().DAL_ChangeNoteImportance(NoteId, IsImportant).TransactionResult;
         }
     }
 }

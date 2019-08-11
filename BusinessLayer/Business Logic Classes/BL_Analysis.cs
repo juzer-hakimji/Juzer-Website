@@ -31,12 +31,11 @@ namespace BusinessLayer.Business_Logic_Classes
         public List<UserDetailsVM> BL_GetAddOrRemoveAdminList(bool IsAdd)
         {
             List<UserDetailsVM> UserList = new List<UserDetailsVM>();
-            foreach (var item in DALObj.DAL_GetAddOrRemoveAdminList(IsAdd))
+            foreach (var item in DALObj.DAL_GetAddOrRemoveAdminList(IsAdd).Data)
             {
                 UserList.Add(new UserDetailsVM { UserId = item.UserId,Email = item.Email });
             }
             return UserList;
         }
-        
     }
 }

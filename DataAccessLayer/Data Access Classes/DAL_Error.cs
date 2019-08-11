@@ -17,14 +17,24 @@ namespace DataAccessLayer.Data_Access_Classes
             db = new JuzerWebsiteEntities();
         }
 
-        public bool DAL_LogExceptionToDataBase(WebsiteErrorLog p_WebsiteErrorLog)
+        public void DAL_LogExceptionToDataBase(WebsiteErrorLog p_WebsiteErrorLog)
         {
-            return this.ExecuteDALMethod<WebsiteErrorLog, bool>(db, (DataContext, P_WebsiteErrorLog) =>
+            this.ExecuteDALMethod<WebsiteErrorLog, bool>(db, (DataContext, P_WebsiteErrorLog) =>
             {
                 DataContext.WebsiteErrorLogs.Add(P_WebsiteErrorLog);
                 DataContext.SaveChanges();
                 return true;
             }, p_WebsiteErrorLog);
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
+        }
+
+        ~DAL_Error()
+        {
+            Dispose();
         }
     }
 }
