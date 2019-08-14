@@ -1,4 +1,5 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
+using BusinessLayer.TransactionResultModel;
 using DataAccessLayer.Data_Access_Classes;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,46 @@ namespace BusinessLayer.Business_Logic_Classes
 
         }
 
-        public bool BL_AddOrRemoveAdmin(string p_UserIds, bool p_IsAdmin)
+        public TransactionResult BL_AddOrRemoveAdmin(string p_UserIds, bool p_IsAdmin)
         {
-            return DALObj.AddOrRemoveAdmin(p_UserIds, p_IsAdmin);
+            if (DALObj.AddOrRemoveAdmin(p_UserIds, p_IsAdmin))
+            {
+                if (p_IsAdmin)
+                {
+                    return new TransactionResult
+                    {
+                        Success = true,
+                        Message = "Admin Addition successful"
+                    };
+                }
+                else
+                {
+                    return new TransactionResult
+                    {
+                        Success = true,
+                        Message = "Admin Removal successful"
+                    };
+                }
+            }
+            else
+            {
+                if (p_IsAdmin)
+                {
+                    return new TransactionResult
+                    {
+                        Success = false,
+                        Message = "Admin Addition unsuccessful"
+                    };
+                }
+                else
+                {
+                    return new TransactionResult
+                    {
+                        Success = false,
+                        Message = "Admin Removal unsuccessful"
+                    };
+                }
+            }
         }
 
         public List<UserDetailsVM> BL_GetAddOrRemoveAdminList(bool IsAdd)
@@ -33,7 +71,7 @@ namespace BusinessLayer.Business_Logic_Classes
             List<UserDetailsVM> UserList = new List<UserDetailsVM>();
             foreach (var item in DALObj.DAL_GetAddOrRemoveAdminList(IsAdd).Data)
             {
-                UserList.Add(new UserDetailsVM { UserId = item.UserId,Email = item.Email });
+                UserList.Add(new UserDetailsVM { UserId = item.UserId, Email = item.Email });
             }
             return UserList;
         }

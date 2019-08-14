@@ -1,6 +1,7 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
 using BusinessLayer.Business_Logic_Classes;
 using BusinessLayer.TransactionResultModel;
+using JuzerWebsite.Utilities.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace JuzerWebsite.Controllers
             BLUser = new BL_User();
         }
         // GET: User
+        [ValidateAntiForgeryToken]
         public ActionResult Save(UserDetailsVM p_UserVM)
         {
             if (ModelState.IsValid)
@@ -36,6 +38,7 @@ namespace JuzerWebsite.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SendResetPasswordEmail(string p_Email)
         {
             if (ModelState.IsValid)
@@ -74,6 +77,7 @@ namespace JuzerWebsite.Controllers
         }
 
         [Route("User/Delete")]
+        [HeaderFooterFilter]
         [HttpGet]
         public ActionResult DeleteAccount()
         {
@@ -81,12 +85,14 @@ namespace JuzerWebsite.Controllers
         }
 
         [HttpGet]
+        [HeaderFooterFilter]
         public ActionResult ChangePassword()
         {
             return View("ChangePassword");
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ChangePasswordVM p_Obj)
         {
             TransactionResult result = BLUser.BL_ChangePassword(p_Obj, (Session["MST_UserInfo"] as MST_UserInfo).Email);

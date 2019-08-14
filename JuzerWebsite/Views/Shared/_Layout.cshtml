@@ -12,6 +12,7 @@
     @RenderSection("styles", false)
 </head>
 <body>
+    @Html.AntiForgeryToken()
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -28,7 +29,8 @@
                     <li>@Html.ActionLink("Spending", "About", "Home")</li>
                     <li>@Html.ActionLink("Notes", "Contact", "Home")</li>
                     <li @(Convert.ToBoolean(Session["IsAdmin"]) ? "hidden" : "")>@Html.ActionLink("Analysis", "Contact", "Home")</li>
-                    <li>Profile
+                    <li>
+                        Profile
                         <ul>
                             <li>@Html.ActionLink("Change Password", "ChangePassword", "User")</li>
                             <li>@Html.ActionLink("Delete Account", "Delete", "User")</li>

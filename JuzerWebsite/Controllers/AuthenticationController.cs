@@ -23,6 +23,7 @@ namespace JuzerWebsite.Controllers
 
         //This method will be called when user user enters information and clicks login
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(UserLoginVM p_UserLoginVM)
         {
             if (ModelState.IsValid)
@@ -60,6 +61,7 @@ namespace JuzerWebsite.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [ValidateAntiForgeryToken]
         public ActionResult ValidatePassword(string p_Password)
         {
             bool IsUserExists = BLUser.BL_ValidatePassword(new UserLoginVM { Email = (Session["MST_UserInfo"] as MST_UserInfo).Email, Password = p_Password });

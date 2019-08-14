@@ -1,4 +1,5 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
+using BusinessLayer.TransactionResultModel;
 using DataAccessLayer.Data_Access_Classes;
 using DataAccessLayer.Interfaces;
 using System;
@@ -40,7 +41,7 @@ namespace BusinessLayer.Business_Logic_Classes
             return NotesVMList;
         }
 
-        public bool BL_SaveNote(NotesVM p_NotesVM)
+        public TransactionResult BL_SaveNote(NotesVM p_NotesVM)
         {
             NoteObj = new TRN_Notes
             {
@@ -50,10 +51,24 @@ namespace BusinessLayer.Business_Logic_Classes
                 IsActive = true,
                 IsImportant = false
             };
-            return INotesObj.Insert(NoteObj).TransactionResult;
+            if (INotesObj.Insert(NoteObj).TransactionResult)
+            {
+                return new TransactionResult{
+                    Success = true,
+                    Message = "Note Saved Successfully"
+                };
+            }
+            else
+            {
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = "Something Went Wrong,Please try again"
+                };
+            }
         }
 
-        public bool BL_UpdateNote(NotesVM p_NotesVM)
+        public TransactionResult BL_UpdateNote(NotesVM p_NotesVM)
         {
             NoteObj = new TRN_Notes
             {
@@ -62,17 +77,62 @@ namespace BusinessLayer.Business_Logic_Classes
                 CreatedDate = Convert.ToDateTime(p_NotesVM.CreatedDate, CultureInfo.InvariantCulture),
                 NoteText = p_NotesVM.NoteText
             };
-            return INotesObj.Update(NoteObj).TransactionResult;
+            if (INotesObj.Update(NoteObj).TransactionResult)
+            {
+                return new TransactionResult
+                {
+                    Success = true,
+                    Message = "Note Updated Successfully"
+                };
+            }
+            else
+            {
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = "Something Went Wrong,Please try again"
+                };
+            }
         }
 
-        public bool BL_DeleteNote(int p_NoteId)
+        public TransactionResult BL_DeleteNote(int p_NoteId)
         {
-            return INotesObj.Delete(p_NoteId).TransactionResult;
+            if (INotesObj.Delete(p_NoteId).TransactionResult)
+            {
+                return new TransactionResult
+                {
+                    Success = true,
+                    Message = "Note Deletion Successful"
+                };
+            }
+            else
+            {
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = "Something Went Wrong,Please try again"
+                };
+            }
         }
 
-        public bool BL_ChangeNoteImportance(int NoteId, bool IsImportant)
+        public TransactionResult BL_ChangeNoteImportance(int NoteId, bool IsImportant)
         {
-            return new DAL_Notes().DAL_ChangeNoteImportance(NoteId, IsImportant).TransactionResult;
+            if (new DAL_Notes().DAL_ChangeNoteImportance(NoteId, IsImportant).TransactionResult)
+            {
+                return new TransactionResult
+                {
+                    Success = true,
+                    Message = "Note Updation Successful"
+                };
+            }
+            else
+            {
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = "Something Went Wrong,Please try again"
+                };
+            }
         }
     }
 }
