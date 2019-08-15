@@ -60,7 +60,7 @@ function CloseModalHandler(event) {
 
 function AddAdminHandler() {
     var UserIds = $('.UserListAdd').val();
-    CallAjaxMethod("Analysis/AddOrRemoveAdmin", 'POST', { UserIds: UserIds, IsAdmin: true }).then(function (result) {
+    CallAjaxMethod("Analysis/AddOrRemoveAdmin", 'PUT', { UserIds: UserIds, IsAdmin: true }).then(function (result) {
         ShowResult(result.Message); // It will show Dashboard
     });
     //$.ajax(function () {
@@ -79,7 +79,7 @@ function AddAdminHandler() {
 
 function RemoveAdminHandler() {
     var UserIds = $('.UserListRemove').val();
-    CallAjaxMethod("Analysis/AddOrRemoveAdmin", 'POST', { UserIds: UserIds, IsAdmin: false }).then(function (result) {
+    CallAjaxMethod("Analysis/AddOrRemoveAdmin", 'PUT', { UserIds: UserIds, IsAdmin: false }).then(function (result) {
         ShowResult(result.Message);
     });
     //$.ajax(function () {

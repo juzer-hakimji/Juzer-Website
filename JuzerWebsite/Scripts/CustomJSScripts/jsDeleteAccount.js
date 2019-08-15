@@ -8,7 +8,7 @@ function AddEventHandlers() {
 
 function DeleteAccountHandler() {
     var Password = $("#txtPass").val();
-    CallAjaxMethod("Authentication/ValidatePassword", 'POST', { p_Password: Password }).then(function (result) {
+    CallAjaxMethod("Authentication/ValidatePassword", 'PUT', { p_Password: Password }).then(function (result) {
         ShowResult(result);
     });
 

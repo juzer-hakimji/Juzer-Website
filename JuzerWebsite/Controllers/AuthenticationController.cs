@@ -62,6 +62,7 @@ namespace JuzerWebsite.Controllers
         }
 
         [ValidateAntiForgeryToken]
+        [HttpPut]
         public ActionResult ValidatePassword(string p_Password)
         {
             bool IsUserExists = BLUser.BL_ValidatePassword(new UserLoginVM { Email = (Session["MST_UserInfo"] as MST_UserInfo).Email, Password = p_Password });

@@ -8,7 +8,7 @@ function AddEventHandlers() {
 
 function ChangePasswordHandler() {
     var SerializedObj = $('#cd-form-ChangePass').serialize();
-    CallAjaxMethod("User/ChangePassword", 'POST', SerializedObj).then(function (result) {
+    CallAjaxMethod("User/ChangePassword", 'PUT', SerializedObj).then(function (result) {
         ShowResult(result);
     });
 }

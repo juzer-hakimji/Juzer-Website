@@ -50,7 +50,7 @@ namespace JuzerWebsite.Areas.Notes.Controllers
             return Json(new { result });
         }
 
-        [HttpPost]
+        [HttpPut]
         public JsonResult ChangeNoteImportance(int NoteId, bool IsImportant)
         {
             TransactionResult result = BLObj.BL_ChangeNoteImportance(NoteId, IsImportant);
@@ -58,7 +58,7 @@ namespace JuzerWebsite.Areas.Notes.Controllers
         }
 
         [Route("Notes/Delete")]
-        [HttpPost]
+        [HttpPut]
         public JsonResult DeleteNote(int p_NoteId)
         {
             TransactionResult result = BLObj.BL_DeleteNote(p_NoteId);

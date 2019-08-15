@@ -73,7 +73,7 @@ function ChangeNoteImportanceHandler() {
     var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
     if ($(this).children('i').attr("class") == 'fas fa-star') {
         //To mark not important
-        CallAjaxMethod("Notes/ChangeNoteImportance", 'POST', { NoteId: CurrentRowdata[0], IsImportant: false }).then(function (result) {
+        CallAjaxMethod("Notes/ChangeNoteImportance", 'PUT', { NoteId: CurrentRowdata[0], IsImportant: false }).then(function (result) {
             ShowResult(result.Message);
         });
         //$.ajax(function () {
@@ -91,7 +91,7 @@ function ChangeNoteImportanceHandler() {
     }
     else {
         //To mark important
-        CallAjaxMethod("Notes/ChangeNoteImportance", 'POST', { NoteId: CurrentRowdata[0], IsImportant: true }).then(function (result) {
+        CallAjaxMethod("Notes/ChangeNoteImportance", 'PUT', { NoteId: CurrentRowdata[0], IsImportant: true }).then(function (result) {
             ShowResult(result);
         });
         //$.ajax(function () {
@@ -124,7 +124,7 @@ function DeleteNoteHandler() {
 
     //Ask For Confirmation using confirm box
 
-    CallAjaxMethod("Notes/Delete", 'POST', { p_NoteId: NoteId }).then(function (result) {
+    CallAjaxMethod("Notes/Delete", 'PUT', { p_NoteId: NoteId }).then(function (result) {
         ShowResult(result.Message);
     });
     //$.ajax(function () {

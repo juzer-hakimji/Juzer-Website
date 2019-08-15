@@ -212,7 +212,7 @@ jQuery(document).ready(function ($) {
         var formValid = $("#cd-form-ResetPass").validate().form();
         if (!formValid) return false;
         $.ajax(function () {
-            type: 'POST',
+            type: 'PUT',
                 url : "User/SendResetPasswordEmail",
                 data: $('#ResetEmail').val(),
                         dataType : 'json',

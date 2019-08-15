@@ -1,4 +1,11 @@
-﻿function objectifyForm(formArray) {//serialize data function
+﻿$.notifyDefaults({
+    placement: {
+        from: "top",
+        align: "center"
+    }
+});
+
+function objectifyForm(formArray) {//serialize data function
 
     var returnArray = {};
     for (var i = 0; i < formArray.length; i++) {
@@ -31,6 +38,14 @@ function CloseModalWhenEsc() {
     });
 }
 
-function ShowResult(result) {
-    alert(result);
+function ShowResult(message,type) {
+    $.notify({
+        icon: '',
+        title: '',
+        message: message,
+    }, {
+            //type: type,
+    });
+
+    //alert(result);
 }
