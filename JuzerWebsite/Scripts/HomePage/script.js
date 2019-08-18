@@ -1,4 +1,5 @@
 jQuery(document).ready(function ($) {
+    InitializeForm('#cd-form-Login,#cd-form-SignUp,#cd-form-ResetPass');
     var $form_modal = $('.cd-user-modal'),
         $form_login = $form_modal.find('#cd-login'),
         $form_signup = $form_modal.find('#cd-signup'),
@@ -134,7 +135,7 @@ jQuery(document).ready(function ($) {
         "use strict";
 
         // PRE loader
-        $(window).load(function () {
+        $(window).on('load',function () {
             $('.preloader').fadeOut(1000); // set duration in brackets    
         });
 
@@ -172,77 +173,80 @@ jQuery(document).ready(function ($) {
     //homene style end
 
     $('#btnLogin').on('click', function () {
-        var formValid = $("#cd-form-Login").validate().form();
-        if (!formValid) return false;
+        //var formValid = $("#cd-form-Login").validate().form();
+        //if (!formValid) return false;
         //var SerializedArray = $('#cd-form-Login').serializeArray();
         //var SerializedObj = objectifyForm(SerializedArray);
         var SerializedObj = $('#cd-form-Login').serialize();
-        $.ajax(function () {
+        $.ajax({
             type: 'POST',
-                url : "Authentication/Login",
-                    data: SerializedObj,
-                        dataType : 'json',
-                            success: function(result) {
-                                if (result.result == false) {
-                                    $('#LoginValidate').text('Invalid Username or Password');
-                                }
-                            });
+            url: "Authentication/Login",
+            data: SerializedObj,
+            dataType: 'json',
+            success: function (result) {
+                if (result.Success == false) {
+                    $('#LoginValidate').text(result.Message);
+                }
+                else if(result.Success == true) {
+                    window.location.href = result.RedirectURL;
+                }
+            }
+        });
     });
 
     $('#btnCrtAcct').on('click', function () {
-        var formValid = $("#cd-form-SignUp").validate().form();
-        if (!formValid) return false;
+        //var formValid = $("#cd-form-SignUp").validate().form();
+        //if (!formValid) return false;
         //var SerializedArray = $('#cd-form-SignUp').serializeArray();
         //var SerializedObj = objectifyForm(SerializedArray);
         var SerializedObj = $('#cd-form-SignUp').serialize();
-        $.ajax(function () {
+        $.ajax({
             type: 'POST',
-                url : "User/Save",
-                    data: SerializedObj,
-                        dataType : 'json',
-                            success: function(result) {
-                                if (result.result == false) {
-                                    alert("something went wrong");
-                                }
-                            }
-        }
+            url: "User/Save",
+            data: SerializedObj,
+            dataType: 'json',
+            success: function (result) {
+                if (result.result == false) {
+                    alert("something went wrong");
+                }
+            }
         });
+    });
 
     $('#btnResetPass').on('click', function () {
-        var formValid = $("#cd-form-ResetPass").validate().form();
-        if (!formValid) return false;
-        $.ajax(function () {
+        //var formValid = $("#cd-form-ResetPass").validate().form();
+        //if (!formValid) return false;
+        $.ajax({
             type: 'PUT',
-                url : "User/SendResetPasswordEmail",
-                data: $('#ResetEmail').val(),
-                        dataType : 'json',
-                            success: function(result) {
-                                if (result.result == false) {
-                                    alert("Please Enter Correct Email");
-                                }
-                                else {
-                                    alert("Email sent successfully");
-                                }
-                            }
-        }
+            url: "User/SendResetPasswordEmail",
+            data: $('#ResetEmail').val(),
+            dataType: 'json',
+            success: function (result) {
+                if (result.result == false) {
+                    alert("Please Enter Correct Email");
+                }
+                else {
+                    alert("Email sent successfully");
+                }
+            }
         });
-});
-});
-
-
-//credits https://css-tricks.com/snippets/jquery/move-cursor-to-end-of-textarea-or-input/
-jQuery.fn.putCursorAtEnd = function () {
-    return this.each(function () {
-        // If this function exists...
-        if (this.setSelectionRange) {
-            // ... then use it (Doesn't work in IE)
-            // Double the length because Opera is inconsistent about whether a carriage return is one character or two. Sigh.
-            var len = $(this).val().length * 2;
-            this.setSelectionRange(len, len);
-        } else {
-            // ... otherwise replace the contents with itself
-            // (Doesn't work in Google Chrome)
-            $(this).val($(this).val());
-        }
     });
-};
+
+
+    //credits https://css-tricks.com/snippets/jquery/move-cursor-to-end-of-textarea-or-input/
+    jQuery.fn.putCursorAtEnd = function () {
+        return this.each(function () {
+            // If this function exists...
+            if (this.setSelectionRange) {
+                // ... then use it (Doesn't work in IE)
+                // Double the length because Opera is inconsistent about whether a carriage return is one character or two. Sigh.
+                var len = $(this).val().length * 2;
+                this.setSelectionRange(len, len);
+            } else {
+                // ... otherwise replace the contents with itself
+                // (Doesn't work in Google Chrome)
+                $(this).val($(this).val());
+            }
+        });
+    }
+});

@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     AddEventHandlers();
+    InitializeForm('#cd-form-ChangePass');
 });
 
 function AddEventHandlers() {

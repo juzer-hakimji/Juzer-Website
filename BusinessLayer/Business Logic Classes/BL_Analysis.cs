@@ -71,7 +71,7 @@ namespace BusinessLayer.Business_Logic_Classes
             List<UserDetailsVM> UserList = new List<UserDetailsVM>();
             foreach (var item in DALObj.DAL_GetAddOrRemoveAdminList(IsAdd).Data)
             {
-                UserList.Add(new UserDetailsVM { UserId = item.UserId, Email = item.Email });
+                UserList.Add(new UserDetailsVM { UserId = item.UserId, SignUpEmail = item.Email });
             }
             return UserList;
         }

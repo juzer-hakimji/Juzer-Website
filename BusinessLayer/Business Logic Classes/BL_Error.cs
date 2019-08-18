@@ -25,8 +25,11 @@ namespace BusinessLayer.Business_Logic_Classes
                 StackTrace = ex.StackTrace,
                 MethodName = ex.TargetSite.Name,
                 TypeName = ex.GetType().ToString(),
-                Date = DateTime.UtcNow.Date,
-                Time = DateTime.UtcNow.TimeOfDay
+                //Indian time is 5 hours and 30 minutes ahead of utc time
+                //Date = DateTime.UtcNow.Date,
+                //Time = DateTime.UtcNow.TimeOfDay
+                Date = DateTime.Now.Date,
+                Time = DateTime.Now.TimeOfDay
             });
         }
     }

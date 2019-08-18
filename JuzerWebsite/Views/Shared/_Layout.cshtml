@@ -28,7 +28,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Spending", "About", "Home")</li>
                     <li>@Html.ActionLink("Notes", "Contact", "Home")</li>
-                    <li @(Convert.ToBoolean(Session["IsAdmin"]) ? "hidden" : "")>@Html.ActionLink("Analysis", "Contact", "Home")</li>
+                    <li @(Convert.ToBoolean(Session["IsAdmin"]) ? "hidden" : "")>@Html.ActionLink("Analysis", "Index", "Analysis")</li>
                     <li>
                         Profile
                         <ul>

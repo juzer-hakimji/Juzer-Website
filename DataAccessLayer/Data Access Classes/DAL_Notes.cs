@@ -15,4 +15,5 @@ namespace DataAccessLayer.Data_Access_Classes
         {
             return ChangeNoteImportance(NoteId, IsImportant);
         }
+    }
 }

@@ -23,14 +23,13 @@ namespace JuzerWebsite.Areas.Notes.Controllers
         [HeaderFooterFilter]
         public ActionResult List()
         {
-            return View("Notes", new BaseViewModel());
+            return View("Notes", new NotesVM());
         }
 
         [HttpPost]
         public JsonResult GetListData()
         {
-            MST_UserInfo Userobj = Session["MST_UserInfo"] as MST_UserInfo;
-            List<NotesVM> NotesList = BLObj.BL_GetNotesList(Userobj.UserId);
+            List<NotesVM> NotesList = BLObj.BL_GetNotesList((Session["MST_UserInfo"] as MST_UserInfo).UserId);
             return Json(NotesList);
         }
 

@@ -8,8 +8,8 @@
             </label>
             @*<input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
             <span class="cd-error-message">Error message here!</span>*@
-            @Html.TextBoxFor(x => x.Email, new { @class = "full-width has-padding has-border" })
-            @Html.ValidationMessageFor(x => x.Email, null, new { @class = "cd-error-message" })
+            @Html.TextBoxFor(x => x.LoginEmail, new { @class = "full-width has-padding has-border", placeholder = "E-mail" })
+            @Html.ValidationMessageFor(x => x.LoginEmail, null, new { @class = "cd-error-message" })
         </p>
         <p class="fieldset">
             <label class="image-replace cd-password" for="Password">
@@ -21,9 +21,9 @@
                 Error message
                 here!
             </span>*@
-            @Html.TextBoxFor(x => x.Password, new { @class = "full-width has-padding has-border" })
+            @Html.TextBoxFor(x => x.LoginPassword, new { @class = "full-width has-padding has-border", placeholder = "Password" })
             <a href="#0" class="hide-password">Hide</a>
-            @Html.ValidationMessageFor(x => x.Password, null, new { @class = "cd-error-message" })
+            @Html.ValidationMessageFor(x => x.LoginPassword, null, new { @class = "cd-error-message" })
         </p>
         <p class="fieldset">
             <input type="checkbox" id="remember-me" checked>
@@ -32,9 +32,9 @@
             </label>
         </p>
         <p class="fieldset">
-            @*    <input class="full-width" type="submit" value="Login">*@
+                <input class="full-width" id="btnLogin" type="submit" value="Login">
             @*<button type="submit" id="btnLogin" class="full-width">Login</button>*@
-            <button id="btnLogin" class="full-width">Login</button>
+            @*<button id="btnLogin" class="full-width">Login</button>*@
             <span id="LoginValidate"></span>
         </p>
     </form>

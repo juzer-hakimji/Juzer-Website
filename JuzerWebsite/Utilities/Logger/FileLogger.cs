@@ -10,7 +10,7 @@ namespace JuzerWebsite.Utilities.Logger
     {
         public void LogExceptionToFile(Exception e)
         {
-            File.WriteAllLines("C://Error//" + DateTime.Now.ToString("dd-MM-yyyy mm hh ss") + ".txt",
+            File.WriteAllLines("C://Error//" + DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss") + ".txt",
                 new string[]
                 {
                     "Message:"+e.Message,

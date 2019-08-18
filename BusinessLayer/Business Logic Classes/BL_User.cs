@@ -31,8 +31,8 @@ namespace BusinessLayer.Business_Logic_Classes
                 FirstName = p_UserVM.FirstName,
                 LastName = p_UserVM.LastName,
                 CountryId = p_UserVM.CountryId,
-                Email = p_UserVM.Email,
-                Password = new MD5Hashing().GetMd5Hash(p_UserVM.Password),
+                Email = p_UserVM.SignUpEmail,
+                Password = new MD5Hashing().GetMd5Hash(p_UserVM.SignUpPassword),
                 IsActive = true,
                 IsAdmin = false,
                 CreatedDate = DateTime.UtcNow
@@ -47,7 +47,7 @@ namespace BusinessLayer.Business_Logic_Classes
                 FirstName = p_UserVM.FirstName,
                 LastName = p_UserVM.LastName,
                 CountryId = p_UserVM.CountryId,
-                Email = p_UserVM.Email
+                Email = p_UserVM.SignUpEmail
             };
             return IUserObj.Update(UserObj).TransactionResult;
         }
@@ -59,12 +59,12 @@ namespace BusinessLayer.Business_Logic_Classes
 
         public MST_UserInfo BL_GetUserValidity(UserLoginVM p_UserLoginVM)
         {
-            MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_UserLoginVM.Email).Data;
-            if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.Password).Equals(UserObj.Password) && UserObj.IsAdmin == true)
+            MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_UserLoginVM.LoginEmail).Data;
+            if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.LoginPassword).Equals(UserObj.Password) && UserObj.IsAdmin == true)
             {
                 UserObj.UserStatus = MST_UserInfo.EnumUserStatus.AuthenticatedAdmin;
             }
-            else if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.Password).Equals(UserObj.Password) && UserObj.IsAdmin == false)
+            else if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.LoginPassword).Equals(UserObj.Password) && UserObj.IsAdmin == false)
             {
                 UserObj.UserStatus = MST_UserInfo.EnumUserStatus.AuthenticatedUser;
             }
@@ -77,8 +77,8 @@ namespace BusinessLayer.Business_Logic_Classes
 
         public bool BL_ValidatePassword(UserLoginVM p_UserLoginVM)
         {
-            MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_UserLoginVM.Email).Data;
-            if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.Password).Equals(UserObj.Password))
+            MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_UserLoginVM.LoginEmail).Data;
+            if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.LoginPassword).Equals(UserObj.Password))
             {
                 return this.BL_DeleteUser(UserObj.UserId) ? true : false;
             }

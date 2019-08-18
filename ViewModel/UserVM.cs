@@ -23,20 +23,20 @@ namespace ViewModel
 
         [Required(ErrorMessage = "Please enter Email")]
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
-        public string Email { get; set; }
+        public string SignUpEmail { get; set; }
 
         [Required(ErrorMessage = "Please enter Password")]
-        public string Password { get; set; }
+        public string SignUpPassword { get; set; }
     }
 
     public class UserLoginVM
     {
         [Required(ErrorMessage = "Please enter Email")]
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
-        public string Email { get; set; }
+        public string LoginEmail { get; set; }
 
         [Required(ErrorMessage = "Please enter Password")]
-        public string Password { get; set; }
+        public string LoginPassword { get; set; }
     }
 
     public class ResetPasswordVM
