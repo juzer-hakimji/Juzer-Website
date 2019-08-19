@@ -1,5 +1,7 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
 using BusinessLayer.Business_Logic_Classes;
+using BusinessLayer.TransactionResultModel;
+using JuzerWebsite.Utilities.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,21 +22,31 @@ namespace JuzerWebsite.Controllers
             BLUser = new BL_User();
         }
         // GET: User
+        [ValidateAntiForgeryToken]
         public ActionResult Save(UserDetailsVM p_UserVM)
         {
             if (ModelState.IsValid)
             {
                 MST_UserInfo MST_UserInfo = BLUser.BL_SaveUser(p_UserVM);
                 Session["MST_UserInfo"] = MST_UserInfo;
-                return RedirectToAction("Notes", "List");
+                return Json(new TransactionResult
+                {
+                    Success = true,
+                    RedirectURL = Url.Action("List", "Notes")
+                });
             }
             else
             {
-                return Json(new { result = false });
+                return Json(new TransactionResult
+                {
+                    Success = false,
+                    Message = "Something went wrong,Note could not be saved."
+                });
             }
         }
 
-        [HttpPost]
+        [HttpPut]
+        [ValidateAntiForgeryToken]
         public ActionResult SendResetPasswordEmail(string p_Email)
         {
             if (ModelState.IsValid)
@@ -72,5 +84,34 @@ namespace JuzerWebsite.Controllers
             }
         }
 
+        [Route("User/Delete")]
+        [HeaderFooterFilter]
+        [HttpGet]
+        public ActionResult DeleteAccount()
+        {
+            return View("DeleteAccount");
+        }
+
+        [HttpGet]
+        [HeaderFooterFilter]
+        public ActionResult ChangePassword()
+        {
+            return View("ChangePassword");
+        }
+
+        [HttpPut]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(ChangePasswordVM p_Obj)
+        {
+            TransactionResult result = BLUser.BL_ChangePassword(p_Obj, (Session["MST_UserInfo"] as MST_UserInfo).Email);
+            if (result.Success)
+            {
+                return Json(result.RedirectURL = Url.Action("List", "Notes"));
+            }
+            else
+            {
+                return Json(result.Message = "Something went wrong,Password could not be changed.");
+            }
+        }
     }
 }

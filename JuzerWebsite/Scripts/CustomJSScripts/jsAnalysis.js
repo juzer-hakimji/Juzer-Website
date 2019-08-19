@@ -1,81 +1,96 @@
 ﻿$(document).ready(function () {
-    var $form_modal = $('.cd-user-modal'),
-        $form_AddAdmin = $form_modal.find('#cd-AddAdmin'),
-        $form_RemoveAdmin = $form_modal.find('#cd-RemoveAdmin'),
-        //$tab_signup = $form_modal_tab.children('li').eq(1).children('a'),
-        $AddAdminBtn = $('#btnAddAdmin');
-    $RemoveAdminBtn = $('#btnRemoveAdmin');
+    AddEventHandlers();
+    InitializeForm('#cd-form-AddAdmin , #cd-form-RemoveAdmin');
 
-    //open modal Add Admin
-    $AddAdminBtn.on('click', function (event) {
-        $form_modal.addClass('is-visible');
-        $form_AddAdmin.addClass('is-selected');
-        $('.UserListAdd').select2({
-            ajax: {
-                url: '/Analysis/GetAddAdminList',
-                dataType: 'json',
-                type: "GET",
-                processResults: function (data) {
-                    return {
-                        results: $.map(data, function (item) {
-                            return {
-                                id: item.UserId,
-                                text: item.Email
-                            }
-                        })
-                    };
-                }
-            }
-        });
-    });
-
-    //open modal Remove Admin
-    $RemoveAdminBtn.on('click', function (event) {
-        $form_modal.addClass('is-visible');
-        $form_RemoveAdmin.addClass('is-selected');
-        $('.UserListRemove').select2();
-    });
+        //$tab_signup = $('.cd-user-modal')_tab.children('li').eq(1).children('a'),
+    //    $AddAdminBtn = $('#AddAdmin');
+    //$RemoveAdminBtn = $('#btnRemoveAdmin');
 
     //close modal
-    $('.cd-user-modal').on('click', function (event) {
-        if ($(event.target).is($form_modal) || $(event.target).is('.cd-close-form')) {
-            $form_modal.removeClass('is-visible');
-        }
-    });
-    //close modal when clicking the esc keyboard button
-    $(document).keyup(function (event) {
-        if (event.which == '27') {
-            $form_modal.removeClass('is-visible');
-        }
-    });
-
-    $('#btnAddAdmin').on('click', function () {
-        var UserIds = $('#UserList').val();
-        $.ajax(function () {
-            type: 'POST',
-                url : "Analysis/AddOrRemoveAdmin",
-                    data: { UserIds = UserIds, IsAdmin = true },
-            dataType: 'json',
-                success: function(result) {
-                    if (result == true) {
-                        alert("Admin Creation successful");
-                        $form_modal.removeClass('is-visible');
-                    }
-                });
-    });
-    $('#btnRemoveAdmin').on('click', function () {
-        var UserIds = $('#UserList').val();
-        $.ajax(function () {
-            type: 'POST',
-                url : "Analysis/AddOrRemoveAdmin",
-                    data: { UserIds = UserIds, IsAdmin = false },
-            dataType: 'json',
-                success: function(result) {
-                    if (result == true) {
-                        alert("Admin Deletion successful");
-                        $form_modal.removeClass('is-visible');
-                    }
-                });
-    });
-
+    //$('.cd-user-modal').on('click', function (event) {
+    //if ($(event.target).is($('.cd-user-modal')) || $(event.target).is('.cd-close-form')) {
+    //    $('.cd-user-modal').removeClass('is-visible');
+    //}
+    //});
+    
 });
+
+function AddEventHandlers() {
+    $("#AddAdmin").on('click', OpenAddAdminModalHandler);
+    $("#RemoveAdmin").on('click', OpenRemoveAdminModalHandler);
+    $(".cd-user-modal").on('click', CloseModalHandler);
+    $("#btnAddAdmin").on('click', AddAdminHandler);
+    $("#btnRemoveAdmin").on('click', RemoveAdminHandler);
+    CloseModalWhenEsc();
+}
+
+function OpenAddAdminModalHandler() {
+    $('.cd-user-modal').addClass('is-visible');
+    $('.cd-user-modal').find('#cd-AddAdmin').addClass('is-selected');
+    $('.UserListAdd').select2({
+        ajax: {
+            url: '/Analysis/GetAddAdminList',
+            dataType: 'json',
+            type: "GET",
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            id: item.UserId,
+                            text: item.Email
+                        }
+                    })
+                };
+            }
+        }
+    });
+}
+
+function OpenRemoveAdminModalHandler() {
+    $('.cd-user-modal').addClass('is-visible');
+    $('.cd-user-modal').find('#cd-RemoveAdmin').addClass('is-selected');
+    $('.UserListRemove').select2();
+}
+
+function CloseModalHandler(event) {
+    if ($(event.target).is($('.cd-user-modal')) || $(event.target).is('.cd-close-form')) {
+        $('.cd-user-modal').removeClass('is-visible');
+    }
+}
+
+function AddAdminHandler() {
+    var UserIds = $('.UserListAdd').val();
+    CallAjaxMethod("Analysis/AddOrRemoveAdmin", 'PUT', { UserIds: UserIds, IsAdmin: true }).then(function (result) {
+        ShowResult(result.Message); // It will show Dashboard
+    });
+    //$.ajax(function () {
+    //    type: 'POST',
+    //        url : "Analysis/AddOrRemoveAdmin",
+    //            data: { UserIds: UserIds, IsAdmin : true },
+    //    dataType: 'json',
+    //        success: function(result) {
+    //            if (result == true) {
+    //                alert("Admin Creation successful");
+    //                $('.cd-user-modal').removeClass('is-visible');
+    //            }
+    //        }
+    //});
+}
+
+function RemoveAdminHandler() {
+    var UserIds = $('.UserListRemove').val();
+    CallAjaxMethod("Analysis/AddOrRemoveAdmin", 'PUT', { UserIds: UserIds, IsAdmin: false }).then(function (result) {
+        ShowResult(result.Message);
+    });
+    //$.ajax(function () {
+    //    type: 'POST',
+    //        url : "Analysis/AddOrRemoveAdmin",
+    //            data: { UserIds: UserIds, IsAdmin : false },
+    //    dataType: 'json',
+    //        success: function(result) {
+    //            if (result == true) {
+    //                alert("Admin Deletion successful");
+    //                $('.cd-user-modal').removeClass('is-visible');
+    //            }
+    //        });
+}

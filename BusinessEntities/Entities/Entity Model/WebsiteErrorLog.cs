@@ -12,10 +12,14 @@ namespace BusinessEntities.Entities.Entity_Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Pract
+    public partial class WebsiteErrorLog
     {
-        public int id { get; set; }
-        public string Question { get; set; }
-        public string Answer { get; set; }
+        public int LogId { get; set; }
+        public string Message { get; set; }
+        public string StackTrace { get; set; }
+        public string MethodName { get; set; }
+        public string TypeName { get; set; }
+        public System.DateTime Date { get; set; }
+        public System.TimeSpan Time { get; set; }
     }
 }

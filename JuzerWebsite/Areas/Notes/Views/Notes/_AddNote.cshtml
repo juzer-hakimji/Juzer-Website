@@ -5,7 +5,7 @@
     <!-- sign up form -->
     <form class="cd-form" id="cd-form-Notes">
         <p class="fieldset">
-            <label class="image-replace cd-Date" for="txtDate">Date</label>
+            <label class="image-replace cd-Date">Date</label>
             @Html.TextBoxFor(x => x.CreatedDate, new { @class = "full-width has-padding has-border", placeholder = "Date" })
             @Html.ValidationMessageFor(x => x.CreatedDate, null, new { @class = "cd-error-message" })
             @*<input class="full-width has-padding has-border" id="txtDate" type="text" placeholder="Date">
@@ -25,8 +25,8 @@
             @*<textarea class="full-width has-padding has-border" id="txtNote" placeholder="Note"></textarea>*@
         </p>
         <p class="fieldset">
-            @*<input class="full-width has-padding" type="submit" value="Add Note">*@
-            <button id="btnAddNote" class="full-width has-padding">Add Note</button>
+            <input class="full-width has-padding" id="btnAddNote" type="submit" value="Add Note">
+            @*<button id="btnAddNote" class="full-width has-padding">Add Note</button>*@
             @*<button id="btnClose" class="full-width has-padding">Close</button>*@
             <span id="NotesSaveValidate"></span>
         </p>

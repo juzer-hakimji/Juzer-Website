@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Business_Logic_Classes;
+using BusinessLayer.TransactionResultModel;
+using JuzerWebsite.Utilities.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,16 +19,20 @@ namespace JuzerWebsite.Controllers
             BLAnalysis = new BL_Analysis();
         }
 
+        [HeaderFooterFilter]
         public ActionResult Index()
         {
-            AnalysisVM AnalysisVM = new AnalysisVM();
-            AnalysisVM.RemoveAdminList = BLAnalysis.BL_GetAddOrRemoveAdminList(false);
+            AnalysisVM AnalysisVM = new AnalysisVM
+            {
+                RemoveAdminList = BLAnalysis.BL_GetAddOrRemoveAdminList(false)
+            };
             return View("Analysis", AnalysisVM);
         }
 
-        public ActionResult BL_AddOrRemoveAdmin(string UserIds,bool IsAdmin)
+        [HttpPut]
+        public ActionResult AddOrRemoveAdmin(string UserIds,bool IsAdmin)
         {
-            bool Result = BLAnalysis.BL_AddOrRemoveAdmin(UserIds, IsAdmin);
+            TransactionResult Result = BLAnalysis.BL_AddOrRemoveAdmin(UserIds, IsAdmin);
             return Json(new { Result });
         }
 

@@ -1,6 +1,7 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
 using BusinessLayer.Business_Logic_Classes;
-using JuzerWebsite.Filters;
+using BusinessLayer.TransactionResultModel;
+using JuzerWebsite.Utilities.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,13 @@ namespace JuzerWebsite.Areas.Notes.Controllers
         [HeaderFooterFilter]
         public ActionResult List()
         {
-            return View("Notes", new BaseViewModel());
+            return View("Notes", new NotesVM());
         }
 
         [HttpPost]
         public JsonResult GetListData()
         {
-            MST_UserInfo Userobj = Session["MST_UserInfo"] as MST_UserInfo;
-            List<NotesVM> NotesList= BLObj.BL_GetNotesList(Userobj.UserId);
+            List<NotesVM> NotesList = BLObj.BL_GetNotesList((Session["MST_UserInfo"] as MST_UserInfo).UserId);
             return Json(NotesList);
         }
 
@@ -37,15 +37,31 @@ namespace JuzerWebsite.Areas.Notes.Controllers
         [HttpPost]
         public JsonResult SaveNote(NotesVM P_NotesVM)
         {
-            bool result = BLObj.BL_SaveNote(P_NotesVM);
+            TransactionResult result;
+            if (P_NotesVM.NoteId != null)
+            {
+                result = BLObj.BL_UpdateNote(P_NotesVM);
+            }
+            else
+            {
+                result = BLObj.BL_SaveNote(P_NotesVM);
+            }
             return Json(new { result });
         }
 
-        [HttpPost]
-        public JsonResult ChangeNoteImportance(int NoteId,bool IsImportant)
+        [HttpPut]
+        public JsonResult ChangeNoteImportance(int NoteId, bool IsImportant)
         {
-            bool result = BLObj.BL_ChangeNoteImportance(NoteId, IsImportant);
-            return Json( new { result });
+            TransactionResult result = BLObj.BL_ChangeNoteImportance(NoteId, IsImportant);
+            return Json(new { result });
+        }
+
+        [Route("Notes/Delete")]
+        [HttpPut]
+        public JsonResult DeleteNote(int p_NoteId)
+        {
+            TransactionResult result = BLObj.BL_DeleteNote(p_NoteId);
+            return Json(new { result });
         }
     }
 }

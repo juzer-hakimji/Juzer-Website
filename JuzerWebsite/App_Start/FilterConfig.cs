@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using JuzerWebsite.Utilities.Filters;
+using System.Web;
 using System.Web.Mvc;
 
 namespace JuzerWebsite
@@ -7,7 +8,7 @@ namespace JuzerWebsite
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new UserExceptionFilter());
             filters.Add(new AuthorizeAttribute());
         }
     }

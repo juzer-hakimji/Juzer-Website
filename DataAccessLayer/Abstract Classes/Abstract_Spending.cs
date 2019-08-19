@@ -1,5 +1,6 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
 using DataAccessLayer.Base_Classes;
+using DataAccessLayer.Data_Model;
 using DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,6 @@ namespace DataAccessLayer.Abstract_Classes
 {
     public abstract class Abstract_Spending : BaseDAL, IDisposable
     {
-
         JuzerWebsiteEntities db;
 
         protected Abstract_Spending()
@@ -19,39 +19,46 @@ namespace DataAccessLayer.Abstract_Classes
             db = new JuzerWebsiteEntities();
         }
 
-        protected List<usp_GetExpenseList_Result> SelectExpense(int p_UserId)
+        protected DBContextResult<List<usp_GetExpenseList_Result>> SelectExpense(int p_UserId)
         {
-            return db.usp_GetExpenseList(p_UserId).ToList();
+            //return db.usp_GetExpenseList(p_UserId).ToList();
+            return ExecuteDALMethod(db, (DataContext, P_UserId) =>
+            {
+                return DataContext.usp_GetExpenseList(P_UserId).ToList();
+            }, p_UserId);
         }
 
-        protected List<usp_GetIncomesList_Result> SelectIncome(int p_UserId)
+        protected DBContextResult<List<usp_GetIncomesList_Result>> SelectIncome(int p_UserId)
         {
-            return db.usp_GetIncomesList(p_UserId).ToList();
+            return ExecuteDALMethod(db, (DataContext, P_UserId) =>
+            {
+                return DataContext.usp_GetIncomesList(P_UserId).ToList();
+            }, p_UserId);
         }
 
-        protected bool InsertExpense(TRN_Expense p_TRN_Expense)
+        protected DBContextResult<object> InsertExpense(TRN_Expense p_TRN_Expense)
         {
-            return this.ExecuteDALMethod<TRN_Expense, bool>(db, (DataContext, P_TRN_Expense) =>
+            return ExecuteDALMethod<TRN_Expense, object>(db, (DataContext, P_TRN_Expense) =>
             {
                 DataContext.TRN_Expense.Add(P_TRN_Expense);
                 DataContext.SaveChanges();
-                return true;
+                return null;
             }, p_TRN_Expense);
         }
 
-        protected bool InsertIncome(TRN_Income p_TRN_Income)
+        protected DBContextResult<object> InsertIncome(TRN_Income p_TRN_Income)
         {
-            return this.ExecuteDALMethod<TRN_Income, bool>(db, (DataContext, P_TRN_Income) =>
+            return ExecuteDALMethod<TRN_Income, object>(db, (DataContext, P_TRN_Income) =>
             {
                 DataContext.TRN_Income.Add(P_TRN_Income);
                 DataContext.SaveChanges();
-                return true;
+                return null;
             }, p_TRN_Income);
         }
 
-        protected bool UpdateExpense(TRN_Expense p_TRN_Expense)
+        protected DBContextResult<object> UpdateExpense(TRN_Expense p_TRN_Expense)
         {
-            return this.ExecuteDALMethod<TRN_Expense, bool>(db, (DataContext, P_TRN_Expense) =>
+            return ExecuteDALMethod<TRN_Expense, object>(db, (DataContext, P_TRN_Expense) =>
             {
                 TRN_Expense Obj = DataContext.TRN_Expense.Find(P_TRN_Expense.ExpenseId);
                 Obj.CategoryId = P_TRN_Expense.CategoryId;
@@ -60,13 +67,13 @@ namespace DataAccessLayer.Abstract_Classes
                 Obj.Note = P_TRN_Expense.Note;
                 Obj.ModifiedDate = P_TRN_Expense.ModifiedDate;
                 DataContext.SaveChanges();
-                return true;
+                return null;
             }, p_TRN_Expense);
         }
 
-        protected bool UpdateIncome(TRN_Income p_TRN_Income)
+        protected DBContextResult<object> UpdateIncome(TRN_Income p_TRN_Income)
         {
-            return this.ExecuteDALMethod<TRN_Income, bool>(db, (DataContext, P_TRN_Income) =>
+            return ExecuteDALMethod<TRN_Income, object>(db, (DataContext, P_TRN_Income) =>
             {
                 TRN_Income Obj = DataContext.TRN_Income.Find(P_TRN_Income.IncomeId);
                 Obj.CategoryId = P_TRN_Income.CategoryId;
@@ -75,38 +82,30 @@ namespace DataAccessLayer.Abstract_Classes
                 Obj.Note = P_TRN_Income.Note;
                 Obj.ModifiedDate = P_TRN_Income.ModifiedDate;
                 DataContext.SaveChanges();
-                return true;
+                return null;
             }, p_TRN_Income);
         }
 
-        protected bool DeleteExpense(int p_ExpenseId)
+        protected DBContextResult<object> DeleteExpense(int p_ExpenseId)
         {
-            TRN_Expense TRN_Expense = new TRN_Expense
+            return ExecuteDALMethod<int, object>(db, (DataContext, P_ExpenseId) =>
             {
-                ExpenseId = p_ExpenseId
-            };
-            return this.ExecuteDALMethod<TRN_Expense, bool>(db, (DataContext, P_TRN_Expense) =>
-            {
-                TRN_Expense Obj = DataContext.TRN_Expense.Find(P_TRN_Expense.ExpenseId);
+                TRN_Expense Obj = DataContext.TRN_Expense.Find(P_ExpenseId);
                 Obj.IsActive = false;
                 DataContext.SaveChanges();
-                return true;
-            }, TRN_Expense);
+                return null;
+            }, p_ExpenseId);
         }
 
-        protected bool DeleteIncome(int p_IncomeId)
+        protected DBContextResult<object> DeleteIncome(int p_IncomeId)
         {
-            TRN_Income TRN_Income = new TRN_Income
+            return ExecuteDALMethod<int, object>(db, (DataContext, P_IncomeId) =>
             {
-                IncomeId = p_IncomeId
-            };
-            return this.ExecuteDALMethod<TRN_Income, bool>(db, (DataContext, P_TRN_Income) =>
-            {
-                TRN_Income Obj = DataContext.TRN_Income.Find(P_TRN_Income.IncomeId);
+                TRN_Income Obj = DataContext.TRN_Income.Find(P_IncomeId);
                 Obj.IsActive = false;
                 DataContext.SaveChanges();
                 return true;
-            }, TRN_Income);
+            }, p_IncomeId);
         }
 
         public void Dispose()

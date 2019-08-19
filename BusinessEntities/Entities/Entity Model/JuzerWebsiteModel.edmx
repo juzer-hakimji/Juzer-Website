@@ -51,14 +51,6 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="Pract">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
         <EntityType Name="TRN_Expense">
           <Key>
             <PropertyRef Name="ExpenseId" />
@@ -98,12 +90,17 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsImportant" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="TypeQuestions">
+        <EntityType Name="WebsiteErrorLogs">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="LogId" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StackTrace" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MethodName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
         </EntityType>
         <Association Name="FK_DEV_Category_DEV_TypeOfTransaction">
           <End Role="DEV_TypeOfTransaction" Type="Self.DEV_TypeOfTransaction" Multiplicity="1" />
@@ -207,11 +204,10 @@
           <EntitySet Name="DEV_Menu" EntityType="Self.DEV_Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DEV_TypeOfTransaction" EntityType="Self.DEV_TypeOfTransaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MST_UserInfo" EntityType="Self.MST_UserInfo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Pract" EntityType="Self.Pract" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRN_Expense" EntityType="Self.TRN_Expense" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRN_Income" EntityType="Self.TRN_Income" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRN_Notes" EntityType="Self.TRN_Notes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TypeQuestions" EntityType="Self.TypeQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebsiteErrorLogs" EntityType="Self.WebsiteErrorLogs" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_DEV_Category_DEV_TypeOfTransaction" Association="Self.FK_DEV_Category_DEV_TypeOfTransaction">
             <End Role="DEV_TypeOfTransaction" EntitySet="DEV_TypeOfTransaction" />
             <End Role="DEV_Category" EntitySet="DEV_Category" />
@@ -260,11 +256,9 @@
           <EntitySet Name="DEV_Menu" EntityType="JuzerWebsiteModel.DEV_Menu" />
           <EntitySet Name="DEV_TypeOfTransaction" EntityType="JuzerWebsiteModel.DEV_TypeOfTransaction" />
           <EntitySet Name="MST_UserInfo" EntityType="JuzerWebsiteModel.MST_UserInfo" />
-          <EntitySet Name="Practs" EntityType="JuzerWebsiteModel.Pract" />
           <EntitySet Name="TRN_Expense" EntityType="JuzerWebsiteModel.TRN_Expense" />
           <EntitySet Name="TRN_Income" EntityType="JuzerWebsiteModel.TRN_Income" />
           <EntitySet Name="TRN_Notes" EntityType="JuzerWebsiteModel.TRN_Notes" />
-          <EntitySet Name="TypeQuestions" EntityType="JuzerWebsiteModel.TypeQuestion" />
           <AssociationSet Name="FK_DEV_Category_DEV_TypeOfTransaction" Association="JuzerWebsiteModel.FK_DEV_Category_DEV_TypeOfTransaction">
             <End Role="DEV_TypeOfTransaction" EntitySet="DEV_TypeOfTransaction" />
             <End Role="DEV_Category" EntitySet="DEV_Category" />
@@ -294,8 +288,9 @@
             <End Role="TRN_Notes" EntitySet="TRN_Notes" />
           </AssociationSet>
           <FunctionImport Name="AskMe" ReturnType="Collection(String)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="WebsiteErrorLogs" EntityType="JuzerWebsiteModel.WebsiteErrorLog" />
         </EntityContainer>
         <ComplexType Name="usp_GetExpenseList_Result">
           <Property Type="Int32" Name="ExpenseId" Nullable="false" />
@@ -376,14 +371,6 @@
           <NavigationProperty Name="TRN_Income" Relationship="JuzerWebsiteModel.FK_TRN_Income_MST_UserInfo" FromRole="MST_UserInfo" ToRole="TRN_Income" />
           <NavigationProperty Name="TRN_Notes" Relationship="JuzerWebsiteModel.FK_TRN_Notes_MST_UserInfo" FromRole="MST_UserInfo" ToRole="TRN_Notes" />
         </EntityType>
-        <EntityType Name="Pract">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Question" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Answer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="TRN_Expense">
           <Key>
             <PropertyRef Name="ExpenseId" />
@@ -427,13 +414,6 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsImportant" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="MST_UserInfo" Relationship="JuzerWebsiteModel.FK_TRN_Notes_MST_UserInfo" FromRole="TRN_Notes" ToRole="MST_UserInfo" />
-        </EntityType>
-        <EntityType Name="TypeQuestion">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Question" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_DEV_Category_DEV_TypeOfTransaction">
           <End Type="JuzerWebsiteModel.DEV_TypeOfTransaction" Role="DEV_TypeOfTransaction" Multiplicity="1" />
@@ -519,6 +499,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="WebsiteErrorLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StackTrace" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MethodName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -612,15 +604,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Practs">
-            <EntityTypeMapping TypeName="JuzerWebsiteModel.Pract">
-              <MappingFragment StoreEntitySet="Pract">
-                <ScalarProperty Name="Answer" ColumnName="Answer" />
-                <ScalarProperty Name="Question" ColumnName="Question" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TRN_Expense">
             <EntityTypeMapping TypeName="JuzerWebsiteModel.TRN_Expense">
               <MappingFragment StoreEntitySet="TRN_Expense">
@@ -663,15 +646,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TypeQuestions">
-            <EntityTypeMapping TypeName="JuzerWebsiteModel.TypeQuestion">
-              <MappingFragment StoreEntitySet="TypeQuestions">
-                <ScalarProperty Name="Question" ColumnName="Question" />
-                <ScalarProperty Name="id" ColumnName="id" />
+          <FunctionImportMapping FunctionImportName="AskMe" FunctionName="JuzerWebsiteModel.Store.AskMe" />
+          <EntitySetMapping Name="WebsiteErrorLogs">
+            <EntityTypeMapping TypeName="JuzerWebsiteModel.WebsiteErrorLog">
+              <MappingFragment StoreEntitySet="WebsiteErrorLogs">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="AskMe" FunctionName="JuzerWebsiteModel.Store.AskMe" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -26,7 +26,7 @@ namespace BusinessLayer.Business_Logic_Classes
         public List<SpendingVM> BL_GetExpenseList(int p_UserId)
         {
             SpendingVMList = new List<SpendingVM>();
-            List<usp_GetExpenseList_Result> ExpenseListObj = DALObj.DAL_GetExpenseList(p_UserId);
+            List<usp_GetExpenseList_Result> ExpenseListObj = DALObj.DAL_GetExpenseList(p_UserId).Data;
             foreach (usp_GetExpenseList_Result Expense in ExpenseListObj)
             {
                 SpendingVM SpendingVMObj = new SpendingVM
@@ -45,7 +45,7 @@ namespace BusinessLayer.Business_Logic_Classes
         public List<SpendingVM> BL_GetIncomesList(int p_UserId)
         {
             SpendingVMList = new List<SpendingVM>();
-            List<usp_GetIncomesList_Result> IncomesListObj = DALObj.DAL_GetIncomesList(p_UserId);
+            List<usp_GetIncomesList_Result> IncomesListObj = DALObj.DAL_GetIncomesList(p_UserId).Data;
             foreach (usp_GetIncomesList_Result Income in IncomesListObj)
             {
                 SpendingVM SpendingVMObj = new SpendingVM
@@ -71,7 +71,7 @@ namespace BusinessLayer.Business_Logic_Classes
                 Note = p_SpendingVMObj.Note,
                 IsActive = true
             };
-            return DALObj.DAL_SaveExpense(ExpenseObj);
+            return DALObj.DAL_SaveExpense(ExpenseObj).TransactionResult;
         }
 
         public bool BL_SaveIncome(SpendingVM p_SpendingVMObj)
@@ -84,7 +84,7 @@ namespace BusinessLayer.Business_Logic_Classes
                 Note = p_SpendingVMObj.Note,
                 IsActive = true
             };
-            return DALObj.DAL_SaveIncome(IncomeObj);
+            return DALObj.DAL_SaveIncome(IncomeObj).TransactionResult;
         }
 
         public bool BL_UpdateExpense(SpendingVM p_SpendingVMObj)
@@ -97,7 +97,7 @@ namespace BusinessLayer.Business_Logic_Classes
                 CreatedDate = Convert.ToDateTime(p_SpendingVMObj.CreatedDate, CultureInfo.InvariantCulture),
                 Note = p_SpendingVMObj.Note
             };
-            return DALObj.DAL_UpdateExpense(ExpenseObj);
+            return DALObj.DAL_UpdateExpense(ExpenseObj).TransactionResult;
         }
 
         public bool BL_UpdateIncome(SpendingVM p_SpendingVMObj)
@@ -110,18 +110,17 @@ namespace BusinessLayer.Business_Logic_Classes
                 CreatedDate = Convert.ToDateTime(p_SpendingVMObj.CreatedDate, CultureInfo.InvariantCulture),
                 Note = p_SpendingVMObj.Note
             };
-            return DALObj.DAL_UpdateIncome(IncomeObj);
+            return DALObj.DAL_UpdateIncome(IncomeObj).TransactionResult;
         }
 
         public bool BL_DeleteExpense(int p_ExpenseId)
         {
-            return DALObj.DAL_DeleteExpense(p_ExpenseId);
+            return DALObj.DAL_DeleteExpense(p_ExpenseId).TransactionResult;
         }
 
         public bool BL_DeleteIncome(int p_IncomeId)
         {
-            return DALObj.DAL_DeleteIncome(p_IncomeId);
+            return DALObj.DAL_DeleteIncome(p_IncomeId).TransactionResult;
         }
-
     }
 }

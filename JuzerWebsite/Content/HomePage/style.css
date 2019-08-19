@@ -881,7 +881,7 @@ xsigin/signup popup
   padding: 0;
   border-radius: 0.25em;
 }
-.cd-form input.full-width {
+.cd-form input.full-width,textarea {
   width: 100%;
 }
 .cd-form input.has-padding {

@@ -9,7 +9,7 @@
             @*<input class="full-width has-padding has-border" id="signup-username" type="text"
                        placeholder="Username">
                 <span class="cd-error-message">Error message here!</span>*@
-            @Html.TextBoxFor(x => x.FirstName, new { @class = "full-width has-padding has-border" })
+            @Html.TextBoxFor(x => x.FirstName, new { @class = "full-width has-padding has-border", placeholder = "First Name" })
             @Html.ValidationMessageFor(x => x.FirstName , null , new { @class = "cd-error-message" })
         </p>
         <p class="fieldset">
@@ -19,7 +19,7 @@
             @*<input class="full-width has-padding has-border" id="signup-username" type="text"
                        placeholder="Username">
                 <span class="cd-error-message">Error message here!</span>*@
-            @Html.TextBoxFor(x => x.LastName, new { @class = "full-width has-padding has-border" })
+            @Html.TextBoxFor(x => x.LastName, new { @class = "full-width has-padding has-border", placeholder = "Last Name" })
             @Html.ValidationMessageFor(x => x.LastName, null, new { @class = "cd-error-message" })
         </p>
         <p class="fieldset">
@@ -27,9 +27,9 @@
                 Country
             </label>
             @*<input class="full-width has-padding has-border" id="signup-username" type="text"
-                       placeholder="Username">
-                <span class="cd-error-message">Error message here!</span>*@
-            @Html.TextBoxFor(x => x.CountryId, new { @class = "full-width has-padding has-border" })
+               placeholder="Username">
+        <span class="cd-error-message">Error message here!</span>*@
+            @Html.DropDownListFor(x => x.CountryId, new SelectList(Model.CountryList, "CountryId", "CountryName"), "Select Country", new { @class = "full-width has-padding has-border CountryList" });
             @Html.ValidationMessageFor(x => x.CountryId, null, new { @class = "cd-error-message" })
         </p>
         <p class="fieldset">
@@ -38,8 +38,8 @@
             </label>
             @*<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
         <span class="cd-error-message">Error message here!</span>*@
-            @Html.TextBoxFor(x => x.Email, new { @class = "full-width has-padding has-border" })
-            @Html.ValidationMessageFor(x => x.Email, null, new { @class = "cd-error-message" })
+            @Html.TextBoxFor(x => x.SignUpEmail, new { @class = "full-width has-padding has-border", placeholder = "E-mail" })
+            @Html.ValidationMessageFor(x => x.SignUpEmail, null, new { @class = "cd-error-message" })
         </p>
         <p class="fieldset">
             <label class="image-replace cd-password" for="Password">
@@ -47,9 +47,9 @@
             </label>
             @*<input class="full-width has-padding has-border" id="signup-password" type="text"
         placeholder="Password">*@
-            @Html.TextBoxFor(x => x.Password, new { @class = "full-width has-padding has-border" })
+            @Html.TextBoxFor(x => x.SignUpPassword, new { @class = "full-width has-padding has-border", placeholder = "Password" })
             <a href="#0" class="hide-password">Hide</a>
-            @Html.ValidationMessageFor(x => x.Password, null, new { @class = "cd-error-message" })
+            @Html.ValidationMessageFor(x => x.SignUpPassword, null, new { @class = "cd-error-message" })
 
             @*<span class="cd-error-message">
             Error message
@@ -63,9 +63,9 @@
             </label>
         </p>
         <p class="fieldset">
-            @*<input class="full-width has-padding" type="submit" value="Create account">*@
+            <input class="full-width has-padding" id="btnCrtAcct" type="submit" value="Create account">
             @*<button type="submit" id="btnCrtAcct" class="full-width has-padding">Create account</button>*@
-            <button id="btnCrtAcct" class="full-width has-padding">Create account</button>
+            @*<button id="btnCrtAcct" class="full-width has-padding">Create account</button>*@
         </p>
     </form>
     <!-- <a href="#0" class="cd-close-form">Close</a> -->

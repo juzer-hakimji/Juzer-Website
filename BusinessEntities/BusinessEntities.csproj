@@ -82,10 +82,7 @@
     <Compile Include="Entities\Entity Model\MST_UserInfo.cs">
       <DependentUpon>JuzerWebsiteModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Entity Model\Pract.cs">
-      <DependentUpon>JuzerWebsiteModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Entity Model\TypeQuestion.cs">
+    <Compile Include="Entities\Entity Model\WebsiteErrorLog.cs">
       <DependentUpon>JuzerWebsiteModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
