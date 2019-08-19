@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 
 namespace ViewModel
 {
+    public class MainUserVM
+    {
+        public UserDetailsVM UserDetailsVM { get; set; }
+        public UserLoginVM UserLoginVM { get; set; }
+        public ResetPasswordVM ResetPasswordVM { get; set; }
+    }
+
     public class UserDetailsVM
     {
         public int UserId { get; set; }
@@ -27,6 +34,8 @@ namespace ViewModel
 
         [Required(ErrorMessage = "Please enter Password")]
         public string SignUpPassword { get; set; }
+
+        public List<CountryVM> CountryList { get; set; }
     }
 
     public class UserLoginVM

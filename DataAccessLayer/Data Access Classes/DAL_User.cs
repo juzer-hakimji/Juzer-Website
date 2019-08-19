@@ -23,7 +23,12 @@ namespace DataAccessLayer.Data_Access_Classes
 
         public bool DAL_SaveNewPassword(int p_UserId,string NewHashedPassword)
         {
-            return this.SaveNewPassword(p_UserId, NewHashedPassword);
+            return SaveNewPassword(p_UserId, NewHashedPassword);
+        }
+
+        public DBContextResult<List<DEV_Country>> DAL_GetCountryList()
+        {
+            return GetCountryList();
         }
     }
 }

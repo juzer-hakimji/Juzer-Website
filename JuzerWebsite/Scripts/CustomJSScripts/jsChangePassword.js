@@ -10,6 +10,11 @@ function AddEventHandlers() {
 function ChangePasswordHandler() {
     var SerializedObj = $('#cd-form-ChangePass').serialize();
     CallAjaxMethod("User/ChangePassword", 'PUT', SerializedObj).then(function (result) {
-        ShowResult(result);
+        if (result.Success == false) {
+            ShowResult(result);
+        }
+        else if (result.Success == true) {
+            window.location.href = result.RedirectURL;
+        }
     });
 }

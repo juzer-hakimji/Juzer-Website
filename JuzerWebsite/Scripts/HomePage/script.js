@@ -10,7 +10,7 @@ jQuery(document).ready(function ($) {
         $forgot_password_link = $form_login.find('.cd-form-bottom-message a'),
         $back_to_login_link = $form_forgot_password.find('.cd-form-bottom-message a'),
         $main_nav = $('.main-nav');
-
+    InitCountryDropdown();
     //open modal
     $main_nav.on('click', function (event) {
 
@@ -250,3 +250,7 @@ jQuery(document).ready(function ($) {
         });
     }
 });
+
+function InitCountryDropdown() {
+    $('.CountryList').select2();
+}

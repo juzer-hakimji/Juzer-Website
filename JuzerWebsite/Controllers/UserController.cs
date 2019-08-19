@@ -29,11 +29,19 @@ namespace JuzerWebsite.Controllers
             {
                 MST_UserInfo MST_UserInfo = BLUser.BL_SaveUser(p_UserVM);
                 Session["MST_UserInfo"] = MST_UserInfo;
-                return RedirectToAction("Notes", "List");
+                return Json(new TransactionResult
+                {
+                    Success = true,
+                    RedirectURL = Url.Action("List", "Notes")
+                });
             }
             else
             {
-                return Json(new { result = false });
+                return Json(new TransactionResult
+                {
+                    Success = false,
+                    Message = "Something went wrong,Note could not be saved."
+                });
             }
         }
 
@@ -98,11 +106,11 @@ namespace JuzerWebsite.Controllers
             TransactionResult result = BLUser.BL_ChangePassword(p_Obj, (Session["MST_UserInfo"] as MST_UserInfo).Email);
             if (result.Success)
             {
-                return RedirectToAction("Notes", "List");
+                return Json(result.RedirectURL = Url.Action("List", "Notes"));
             }
             else
             {
-                return Json(new { result = result.Message }); 
+                return Json(result.Message = "Something went wrong,Password could not be changed.");
             }
         }
     }

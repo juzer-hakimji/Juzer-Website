@@ -1,4 +1,4 @@
-﻿@using ViewModel
+﻿@model ViewModel.MainUserVM
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,13 +58,13 @@
                 <li><a href="#0">New account</a></li>
             </ul>
             <!-- log in form -->
-            @Html.Partial("_Login", new UserLoginVM())
+            @Html.Partial("_Login", Model.UserLoginVM)
             <!-- cd-login -->
             <!-- sign up form -->
-            @Html.Partial("_SignUp", new UserDetailsVM())
+            @Html.Partial("_SignUp", Model.UserDetailsVM)
             <!-- cd-signup -->
             <!-- reset password form -->
-            @Html.Partial("_ResetPassword", new ResetPasswordVM())
+            @Html.Partial("_ResetPassword", Model.ResetPasswordVM)
             <!-- cd-reset-password -->
             <a href="#0" class="cd-close-form">Close</a>
         </div>

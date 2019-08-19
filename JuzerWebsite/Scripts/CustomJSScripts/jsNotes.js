@@ -36,20 +36,20 @@ $(document).ready(function () {
     //open modal
     //$AddNoteBtn.on('click', function (event) {
 
-       
-        //if ($(event.target).is($main_nav)) {
-        //    // on mobile open the submenu
-        //    $(this).children('ul').toggleClass('is-visible');
-        //} else {
-        // on mobile close submenu
-        //$main_nav.children('ul').removeClass('is-visible');
-        //show modal layer
-        //show the selected form
-        //($(event.target).is('.cd-signup')) ? signup_selected() : login_selected();
-        //$form_login.removeClass('is-selected');
-        //$form_forgot_password.removeClass('is-selected');
-        //$tab_login.removeClass('selected');
-        //$tab_signup.addClass('selected');
+
+    //if ($(event.target).is($main_nav)) {
+    //    // on mobile open the submenu
+    //    $(this).children('ul').toggleClass('is-visible');
+    //} else {
+    // on mobile close submenu
+    //$main_nav.children('ul').removeClass('is-visible');
+    //show modal layer
+    //show the selected form
+    //($(event.target).is('.cd-signup')) ? signup_selected() : login_selected();
+    //$form_login.removeClass('is-selected');
+    //$form_forgot_password.removeClass('is-selected');
+    //$tab_login.removeClass('selected');
+    //$tab_signup.addClass('selected');
     //});
 
     //close modal
@@ -147,8 +147,8 @@ function OpenAddNoteModalHandler() {
 
 function CloseModalHandler() {
     if ($(event.target).is($('.cd-user-modal')) || $(event.target).is('.cd-close-form')) {
-            $('.cd-user-modal').removeClass('is-visible');
-        }
+        $('.cd-user-modal').removeClass('is-visible');
+    }
 }
 
 function AddNoteHandler() {
@@ -159,7 +159,12 @@ function AddNoteHandler() {
     var SerializedObj = $('#cd-form-Notes').serialize();
     SerializedObj["NoteId"] = $('#hdnEditNoteId').val() == "" ? null : $('#hdnEditNoteId').val();
     CallAjaxMethod("Notes/Save", 'POST', SerializedObj).then(function (result) {
-        ShowResult(result.Message);
+        if (result.Success == true) {
+            window.location.href = result.RedirectURL;
+        }
+        else {
+            ShowResult(result.Message);
+        }
     });
     //$.ajax(function () {
     //    type: 'POST',
@@ -218,7 +223,7 @@ function DataTableInit() {
             { "data": "NoteText" },
         ]
     });
-} 
+}
 
 //function signup_selected() {
 //    $form_login.removeClass('is-selected');

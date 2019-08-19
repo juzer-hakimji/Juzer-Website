@@ -121,5 +121,19 @@ namespace BusinessLayer.Business_Logic_Classes
                 };
             }
         }
+
+        public List<CountryVM> BL_GetCountryList()
+        {
+            List<CountryVM> CountryList = new List<CountryVM>();
+            foreach (var Country in new DAL_User().DAL_GetCountryList().Data.ToList())
+            {
+                CountryList.Add(new CountryVM
+                {
+                    CountryId = Country.CountryId,
+                    CountryName = Country.CountryName
+                });
+            }
+            return CountryList;
+        }
     }
 }

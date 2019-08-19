@@ -89,6 +89,14 @@ namespace DataAccessLayer.Abstract_Classes
             }
         }
 
+        public DBContextResult<List<DEV_Country>> GetCountryList()
+        {
+            return ExecuteDALMethod(db, (DataContext, p_obj) =>
+            {
+                return DataContext.DEV_Country.ToList();
+            }, new object());
+        }
+
         public void Dispose()
         {
             db.Dispose();

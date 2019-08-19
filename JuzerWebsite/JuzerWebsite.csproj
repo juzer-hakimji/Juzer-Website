@@ -144,7 +144,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\CustomCss\Notes.css" />
+    <Content Include="Content\CustomCss\Common.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -162,6 +162,7 @@
     <Content Include="Content\Images\work-2.jpg" />
     <Content Include="Content\Images\work-3.jpg" />
     <Content Include="Content\Images\work-4.jpg" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -206,7 +207,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap-notify.js" />
     <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Areas\Notes\Views\web.config" />
@@ -246,6 +246,8 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Areas\Notes\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Spending\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\CustomJSScripts\Common.js" />
     <Content Include="Scripts\CustomJSScripts\jsAnalysis.js" />

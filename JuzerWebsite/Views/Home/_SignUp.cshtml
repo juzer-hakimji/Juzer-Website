@@ -27,9 +27,9 @@
                 Country
             </label>
             @*<input class="full-width has-padding has-border" id="signup-username" type="text"
-                       placeholder="Username">
-                <span class="cd-error-message">Error message here!</span>*@
-            @Html.TextBoxFor(x => x.CountryId, new { @class = "full-width has-padding has-border", placeholder = "Country" })
+               placeholder="Username">
+        <span class="cd-error-message">Error message here!</span>*@
+            @Html.DropDownListFor(x => x.CountryId, new SelectList(Model.CountryList, "CountryId", "CountryName"), "Select Country", new { @class = "full-width has-padding has-border CountryList" });
             @Html.ValidationMessageFor(x => x.CountryId, null, new { @class = "cd-error-message" })
         </p>
         <p class="fieldset">
