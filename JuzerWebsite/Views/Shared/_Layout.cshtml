@@ -33,17 +33,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav ml-auto">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Spending", "About", "Home")</li>
-                    <li>@Html.ActionLink("Notes", "Contact", "Home")</li>
-                    <li @(Convert.ToBoolean(Session["IsAdmin"]) ? "" : "hidden")>@Html.ActionLink("Analysis", "Index", "Analysis")</li>
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                    <li><a href="Home/Index">Home</a></li>
+                    <li><a href="#">Spending</a></li>
+                    <li><a href="Notes/List">Notes</a></li>
+                    <li @(Convert.ToBoolean(Session["IsAdmin"]) ? "" : "hidden")><a href="Analysis/Index">Analysis</a></li>
                     <li class="dropdown">
                         @*@Html.ActionLink("Profile", "Index", "Analysis")<b class="caret"></b>*@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Change Password", "ChangePassword", "User")</li>
-                            <li>@Html.ActionLink("Delete Account", "Delete", "User")</li>
-                            <li>@Html.ActionLink("Log Out", "LogOut", "Authentication")</li>
+                            <li><a href="/User/ChangePassword">Change Password</a></li>
+                            <li><a href="/User/Delete">Delete Account</a></li>
+                            @*<li>@Html.ActionLink("Log Out", "LogOut", "Authentication",new { area = "" },null)</li>*@
+                            <li><a href="/Authentication/LogOut">Log Out</a></li>
                         </ul>
                     </li>
                 </ul>
