@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section styles
+{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+}
+
 <div class="cd-user-modal">
     <!-- this is the entire modal form, including the background -->
     <div class="cd-user-modal-container">
@@ -12,7 +17,7 @@
         @Html.Partial("_AddAdmin")
         <!-- cd-AddAdmin-->
         <!-- Remove Admin form -->
-        @Html.Partial("_RemoveAdmin",Model)
+        @Html.Partial("_RemoveAdmin", Model)
         <!-- cd-RemoveAdmin-->
         <a href="#0" class="cd-close-form">Close</a>
     </div>
@@ -25,3 +30,9 @@
         <span><a id="RemoveAdmin" class="cd-signin" href="#0">Remove Admin</a></span>
     </div>
 </div>
+
+
+@section scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+}
