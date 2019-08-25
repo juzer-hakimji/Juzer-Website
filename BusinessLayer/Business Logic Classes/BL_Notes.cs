@@ -32,7 +32,7 @@ namespace BusinessLayer.Business_Logic_Classes
                 {
                     NoteId = Note.NoteId,
                     Subject = Note.Subject,
-                    CreatedDate = Note.CreatedDate.ToString(),
+                    CreatedDate = Note.CreatedDate.ToString("dd/MMM/yyyy"),
                     NoteText = Note.NoteText,
                     IsImportant = Note.IsImportant
                 };
@@ -41,13 +41,14 @@ namespace BusinessLayer.Business_Logic_Classes
             return NotesVMList;
         }
 
-        public TransactionResult BL_SaveNote(NotesVM p_NotesVM)
+        public TransactionResult BL_SaveNote(NotesVM p_NotesVM,int p_UserId)
         {
             NoteObj = new TRN_Notes
             {
                 Subject = p_NotesVM.Subject,
                 CreatedDate = Convert.ToDateTime(p_NotesVM.CreatedDate, CultureInfo.InvariantCulture),
                 NoteText = p_NotesVM.NoteText,
+                UserId = p_UserId,
                 IsActive = true,
                 IsImportant = false
             };
@@ -68,14 +69,15 @@ namespace BusinessLayer.Business_Logic_Classes
             }
         }
 
-        public TransactionResult BL_UpdateNote(NotesVM p_NotesVM)
+        public TransactionResult BL_UpdateNote(NotesVM p_NotesVM,int p_UserId)
         {
             NoteObj = new TRN_Notes
             {
                 NoteId = p_NotesVM.NoteId ?? 0,
                 Subject = p_NotesVM.Subject,
                 CreatedDate = Convert.ToDateTime(p_NotesVM.CreatedDate, CultureInfo.InvariantCulture),
-                NoteText = p_NotesVM.NoteText
+                NoteText = p_NotesVM.NoteText,
+                ModifiedDate = DateTime.UtcNow
             };
             if (INotesObj.Update(NoteObj).TransactionResult)
             {

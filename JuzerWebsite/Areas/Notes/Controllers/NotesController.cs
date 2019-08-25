@@ -26,42 +26,41 @@ namespace JuzerWebsite.Areas.Notes.Controllers
             return View("Notes", new NotesVM());
         }
 
-        [HttpPost]
         public JsonResult GetListData()
         {
             List<NotesVM> NotesList = BLObj.BL_GetNotesList((Session["MST_UserInfo"] as MST_UserInfo).UserId);
-            return Json(NotesList);
+            return Json(NotesList, JsonRequestBehavior.AllowGet);
         }
 
-        [Route("Notes/Save")]
+        //[Route("Notes/Save")]
         [HttpPost]
         public JsonResult SaveNote(NotesVM P_NotesVM)
         {
             TransactionResult result;
             if (P_NotesVM.NoteId != null)
             {
-                result = BLObj.BL_UpdateNote(P_NotesVM);
+                result = BLObj.BL_UpdateNote(P_NotesVM, (Session["MST_UserInfo"] as MST_UserInfo).UserId);
             }
             else
             {
-                result = BLObj.BL_SaveNote(P_NotesVM);
+                result = BLObj.BL_SaveNote(P_NotesVM, (Session["MST_UserInfo"] as MST_UserInfo).UserId);
             }
-            return Json(new { result });
+            return Json(result);
         }
 
         [HttpPut]
         public JsonResult ChangeNoteImportance(int NoteId, bool IsImportant)
         {
             TransactionResult result = BLObj.BL_ChangeNoteImportance(NoteId, IsImportant);
-            return Json(new { result });
+            return Json(result);
         }
 
-        [Route("Notes/Delete")]
+        //[Route("Notes/Delete")]
         [HttpPut]
         public JsonResult DeleteNote(int p_NoteId)
         {
             TransactionResult result = BLObj.BL_DeleteNote(p_NoteId);
-            return Json(new { result });
+            return Json(result);
         }
     }
 }

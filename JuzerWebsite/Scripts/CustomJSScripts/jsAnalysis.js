@@ -21,7 +21,7 @@ function AddEventHandlers() {
     $(".cd-user-modal").on('click', CloseModalHandler);
     $("#btnAddAdmin").on('click', AddAdminHandler);
     $("#btnRemoveAdmin").on('click', RemoveAdminHandler);
-    CloseModalWhenEsc();
+    CloseModalWhenEsc($('.cd-user-modal'));
 }
 
 function OpenAddAdminModalHandler() {

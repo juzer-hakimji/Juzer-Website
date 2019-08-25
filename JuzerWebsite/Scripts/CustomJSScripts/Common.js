@@ -29,11 +29,11 @@ function InitializeForm(FormSelector) {
     $(FormSelector).submit(function () { return false; });
 }
 
-function CloseModalWhenEsc() {
+function CloseModalWhenEsc(Selector) {
     //close modal when clicking the esc keyboard button
     $(document).keyup(function (event) {
         if (event.which == '27') {
-            $form_modal.removeClass('is-visible');
+            Selector.removeClass('is-visible');
         }
     });
 }

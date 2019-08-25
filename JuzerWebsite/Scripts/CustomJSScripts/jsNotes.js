@@ -60,22 +60,26 @@ $(document).ready(function () {
 });
 
 function AddEventHandlers() {
-    $(".IsImp").on('click', ChangeNoteImportanceHandler);
-    $(".EditNote").on('click', EditNoteHandler);
-    $(".DeleteNote").on('click', DeleteNoteHandler);
+    $("body").on('click', '.IsImp', ChangeNoteImportanceHandler);
+    $("body").on('click', '.EditNote', EditNoteHandler);
+    $("body").on('click', '.DeleteNote', DeleteNoteHandler);
+    //$(".IsImp").on('click', ChangeNoteImportanceHandler);
+    //$(".EditNote").on('click', EditNoteHandler);
+    //$(".DeleteNote").on('click', DeleteNoteHandler);
     $("#AddNote").on('click', OpenAddNoteModalHandler);
     $(".cd-user-modal").on('click', CloseModalHandler);
     $("#btnAddNote").on('click', AddNoteHandler);
-    CloseModalWhenEsc();
+    CloseModalWhenEsc($('.cd-user-modal'));
 }
 
 function ChangeNoteImportanceHandler() {
     var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
     if ($(this).children('i').attr("class") == 'fas fa-star') {
         //To mark not important
-        CallAjaxMethod("Notes/ChangeNoteImportance", 'PUT', { NoteId: CurrentRowdata[0], IsImportant: false }).then(function (result) {
+        CallAjaxMethod("/Notes/ChangeNoteImportance", 'PUT', { NoteId: CurrentRowdata.NoteId, IsImportant: false }).then(function (result) {
             ShowResult(result.Message);
         });
+        $(this).children('i').attr("class", "far fa-star");
         //$.ajax(function () {
         //    type: 'POST',
         //        url : "Notes/ChangeNoteImportance",
@@ -87,13 +91,13 @@ function ChangeNoteImportanceHandler() {
         //            }
         //        }
         //});
-        $(this).children('i').attr("class", "far fa-star")
     }
     else {
         //To mark important
-        CallAjaxMethod("Notes/ChangeNoteImportance", 'PUT', { NoteId: CurrentRowdata[0], IsImportant: true }).then(function (result) {
-            ShowResult(result);
+        CallAjaxMethod("/Notes/ChangeNoteImportance", 'PUT', { NoteId: CurrentRowdata.NoteId, IsImportant: true }).then(function (result) {
+            ShowResult(result.Message);
         });
+        $(this).children('i').attr("class", "fas fa-star");
         //$.ajax(function () {
         //    type: 'POST',
         //        url : "Notes/ChangeNoteImportance",
@@ -105,27 +109,26 @@ function ChangeNoteImportanceHandler() {
         //            }
         //        }
         //});
-        $(this).children('i').attr("class", "fas fa-star")
     }
 }
 
 function EditNoteHandler() {
     var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
-    $('#hdnEditNoteId').val(CurrentRowdata[0]);
-    $('#CreatedDate').val(CurrentRowdata[2]);
-    $('#Subject').val(CurrentRowdata[3]);
-    $('#NoteText').val(CurrentRowdata[4]);
+    $('#hdnEditNoteId').val(CurrentRowdata.NoteId);
+    $('#CreatedDate').val(CurrentRowdata.CreatedDate);
+    $('#Subject').val(CurrentRowdata.Subject);
+    $('#NoteText').val(CurrentRowdata.NoteText);
     fn_OpenModal();
 }
 
 function DeleteNoteHandler() {
     var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
-    var NoteId = CurrentRowdata[0];
 
     //Ask For Confirmation using confirm box
 
-    CallAjaxMethod("Notes/Delete", 'PUT', { p_NoteId: NoteId }).then(function (result) {
+    CallAjaxMethod("/Notes/DeleteNote", 'PUT', { p_NoteId: CurrentRowdata.NoteId }).then(function (result) {
         ShowResult(result.Message);
+        fn_InitDataTable();
     });
     //$.ajax(function () {
     //    type: 'POST',
@@ -152,15 +155,17 @@ function CloseModalHandler() {
 }
 
 function AddNoteHandler() {
-    var formValid = $("#cd-form-Notes").validate().form();
-    if (!formValid) return false;
-    //var SerializedArray = $('#cd-form-Notes').serializeArray();
-    //var SerializedObj = objectifyForm(SerializedArray);
-    var SerializedObj = $('#cd-form-Notes').serialize();
+    //var formValid = $("#cd-form-Notes").validate().form();
+    //if (!formValid) return false;
+    var SerializedArray = $('#cd-form-Notes').serializeArray();
+    var SerializedObj = objectifyForm(SerializedArray);
+    //var SerializedObj = $('#cd-form-Notes').serialize();
     SerializedObj["NoteId"] = $('#hdnEditNoteId').val() == "" ? null : $('#hdnEditNoteId').val();
-    CallAjaxMethod("Notes/Save", 'POST', SerializedObj).then(function (result) {
+    CallAjaxMethod("/Notes/SaveNote", 'POST', SerializedObj).then(function (result) {
         if (result.Success == true) {
-            window.location.href = result.RedirectURL;
+            ShowResult(result.Message);
+            fn_AfterSave();
+            //window.location.href = result.RedirectURL;
         }
         else {
             ShowResult(result.Message);
@@ -185,7 +190,7 @@ function fn_OpenModal() {
     $('.cd-user-modal').addClass('is-visible');
     $('.cd-user-modal').find('#cd-Notes').addClass('is-selected');
     $('#CreatedDate').datepicker({
-        //dateFormat: "dd/M/yy",
+        dateFormat: "dd/M/yy",
         changeMonth: true,
         changeYear: true
         //yearRange: "-60:+0"
@@ -198,18 +203,24 @@ function DataTableInit() {
             url: "/Notes/GetListData",
             dataSrc: ''
         },
-        "columnDefs": [{
-            "targets": 0,
-            "data": null,
-            "defaultContent": '<span class=""><i class="fa fa - pencil EditNote" title="Edit" ></i>&nbsp;<i class="fa fa - trash DeleteNote" title="Delete"></i></span>'
-        }],
+        //"columnDefs": [{
+        //    "targets": 0,
+        //    visible: false
+        //    //"data": null,
+        //    //"defaultContent": '<span class=""><i class="fa fa - pencil EditNote" title="Edit" ></i>&nbsp;<i class="fa fa - trash DeleteNote" title="Delete"></i></span>'
+        //}],
         "columns": [
-            { "data": "NoteId" },
+            {
+                "data": "NoteId",
+                "render": function (data, type, row) {
+                    return '<span class=""><i class="fa fa-pencil EditNote" title="Edit" ></i>&nbsp;<i class="fa fa-trash DeleteNote" title="Delete"></i></span>';
+                }
+            },
             {
                 "data": "IsImportant",
-                "render": function (data, type, row) {
+                "render": function (IsImportant, type, row) {
                     var strData = "";
-                    if (data.IsImportant == true) {
+                    if (IsImportant) {
                         strData = '<span class="IsImp"><i class="fas fa-star" title="Mark Important"></i></span>';
                     }
                     else {
@@ -232,3 +243,13 @@ function DataTableInit() {
 //    $tab_login.removeClass('selected');
 //    $tab_signup.addClass('selected');
 //}
+
+function fn_AfterSave() {
+    fn_InitDataTable();
+    $('.cd-user-modal').removeClass('is-visible');
+}
+
+function fn_InitDataTable() {
+    $('#tblNotesList').DataTable().destroy();
+    DataTableInit();
+}

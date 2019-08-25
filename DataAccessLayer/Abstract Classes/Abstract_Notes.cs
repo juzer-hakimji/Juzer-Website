@@ -47,7 +47,6 @@ namespace DataAccessLayer.Abstract_Classes
                 NoteObj.NoteText = P_TRN_Notes.NoteText;
                 NoteObj.CreatedDate = P_TRN_Notes.CreatedDate;
                 NoteObj.ModifiedDate = P_TRN_Notes.ModifiedDate;
-                NoteObj.IsImportant = P_TRN_Notes.IsImportant;
                 DataContext.SaveChanges();
                 return null;
             }, p_TRN_Notes);
