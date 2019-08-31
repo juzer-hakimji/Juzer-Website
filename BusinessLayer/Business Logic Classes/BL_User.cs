@@ -75,16 +75,33 @@ namespace BusinessLayer.Business_Logic_Classes
             return UserObj;
         }
 
-        public bool BL_ValidatePassword(UserLoginVM p_UserLoginVM)
+        public TransactionResult BL_ValidatePassword(UserLoginVM p_UserLoginVM)
         {
             MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_UserLoginVM.LoginEmail).Data;
             if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.LoginPassword).Equals(UserObj.Password))
             {
-                return this.BL_DeleteUser(UserObj.UserId) ? true : false;
+                if (BL_DeleteUser(UserObj.UserId))
+                {
+                    return new TransactionResult
+                    {
+                        Success = true,
+                        RedirectURL = "/Home/Index",
+                        Message = "User Deletion successful"
+                    };
+                }
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = "Something went wrong.Please try again"
+                };
             }
             else
             {
-                return false;
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = "Something went wrong.Please try again"
+                };
             }
         }
 
@@ -109,6 +126,7 @@ namespace BusinessLayer.Business_Logic_Classes
                 return new TransactionResult
                 {
                     Success = true,
+                    RedirectURL = "/Notes/List",
                     Message = "Password Successfully updated"
                 };
             }

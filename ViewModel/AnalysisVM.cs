@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ViewModel
 {
-    public class AnalysisVM
+    public class AnalysisVM : BaseViewModel
     {
         public List<UserDetailsVM> RemoveAdminList { get; set; }
     }

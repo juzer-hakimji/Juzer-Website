@@ -50,4 +50,27 @@ function ShowResult(message,type) {
     //alert(result);
 }
 
+function ShowConfirmBox(p_MainMessage,p_SecondaryMessage) {
+    var Answer;
+    //bootbox.confirm({
+    //    title: p_MainMessage,
+    //    message: p_SecondaryMessage,
+    //    buttons: {
+    //        cancel: {
+    //            label: '<i class="fa fa-times"></i> Cancel'
+    //        },
+    //        confirm: {
+    //            label: '<i class="fa fa-check"></i> Confirm'
+    //        }
+    //    },
+    //    callback: function (result) {
+    //        Answer = result;    
+    //    }
+    //});
+    bootbox.confirm("This is the default confirm!", function (result) {
+        Answer = result;    
+    });
+    return Answer;
+}
+
 

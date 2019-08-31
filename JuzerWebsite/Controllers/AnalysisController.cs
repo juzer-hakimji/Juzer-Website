@@ -33,12 +33,12 @@ namespace JuzerWebsite.Controllers
         public ActionResult AddOrRemoveAdmin(string UserIds,bool IsAdmin)
         {
             TransactionResult Result = BLAnalysis.BL_AddOrRemoveAdmin(UserIds, IsAdmin);
-            return Json(new { Result });
+            return Json(Result);
         }
 
         public ActionResult GetAddAdminList()
         {
-            return Json(BLAnalysis.BL_GetAddOrRemoveAdminList(true));
+            return Json(BLAnalysis.BL_GetAddOrRemoveAdminList(true), JsonRequestBehavior.AllowGet);
         }
     }
 }

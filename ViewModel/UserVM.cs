@@ -55,7 +55,7 @@ namespace ViewModel
         public string ResetEmail { get; set; }
     }
 
-    public class ChangePasswordVM
+    public class ChangePasswordVM :BaseViewModel
     {
         [Required(ErrorMessage = "Please enter Old Password")]
         public string OldPassword { get; set; }

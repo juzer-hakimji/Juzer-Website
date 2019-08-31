@@ -42,8 +42,11 @@ namespace JuzerWebsite.Controllers
                 else
                 {
                     ModelState.AddModelError("CredentialError", "Invalid Username or Password");
-                    return Json(new { result = false });
-                    //return RedirectToAction("Index","Home");
+                    return Json(new TransactionResult
+                    {
+                        Success = false,
+                        Message = "Invalid Username or Password"
+                    });
                 }
                 FormsAuthentication.SetAuthCookie(p_UserLoginVM.LoginEmail, false);
                 Session["IsAdmin"] = IsAdmin;
@@ -51,7 +54,7 @@ namespace JuzerWebsite.Controllers
                 return Json(new TransactionResult
                 {
                     Success = true,
-                    RedirectURL = Url.Action("List","Notes")
+                    RedirectURL = Url.Action("List", "Notes")
                 });
             }
             else
@@ -72,10 +75,10 @@ namespace JuzerWebsite.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPut]
-        public ActionResult ValidatePassword(string p_Password)
+        public ActionResult ValidatePasswordAndDeleteUser(string p_Password)
         {
-            bool IsUserExists = BLUser.BL_ValidatePassword(new UserLoginVM { LoginEmail = (Session["MST_UserInfo"] as MST_UserInfo).Email, LoginPassword = p_Password });
-            return Json(new { IsUserExists });
+            TransactionResult result = BLUser.BL_ValidatePassword(new UserLoginVM { LoginEmail = (Session["MST_UserInfo"] as MST_UserInfo).Email, LoginPassword = p_Password });
+            return Json(result);
         }
     }
 }

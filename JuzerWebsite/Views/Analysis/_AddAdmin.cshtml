@@ -1,16 +1,12 @@
 ﻿    
-<ul class="cd-switcher">
-    <li><a href="#0">Make Admin</a></li>
-    @*
-        <li><a href="#0">New account</a></li>*@
-</ul>
+
 <div id="cd-AddAdmin">
     <!-- sign up form -->
     <form class="cd-form" id="cd-form-AddAdmin">
         <p class="fieldset">
             <label class="image-replace cd-UserName" for="ddUserName">Select User</label>
             @*@Html.TextBoxFor(x => x.CreatedDate, new { @class = "full-width has-padding has-border", placeholder = "Date" })*@
-            @Html.DropDownList("UserList-Add[]",new SelectList(new List<string>()),"Select User", new { @class = "full-width has-padding has-border UserListAdd",  multiple = "multiple" });
+            @Html.DropDownList("UserListAdd[]",new SelectList(new List<string>()),"Select User", new { @class = "full-width has-padding has-border UserListAdd",  multiple = "multiple" })
             @*<input class="full-width has-padding has-border" id="txtDate" type="text" placeholder="Date">
             <span class="cd-error-message">Error message here!</span>*@
         </p>

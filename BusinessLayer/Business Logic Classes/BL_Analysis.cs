@@ -26,7 +26,7 @@ namespace BusinessLayer.Business_Logic_Classes
 
         public TransactionResult BL_AddOrRemoveAdmin(string p_UserIds, bool p_IsAdmin)
         {
-            if (DALObj.AddOrRemoveAdmin(p_UserIds, p_IsAdmin))
+            if (DALObj.AddOrRemoveAdmin(p_UserIds.Split(',').ToList(), p_IsAdmin))
             {
                 if (p_IsAdmin)
                 {

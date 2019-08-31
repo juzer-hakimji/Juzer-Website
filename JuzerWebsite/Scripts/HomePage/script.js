@@ -155,15 +155,15 @@ jQuery(document).ready(function ($) {
 
 
         // Smoothscroll js
-        $(function () {
-            $('.custom-navbar a, #home a').bind('click', function (event) {
-                var $anchor = $(this);
-                $('html, body').stop().animate({
-                    scrollTop: $($anchor.attr('href')).offset().top - 49
-                }, 1000);
-                event.preventDefault();
-            });
-        });
+        //$(function () {
+        //    $('.custom-navbar a, #home a').bind('click', function (event) {
+        //        var $anchor = $(this);
+        //        $('html, body').stop().animate({
+        //            scrollTop: $($anchor.attr('href')).offset().top - 49
+        //        }, 1000);
+        //        event.preventDefault();
+        //    });
+        //});
 
 
         // WOW Animation js
@@ -180,7 +180,7 @@ jQuery(document).ready(function ($) {
         var SerializedObj = $('#cd-form-Login').serialize();
         $.ajax({
             type: 'POST',
-            url: "Authentication/Login",
+            url: "/Authentication/Login",
             data: SerializedObj,
             dataType: 'json',
             success: function (result) {

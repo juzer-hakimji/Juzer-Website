@@ -12,7 +12,11 @@
     //    $('.cd-user-modal').removeClass('is-visible');
     //}
     //});
-    
+
+    $('.cd-switcher').on('click', function (event) {
+        event.preventDefault();
+        $(event.target).is($('.cd-switcher').children('li').eq(0).children('a')) ? OpenAddAdminModalHandler() : OpenRemoveAdminModalHandler();
+    });
 });
 
 function AddEventHandlers() {
@@ -24,9 +28,13 @@ function AddEventHandlers() {
     CloseModalWhenEsc($('.cd-user-modal'));
 }
 
+
 function OpenAddAdminModalHandler() {
     $('.cd-user-modal').addClass('is-visible');
     $('.cd-user-modal').find('#cd-AddAdmin').addClass('is-selected');
+    $('.cd-user-modal').find('#cd-RemoveAdmin').removeClass('is-selected');
+    $('.cd-switcher').children('li').eq(0).children('a').addClass('selected');
+    $('.cd-switcher').children('li').eq(1).children('a').removeClass('selected');
     $('.UserListAdd').select2({
         ajax: {
             url: '/Analysis/GetAddAdminList',
@@ -37,7 +45,7 @@ function OpenAddAdminModalHandler() {
                     results: $.map(data, function (item) {
                         return {
                             id: item.UserId,
-                            text: item.Email
+                            text: item.SignUpEmail
                         }
                     })
                 };
@@ -49,6 +57,9 @@ function OpenAddAdminModalHandler() {
 function OpenRemoveAdminModalHandler() {
     $('.cd-user-modal').addClass('is-visible');
     $('.cd-user-modal').find('#cd-RemoveAdmin').addClass('is-selected');
+    $('.cd-user-modal').find('#cd-AddAdmin').removeClass('is-selected');
+    $('.cd-switcher').children('li').eq(1).children('a').addClass('selected');
+    $('.cd-switcher').children('li').eq(0).children('a').removeClass('selected');
     $('.UserListRemove').select2();
 }
 

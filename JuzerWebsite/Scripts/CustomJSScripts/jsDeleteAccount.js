@@ -9,8 +9,14 @@ function AddEventHandlers() {
 
 function DeleteAccountHandler() {
     var Password = $("#txtPass").val();
-    CallAjaxMethod("Authentication/ValidatePassword", 'PUT', { p_Password: Password }).then(function (result) {
-        ShowResult(result);
+    CallAjaxMethod("/Authentication/ValidatePasswordAndDeleteUser", 'PUT', { p_Password: Password }).then(function (result) {
+        if (result.Success) {
+            ShowResult(result.Message);
+            window.location.href = result.RedirectURL;
+        }
+        else {
+            ShowResult(result.Message);
+        }
     });
 
     //$.ajax(function () {

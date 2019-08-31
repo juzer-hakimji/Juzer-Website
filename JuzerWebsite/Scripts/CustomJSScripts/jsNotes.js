@@ -125,11 +125,13 @@ function DeleteNoteHandler() {
     var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
 
     //Ask For Confirmation using confirm box
+    //if (ShowConfirmBox("Delete Note?", "Note will be deleted.Are you sure?")) {
+    //}
+        CallAjaxMethod("/Notes/DeleteNote", 'PUT', { p_NoteId: CurrentRowdata.NoteId }).then(function (result) {
+            ShowResult(result.Message);
+            fn_InitDataTable();
+        });
 
-    CallAjaxMethod("/Notes/DeleteNote", 'PUT', { p_NoteId: CurrentRowdata.NoteId }).then(function (result) {
-        ShowResult(result.Message);
-        fn_InitDataTable();
-    });
     //$.ajax(function () {
     //    type: 'POST',
     //        url : "Notes/Delete",

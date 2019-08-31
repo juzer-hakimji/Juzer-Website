@@ -17,7 +17,7 @@ namespace JuzerWebsite.Controllers
     {
         private BL_User BLUser { get; set; }
 
-        UserController()
+        public UserController()
         {
             BLUser = new BL_User();
         }
@@ -89,29 +89,23 @@ namespace JuzerWebsite.Controllers
         [HttpGet]
         public ActionResult DeleteAccount()
         {
-            return View("DeleteAccount");
+            return View("DeleteAccount",new BaseViewModel());
         }
 
         [HttpGet]
         [HeaderFooterFilter]
         public ActionResult ChangePassword()
         {
-            return View("ChangePassword");
+            return View("ChangePassword",new ChangePasswordVM());
         }
 
         [HttpPut]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ChangePasswordVM p_Obj)
         {
             TransactionResult result = BLUser.BL_ChangePassword(p_Obj, (Session["MST_UserInfo"] as MST_UserInfo).Email);
-            if (result.Success)
-            {
-                return Json(result.RedirectURL = Url.Action("List", "Notes"));
-            }
-            else
-            {
-                return Json(result.Message = "Something went wrong,Password could not be changed.");
-            }
+            return Json(result);
         }
     }
 }
+

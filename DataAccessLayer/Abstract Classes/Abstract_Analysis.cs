@@ -24,11 +24,10 @@ namespace DataAccessLayer.Abstract_Classes
             //get number of users and new users monthwise and yearwise using stored procedure
         }
 
-        public bool AddOrRemoveAdmin(string p_UserIds, bool p_IsAdmin)
+        public bool AddOrRemoveAdmin(List<string> lstUserIds, bool p_IsAdmin)
         {
             try
             {
-                List<string> lstUserIds = p_UserIds.Split(',').ToList();
                 foreach (var UserId in lstUserIds)
                 {
                     MST_UserInfo User = db.MST_UserInfo.Find(Convert.ToInt32(UserId));

@@ -1,8 +1,8 @@
 ﻿@model  ViewModel.AnalysisVM
 
 @{
-    ViewBag.Title = "Analysis";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+//ViewBag.Title = "Analysis";
+//Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section styles
@@ -13,6 +13,10 @@
 <div class="cd-user-modal">
     <!-- this is the entire modal form, including the background -->
     <div class="cd-user-modal-container">
+        <ul class="cd-switcher">
+            <li><a href="#0">Make Admin</a></li>
+            <li><a href="#0">Remove Admin</a></li>
+        </ul>
         <!-- Add Admin form -->
         @Html.Partial("_AddAdmin")
         <!-- cd-AddAdmin-->
@@ -24,15 +28,17 @@
     <!-- cd-user-modal-container -->
 </div>
 
-<div class="row">
-    <div class="jumbotron ml-auto">
-        <span><a id="AddAdmin" class="cd-signin" href="#0">Make Admin</a></span>
-        <span><a id="RemoveAdmin" class="cd-signin" href="#0">Remove Admin</a></span>
+<div class="Top-Content-Padding">
+    <div class="row">
+        <div class="jumbotron ml-auto">
+            <span><a id="RemoveAdmin" class="btn btn-danger pull-right" href="#0">Remove Admin</a></span>
+            <span><a id="AddAdmin" class="btn btn-success pull-right" href="#0">Make Admin</a></span>
+        </div>
     </div>
 </div>
-
 
 @section scripts
 {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+    <script src="~/Scripts/CustomJSScripts/jsAnalysis.js"></script>
 }
