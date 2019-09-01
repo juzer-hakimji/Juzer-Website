@@ -78,7 +78,12 @@ namespace JuzerWebsite.Controllers
         public ActionResult ValidatePasswordAndDeleteUser(string p_Password)
         {
             TransactionResult result = BLUser.BL_ValidatePassword(new UserLoginVM { LoginEmail = (Session["MST_UserInfo"] as MST_UserInfo).Email, LoginPassword = p_Password });
+            if (result.Success)
+            {
+                Session.Abandon();
+            }
             return Json(result);
         }
     }
 }
+

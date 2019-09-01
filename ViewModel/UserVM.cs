@@ -16,7 +16,7 @@ namespace ViewModel
 
     public class UserDetailsVM
     {
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         [Required(ErrorMessage = "Please enter FirstName")]
         [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]

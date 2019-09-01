@@ -7,13 +7,13 @@
         <p class="fieldset">
             <label class="image-replace cd-RemoveAdmin" for="UserList">Select User</label>
             @*@Html.TextBoxFor(x => x.CreatedDate, new { @class = "full-width has-padding has-border", placeholder = "Date" })*@
-            @Html.DropDownList("UserListRemove[]", new SelectList(Model.RemoveAdminList, "UserId", "SignUpEmail"), "Select User", new { @class = "full-width has-padding has-border UserListRemove", multiple = "multiple" })
+            @Html.DropDownList("UserListRemove", new SelectList(Model.RemoveAdminList, "UserId", "SignUpEmail"), "Select User", new { @class = "full-width has-padding has-border UserListRemove", multiple = "multiple" })
             @*<input class="full-width has-padding has-border" id="txtDate" type="text" placeholder="Date">
                 <span class="cd-error-message">Error message here!</span>*@
         </p>
         <p class="fieldset">
-            @*<input class="full-width has-padding" type="submit" value="Add Note">*@
-            <button id="btnRemoveAdmin" class="full-width has-padding">Remove Admin</button>
+            <input id="btnRemoveAdmin" class="full-width has-padding" type="submit" value="Remove Admin">
+            @*<button id="btnRemoveAdmin" class="full-width has-padding">Remove Admin</button>*@
             @*<button id="btnClose" class="full-width has-padding">Close</button>*@
             <span id="RemoveAdminValidate"></span>
         </p>

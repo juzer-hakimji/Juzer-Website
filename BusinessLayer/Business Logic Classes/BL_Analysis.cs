@@ -33,6 +33,7 @@ namespace BusinessLayer.Business_Logic_Classes
                     return new TransactionResult
                     {
                         Success = true,
+                        RedirectURL = "/Analysis/Index",
                         Message = "Admin Addition successful"
                     };
                 }
@@ -41,6 +42,7 @@ namespace BusinessLayer.Business_Logic_Classes
                     return new TransactionResult
                     {
                         Success = true,
+                        RedirectURL = "/Analysis/Index",
                         Message = "Admin Removal successful"
                     };
                 }
@@ -66,10 +68,10 @@ namespace BusinessLayer.Business_Logic_Classes
             }
         }
 
-        public List<UserDetailsVM> BL_GetAddOrRemoveAdminList(bool IsAdd)
+        public List<UserDetailsVM> BL_GetAddOrRemoveAdminList(bool IsAddAdminList)
         {
             List<UserDetailsVM> UserList = new List<UserDetailsVM>();
-            foreach (var item in DALObj.DAL_GetAddOrRemoveAdminList(IsAdd).Data)
+            foreach (var item in DALObj.DAL_GetAddOrRemoveAdminList(IsAddAdminList).Data)
             {
                 UserList.Add(new UserDetailsVM { UserId = item.UserId, SignUpEmail = item.Email });
             }

@@ -107,13 +107,13 @@ namespace BusinessLayer.Business_Logic_Classes
 
         public bool BL_CheckForEmailAvailability(string p_Email)
         {
-            return new DAL_User().DAL_CheckForEmailAvailability(p_Email).TransactionResult;
+            return new DAL_User().DAL_CheckForEmailAvailability(p_Email).Data;
         }
 
-        public string BL_GenerateNewPassword(int p_UserId)
+        public string BL_GenerateNewPassword(string p_Email)
         {
             string NewPassword = Membership.GeneratePassword(6, 1);
-            bool result = new DAL_User().DAL_SaveNewPassword(p_UserId, new MD5Hashing().GetMd5Hash(NewPassword));
+            bool result = new DAL_User().DAL_SaveNewPassword(p_Email, new MD5Hashing().GetMd5Hash(NewPassword));
             return NewPassword;
         }
 
@@ -122,7 +122,7 @@ namespace BusinessLayer.Business_Logic_Classes
             MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_Email).Data;
             if (new MD5Hashing().GetMd5Hash(p_Obj.OldPassword).Equals(UserObj.Password))
             {
-                bool result = new DAL_User().DAL_SaveNewPassword(UserObj.UserId, new MD5Hashing().GetMd5Hash(p_Obj.NewPassword));
+                bool result = new DAL_User().DAL_SaveNewPassword(UserObj.Email, new MD5Hashing().GetMd5Hash(p_Obj.NewPassword));
                 return new TransactionResult
                 {
                     Success = true,

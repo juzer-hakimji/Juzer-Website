@@ -37,7 +37,7 @@
                     <li><a href="Home/Index">Home</a></li>
                     <li><a href="#">Spending</a></li>
                     <li><a href="/Notes/List">Notes</a></li>
-                    <li @(Convert.ToBoolean(Session["IsAdmin"]) ? "" : "hidden")><a href="/Analysis/Index">Analysis</a></li>
+                    <li style="display:@(Convert.ToBoolean(Session["IsAdmin"]) ? "inline" : "none")"><a href="/Analysis/Index">Analysis</a></li>
                     <li class="dropdown">
                         @*@Html.ActionLink("Profile", "Index", "Analysis")<b class="caret"></b>*@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>

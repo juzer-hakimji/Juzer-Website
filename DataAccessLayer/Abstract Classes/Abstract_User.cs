@@ -26,7 +26,7 @@ namespace DataAccessLayer.Abstract_Classes
             {
                 DataContext.MST_UserInfo.Add(P_MST_UserInfo);
                 DataContext.SaveChanges();
-                return DataContext.MST_UserInfo.LastOrDefault();
+                return DataContext.MST_UserInfo.OrderByDescending(x => x.UserId).FirstOrDefault();
             }, p_MST_UserInfo);
         }
 
@@ -73,11 +73,11 @@ namespace DataAccessLayer.Abstract_Classes
             }, p_Email);
         }
 
-        public bool SaveNewPassword(int p_UserId, string NewHashedPassword)
+        public bool SaveNewPassword(string p_Email, string NewHashedPassword)
         {
             try
             {
-                MST_UserInfo MST_UserInfo = db.MST_UserInfo.Find(p_UserId);
+                MST_UserInfo MST_UserInfo = db.MST_UserInfo.FirstOrDefault(x => x.Email.Equals(p_Email));
                 MST_UserInfo.Password = NewHashedPassword;
                 db.SaveChanges();
                 return true;

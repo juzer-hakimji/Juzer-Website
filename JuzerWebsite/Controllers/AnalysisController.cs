@@ -30,7 +30,7 @@ namespace JuzerWebsite.Controllers
         }
 
         [HttpPut]
-        public ActionResult AddOrRemoveAdmin(string UserIds,bool IsAdmin)
+        public ActionResult AddOrRemoveAdmin(string UserIds, bool IsAdmin)
         {
             TransactionResult Result = BLAnalysis.BL_AddOrRemoveAdmin(UserIds, IsAdmin);
             return Json(Result);
@@ -38,7 +38,13 @@ namespace JuzerWebsite.Controllers
 
         public ActionResult GetAddAdminList()
         {
-            return Json(BLAnalysis.BL_GetAddOrRemoveAdminList(true), JsonRequestBehavior.AllowGet);
+            List<object> Adminlst = new List<object>();
+            BLAnalysis.BL_GetAddOrRemoveAdminList(true).ForEach(x => Adminlst.Add(new
+            {
+                id = x.UserId,
+                text = x.SignUpEmail
+            }));
+            return Json(Adminlst , JsonRequestBehavior.AllowGet);
         }
     }
 }

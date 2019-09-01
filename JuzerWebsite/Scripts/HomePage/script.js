@@ -10,7 +10,6 @@ jQuery(document).ready(function ($) {
         $forgot_password_link = $form_login.find('.cd-form-bottom-message a'),
         $back_to_login_link = $form_forgot_password.find('.cd-form-bottom-message a'),
         $main_nav = $('.main-nav');
-    InitCountryDropdown();
     //open modal
     $main_nav.on('click', function (event) {
 
@@ -84,6 +83,7 @@ jQuery(document).ready(function ($) {
         $form_forgot_password.removeClass('is-selected');
         $tab_login.removeClass('selected');
         $tab_signup.addClass('selected');
+        //InitCountryDropdown();
     }
 
     function forgot_password_selected() {
@@ -202,12 +202,18 @@ jQuery(document).ready(function ($) {
         var SerializedObj = $('#cd-form-SignUp').serialize();
         $.ajax({
             type: 'POST',
-            url: "User/Save",
+            url: "/User/Save",
             data: SerializedObj,
             dataType: 'json',
             success: function (result) {
-                if (result.result == false) {
-                    alert("something went wrong");
+                if (result.Success) {
+                    ShowResult(result.Message);
+                    setTimeout(function () {
+                        window.location.href = result.RedirectURL;
+                    }, 1500);
+                }
+                else {
+                    ShowResult(result.Message);
                 }
             }
         });
@@ -218,15 +224,18 @@ jQuery(document).ready(function ($) {
         //if (!formValid) return false;
         $.ajax({
             type: 'PUT',
-            url: "User/SendResetPasswordEmail",
-            data: $('#ResetEmail').val(),
+            url: "/User/SendResetPasswordEmail",
+            data: { p_Email: $('#ResetEmail').val() },
             dataType: 'json',
             success: function (result) {
-                if (result.result == false) {
-                    alert("Please Enter Correct Email");
+                if (result.Success) {
+                    ShowResult(result.Message);
+                    setTimeout(function () {
+                        window.location.href = result.RedirectURL;
+                    }, 1500);
                 }
                 else {
-                    alert("Email sent successfully");
+                    ShowResult(result.Message);
                 }
             }
         });

@@ -21,9 +21,9 @@ namespace DataAccessLayer.Data_Access_Classes
             return CheckForEmailAvailability(p_Email);
         }
 
-        public bool DAL_SaveNewPassword(int p_UserId,string NewHashedPassword)
+        public bool DAL_SaveNewPassword(string p_Email, string NewHashedPassword)
         {
-            return SaveNewPassword(p_UserId, NewHashedPassword);
+            return SaveNewPassword(p_Email, NewHashedPassword);
         }
 
         public DBContextResult<List<DEV_Country>> DAL_GetCountryList()

@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ViewModel;
 
 namespace JuzerWebsite.Controllers
@@ -21,39 +22,56 @@ namespace JuzerWebsite.Controllers
         {
             BLUser = new BL_User();
         }
-        // GET: User
-        [ValidateAntiForgeryToken]
+
+        [HttpPost]
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
         public ActionResult Save(UserDetailsVM p_UserVM)
         {
             if (ModelState.IsValid)
             {
                 MST_UserInfo MST_UserInfo = BLUser.BL_SaveUser(p_UserVM);
-                Session["MST_UserInfo"] = MST_UserInfo;
-                return Json(new TransactionResult
+                if (MST_UserInfo != null)
                 {
-                    Success = true,
-                    RedirectURL = Url.Action("List", "Notes")
-                });
+                    FormsAuthentication.SetAuthCookie(MST_UserInfo.Email, false);
+                    Session["IsAdmin"] = false;
+                    Session["MST_UserInfo"] = MST_UserInfo;
+                    return Json(new TransactionResult
+                    {
+                        Success = true,
+                        RedirectURL = "/Notes/List",
+                        Message = "Registration Successful"
+                    });
+                }
+                else
+                {
+                    return Json(new TransactionResult
+                    {
+                        Success = false,
+                        Message = "Something went wrong,Please try again."
+                    });
+                }
             }
             else
             {
                 return Json(new TransactionResult
                 {
                     Success = false,
-                    Message = "Something went wrong,Note could not be saved."
+                    Message = "Entered Details are not correct,please try again."
                 });
             }
         }
 
         [HttpPut]
-        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
         public ActionResult SendResetPasswordEmail(string p_Email)
         {
             if (ModelState.IsValid)
             {
                 if (BLUser.BL_CheckForEmailAvailability(p_Email))
                 {
-                    string NewPassword = BLUser.BL_GenerateNewPassword((Session["MST_UserInfo"] as MST_UserInfo).UserId);
+                    string NewPassword = BLUser.BL_GenerateNewPassword(p_Email);
                     var smtp = new SmtpClient
                     {
                         Host = "smtp.gmail.com",
@@ -63,24 +81,37 @@ namespace JuzerWebsite.Controllers
                         UseDefaultCredentials = false,
                         Credentials = new NetworkCredential("hakimjuzer@gmail.com", "9168511453")
                     };
-                    using (var message = new MailMessage(new MailAddress("hakimjuzer@gmail.com", "Juzer"), new MailAddress(p_Email, (Session["MST_UserInfo"] as MST_UserInfo).FirstName))
+                    using (var message = new MailMessage(new MailAddress("hakimjuzer@gmail.com", "Juzer"), new MailAddress(p_Email, "user"))
                     {
                         Subject = "Reset Password Request",
-                        Body = "Hello \nyour new password is" + NewPassword + "\nThank you"
+                        Body = "Hello \n\nyour new password is : " + NewPassword + "\n\n\nThank you"
                     })
                     {
                         smtp.Send(message);
                     }
-                    return Json(new { result = true, Message = "New Password has been sent to your Email Address" });
+                    return Json(new TransactionResult
+                    {
+                        Success = true,
+                        RedirectURL = "/Home/Index",
+                        Message = "New Password has been sent to your Email Address,Please use new password to login"
+                    });
                 }
                 else
                 {
-                    return Json(new { result = false,Message = "email address does not exist" });
+                    return Json(new TransactionResult
+                    {
+                        Success = false,
+                        Message = "email address does not exist"
+                    });
                 }
             }
             else
             {
-                return Json(new { result = false, Message = "please enter correct email address" });
+                return Json(new TransactionResult
+                {
+                    Success = false,
+                    Message = "please enter correct email address"
+                });
             }
         }
 
@@ -89,14 +120,14 @@ namespace JuzerWebsite.Controllers
         [HttpGet]
         public ActionResult DeleteAccount()
         {
-            return View("DeleteAccount",new BaseViewModel());
+            return View("DeleteAccount", new BaseViewModel());
         }
 
         [HttpGet]
         [HeaderFooterFilter]
         public ActionResult ChangePassword()
         {
-            return View("ChangePassword",new ChangePasswordVM());
+            return View("ChangePassword", new ChangePasswordVM());
         }
 
         [HttpPut]

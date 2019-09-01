@@ -16,7 +16,7 @@ namespace DataAccessLayer.Data_Access_Classes
 
         }
 
-        public bool DAL_AddOrRemoveAdmin(string p_UserIds, bool p_IsAdmin)
+        public bool DAL_AddOrRemoveAdmin(List<string> p_UserIds, bool p_IsAdmin)
         {
             return AddOrRemoveAdmin(p_UserIds, p_IsAdmin);
         }
