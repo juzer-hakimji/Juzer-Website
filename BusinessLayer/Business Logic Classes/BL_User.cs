@@ -24,7 +24,7 @@ namespace BusinessLayer.Business_Logic_Classes
             IUserObj = new DAL_User();
         }
 
-        public MST_UserInfo BL_SaveUser(UserDetailsVM p_UserVM)
+        public TransactionResult<MST_UserInfo> BL_SaveUser(UserDetailsVM p_UserVM)
         {
             UserObj = new MST_UserInfo
             {
@@ -37,7 +37,23 @@ namespace BusinessLayer.Business_Logic_Classes
                 IsAdmin = false,
                 CreatedDate = DateTime.UtcNow
             };
-            return IUserObj.Insert(UserObj).Data;
+            if (BL_CheckForEmailAvailability(p_UserVM.SignUpEmail))
+            {
+                return new TransactionResult<MST_UserInfo>
+                {
+                    Success = false,
+                    RedirectURL = "/Home/Index",
+                    Message = "Email already Exists,Please use forgot password section to generate new password."
+                };
+            }
+            else
+            {
+                return new TransactionResult<MST_UserInfo>
+                {
+                    Success = true,
+                    Data = IUserObj.Insert(UserObj).Data
+                };
+            }
         }
 
         public bool BL_UpdateUser(UserDetailsVM p_UserVM)
@@ -75,21 +91,21 @@ namespace BusinessLayer.Business_Logic_Classes
             return UserObj;
         }
 
-        public TransactionResult BL_ValidatePassword(UserLoginVM p_UserLoginVM)
+        public TransactionResult<object> BL_ValidatePassword(UserLoginVM p_UserLoginVM)
         {
             MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_UserLoginVM.LoginEmail).Data;
             if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.LoginPassword).Equals(UserObj.Password))
             {
                 if (BL_DeleteUser(UserObj.UserId))
                 {
-                    return new TransactionResult
+                    return new TransactionResult<object>
                     {
                         Success = true,
                         RedirectURL = "/Home/Index",
                         Message = "User Deletion successful"
                     };
                 }
-                return new TransactionResult
+                return new TransactionResult<object>
                 {
                     Success = false,
                     Message = "Something went wrong.Please try again"
@@ -97,7 +113,7 @@ namespace BusinessLayer.Business_Logic_Classes
             }
             else
             {
-                return new TransactionResult
+                return new TransactionResult<object>
                 {
                     Success = false,
                     Message = "Something went wrong.Please try again"
@@ -117,13 +133,13 @@ namespace BusinessLayer.Business_Logic_Classes
             return NewPassword;
         }
 
-        public TransactionResult BL_ChangePassword(ChangePasswordVM p_Obj, string p_Email)
+        public TransactionResult<object> BL_ChangePassword(ChangePasswordVM p_Obj, string p_Email)
         {
             MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_Email).Data;
             if (new MD5Hashing().GetMd5Hash(p_Obj.OldPassword).Equals(UserObj.Password))
             {
                 bool result = new DAL_User().DAL_SaveNewPassword(UserObj.Email, new MD5Hashing().GetMd5Hash(p_Obj.NewPassword));
-                return new TransactionResult
+                return new TransactionResult<object>
                 {
                     Success = true,
                     RedirectURL = "/Notes/List",
@@ -132,7 +148,7 @@ namespace BusinessLayer.Business_Logic_Classes
             }
             else
             {
-                return new TransactionResult
+                return new TransactionResult<object>
                 {
                     Success = false,
                     Message = "Incorrect Old Password"

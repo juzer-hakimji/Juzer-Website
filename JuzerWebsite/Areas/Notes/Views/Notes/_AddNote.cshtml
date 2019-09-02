@@ -13,7 +13,7 @@
         </p>
         <p class="fieldset">
             <label class="image-replace cd-Subject" for="txtSubject">Subject</label>
-            @Html.TextBoxFor(x => x.Subject, new { @class = "full-width has-padding has-border", placeholder = "Subject" })
+            @Html.TextBoxFor(x => x.Subject, new { @class = "full-width has-padding has-border", placeholder = "Subject", autofocus = "autofocus" })
             @Html.ValidationMessageFor(x => x.Subject, null, new { @class = "cd-error-message" })
             @*<input class="full-width has-padding has-border" id="txtSubject" type="email" placeholder="subject">
             <span class="cd-error-message">Error message here!</span>*@

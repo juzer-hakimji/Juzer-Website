@@ -41,7 +41,7 @@ namespace BusinessLayer.Business_Logic_Classes
             return NotesVMList;
         }
 
-        public TransactionResult BL_SaveNote(NotesVM p_NotesVM,int p_UserId)
+        public TransactionResult<object> BL_SaveNote(NotesVM p_NotesVM,int p_UserId)
         {
             NoteObj = new TRN_Notes
             {
@@ -54,14 +54,15 @@ namespace BusinessLayer.Business_Logic_Classes
             };
             if (INotesObj.Insert(NoteObj).TransactionResult)
             {
-                return new TransactionResult{
+                return new TransactionResult<object>
+                {
                     Success = true,
                     Message = "Note Saved Successfully"
                 };
             }
             else
             {
-                return new TransactionResult
+                return new TransactionResult<object>
                 {
                     Success = false,
                     Message = "Something Went Wrong,Please try again"
@@ -69,7 +70,7 @@ namespace BusinessLayer.Business_Logic_Classes
             }
         }
 
-        public TransactionResult BL_UpdateNote(NotesVM p_NotesVM,int p_UserId)
+        public TransactionResult<object> BL_UpdateNote(NotesVM p_NotesVM,int p_UserId)
         {
             NoteObj = new TRN_Notes
             {
@@ -81,7 +82,7 @@ namespace BusinessLayer.Business_Logic_Classes
             };
             if (INotesObj.Update(NoteObj).TransactionResult)
             {
-                return new TransactionResult
+                return new TransactionResult<object>
                 {
                     Success = true,
                     Message = "Note Updated Successfully"
@@ -89,7 +90,7 @@ namespace BusinessLayer.Business_Logic_Classes
             }
             else
             {
-                return new TransactionResult
+                return new TransactionResult<object>
                 {
                     Success = false,
                     Message = "Something Went Wrong,Please try again"
@@ -97,11 +98,11 @@ namespace BusinessLayer.Business_Logic_Classes
             }
         }
 
-        public TransactionResult BL_DeleteNote(int p_NoteId)
+        public TransactionResult<object> BL_DeleteNote(int p_NoteId)
         {
             if (INotesObj.Delete(p_NoteId).TransactionResult)
             {
-                return new TransactionResult
+                return new TransactionResult<object>
                 {
                     Success = true,
                     Message = "Note Deletion Successful"
@@ -109,7 +110,7 @@ namespace BusinessLayer.Business_Logic_Classes
             }
             else
             {
-                return new TransactionResult
+                return new TransactionResult<object>
                 {
                     Success = false,
                     Message = "Something Went Wrong,Please try again"
@@ -117,11 +118,11 @@ namespace BusinessLayer.Business_Logic_Classes
             }
         }
 
-        public TransactionResult BL_ChangeNoteImportance(int NoteId, bool IsImportant)
+        public TransactionResult<object> BL_ChangeNoteImportance(int NoteId, bool IsImportant)
         {
             if (new DAL_Notes().DAL_ChangeNoteImportance(NoteId, IsImportant).TransactionResult)
             {
-                return new TransactionResult
+                return new TransactionResult<object>
                 {
                     Success = true,
                     Message = "Note Updation Successful"
@@ -129,7 +130,7 @@ namespace BusinessLayer.Business_Logic_Classes
             }
             else
             {
-                return new TransactionResult
+                return new TransactionResult<object>
                 {
                     Success = false,
                     Message = "Something Went Wrong,Please try again"

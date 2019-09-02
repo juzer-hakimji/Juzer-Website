@@ -24,13 +24,13 @@ namespace BusinessLayer.Business_Logic_Classes
 
         }
 
-        public TransactionResult BL_AddOrRemoveAdmin(string p_UserIds, bool p_IsAdmin)
+        public TransactionResult<object> BL_AddOrRemoveAdmin(string p_UserIds, bool p_IsAdmin)
         {
             if (DALObj.AddOrRemoveAdmin(p_UserIds.Split(',').ToList(), p_IsAdmin))
             {
                 if (p_IsAdmin)
                 {
-                    return new TransactionResult
+                    return new TransactionResult<object>
                     {
                         Success = true,
                         RedirectURL = "/Analysis/Index",
@@ -39,7 +39,7 @@ namespace BusinessLayer.Business_Logic_Classes
                 }
                 else
                 {
-                    return new TransactionResult
+                    return new TransactionResult<object>
                     {
                         Success = true,
                         RedirectURL = "/Analysis/Index",
@@ -51,7 +51,7 @@ namespace BusinessLayer.Business_Logic_Classes
             {
                 if (p_IsAdmin)
                 {
-                    return new TransactionResult
+                    return new TransactionResult<object>
                     {
                         Success = false,
                         Message = "Admin Addition unsuccessful"
@@ -59,7 +59,7 @@ namespace BusinessLayer.Business_Logic_Classes
                 }
                 else
                 {
-                    return new TransactionResult
+                    return new TransactionResult<object>
                     {
                         Success = false,
                         Message = "Admin Removal unsuccessful"

@@ -177,21 +177,26 @@ jQuery(document).ready(function ($) {
         //if (!formValid) return false;
         //var SerializedArray = $('#cd-form-Login').serializeArray();
         //var SerializedObj = objectifyForm(SerializedArray);
-        var SerializedObj = $('#cd-form-Login').serialize();
-        $.ajax({
-            type: 'POST',
-            url: "/Authentication/Login",
-            data: SerializedObj,
-            dataType: 'json',
-            success: function (result) {
-                if (result.Success == false) {
-                    $('#LoginValidate').text(result.Message);
+        if (fn_FormValidation('#cd-form-Login')) {
+            var SerializedObj = $('#cd-form-Login').serialize();
+            $.ajax({
+                type: 'POST',
+                url: "/Authentication/Login",
+                data: SerializedObj,
+                dataType: 'json',
+                success: function (result) {
+                    if (result.Success == false) {
+                        $('#LoginValidate').text(result.Message);
+                    }
+                    else if (result.Success == true) {
+                        window.location.href = result.RedirectURL;
+                    }
                 }
-                else if(result.Success == true) {
-                    window.location.href = result.RedirectURL;
-                }
-            }
-        });
+            });
+        }
+        else {
+            fn_ShowValidationErrors();
+        }
     });
 
     $('#btnCrtAcct').on('click', function () {
@@ -199,48 +204,57 @@ jQuery(document).ready(function ($) {
         //if (!formValid) return false;
         //var SerializedArray = $('#cd-form-SignUp').serializeArray();
         //var SerializedObj = objectifyForm(SerializedArray);
-        var SerializedObj = $('#cd-form-SignUp').serialize();
-        $.ajax({
-            type: 'POST',
-            url: "/User/Save",
-            data: SerializedObj,
-            dataType: 'json',
-            success: function (result) {
-                if (result.Success) {
-                    ShowResult(result.Message);
-                    setTimeout(function () {
-                        window.location.href = result.RedirectURL;
-                    }, 1500);
+        if (fn_FormValidation('#cd-form-SignUp')) {
+            var SerializedObj = $('#cd-form-SignUp').serialize();
+            $.ajax({
+                type: 'POST',
+                url: "/User/Save",
+                data: SerializedObj,
+                dataType: 'json',
+                success: function (result) {
+                    if (result.Success) {
+                        ShowResult(result.Message);
+                        setTimeout(function () {
+                            window.location.href = result.RedirectURL;
+                        }, 1500);
+                    }
+                    else {
+                        ShowResult(result.Message);
+                    }
                 }
-                else {
-                    ShowResult(result.Message);
-                }
-            }
-        });
+            });    
+        }
+        else {
+            fn_ShowValidationErrors();
+        }
     });
 
     $('#btnResetPass').on('click', function () {
         //var formValid = $("#cd-form-ResetPass").validate().form();
         //if (!formValid) return false;
-        $.ajax({
-            type: 'PUT',
-            url: "/User/SendResetPasswordEmail",
-            data: { p_Email: $('#ResetEmail').val() },
-            dataType: 'json',
-            success: function (result) {
-                if (result.Success) {
-                    ShowResult(result.Message);
-                    setTimeout(function () {
-                        window.location.href = result.RedirectURL;
-                    }, 1500);
+        if (fn_FormValidation('#cd-form-ResetPass')) {
+            $.ajax({
+                type: 'PUT',
+                url: "/User/SendResetPasswordEmail",
+                data: { p_Email: $('#ResetEmail').val() },
+                dataType: 'json',
+                success: function (result) {
+                    if (result.Success) {
+                        ShowResult(result.Message);
+                        setTimeout(function () {
+                            window.location.href = result.RedirectURL;
+                        }, 1500);
+                    }
+                    else {
+                        ShowResult(result.Message);
+                    }
                 }
-                else {
-                    ShowResult(result.Message);
-                }
-            }
-        });
+            });    
+        }
+        else {
+            fn_ShowValidationErrors();
+        }
     });
-
 
     //credits https://css-tricks.com/snippets/jquery/move-cursor-to-end-of-textarea-or-input/
     jQuery.fn.putCursorAtEnd = function () {

@@ -32,7 +32,7 @@ namespace JuzerWebsite.Controllers
         [HttpPut]
         public ActionResult AddOrRemoveAdmin(string UserIds, bool IsAdmin)
         {
-            TransactionResult Result = BLAnalysis.BL_AddOrRemoveAdmin(UserIds, IsAdmin);
+            TransactionResult<object> Result = BLAnalysis.BL_AddOrRemoveAdmin(UserIds, IsAdmin);
             return Json(Result);
         }
 

@@ -30,13 +30,13 @@ namespace JuzerWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                MST_UserInfo MST_UserInfo = BLUser.BL_SaveUser(p_UserVM);
-                if (MST_UserInfo != null)
+                TransactionResult<MST_UserInfo> result = BLUser.BL_SaveUser(p_UserVM);
+                if (result.Data != null)
                 {
-                    FormsAuthentication.SetAuthCookie(MST_UserInfo.Email, false);
+                    FormsAuthentication.SetAuthCookie(result.Data.Email, false);
                     Session["IsAdmin"] = false;
-                    Session["MST_UserInfo"] = MST_UserInfo;
-                    return Json(new TransactionResult
+                    Session["MST_UserInfo"] = result.Data;
+                    return Json(new TransactionResult<object>
                     {
                         Success = true,
                         RedirectURL = "/Notes/List",
@@ -45,16 +45,12 @@ namespace JuzerWebsite.Controllers
                 }
                 else
                 {
-                    return Json(new TransactionResult
-                    {
-                        Success = false,
-                        Message = "Something went wrong,Please try again."
-                    });
+                    return Json(result);
                 }
             }
             else
             {
-                return Json(new TransactionResult
+                return Json(new TransactionResult<object>
                 {
                     Success = false,
                     Message = "Entered Details are not correct,please try again."
@@ -89,7 +85,7 @@ namespace JuzerWebsite.Controllers
                     {
                         smtp.Send(message);
                     }
-                    return Json(new TransactionResult
+                    return Json(new TransactionResult<object>
                     {
                         Success = true,
                         RedirectURL = "/Home/Index",
@@ -98,7 +94,7 @@ namespace JuzerWebsite.Controllers
                 }
                 else
                 {
-                    return Json(new TransactionResult
+                    return Json(new TransactionResult<object>
                     {
                         Success = false,
                         Message = "email address does not exist"
@@ -107,7 +103,7 @@ namespace JuzerWebsite.Controllers
             }
             else
             {
-                return Json(new TransactionResult
+                return Json(new TransactionResult<object>
                 {
                     Success = false,
                     Message = "please enter correct email address"
@@ -134,7 +130,7 @@ namespace JuzerWebsite.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ChangePasswordVM p_Obj)
         {
-            TransactionResult result = BLUser.BL_ChangePassword(p_Obj, (Session["MST_UserInfo"] as MST_UserInfo).Email);
+            TransactionResult<object> result = BLUser.BL_ChangePassword(p_Obj, (Session["MST_UserInfo"] as MST_UserInfo).Email);
             return Json(result);
         }
     }

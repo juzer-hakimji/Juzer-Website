@@ -8,16 +8,21 @@ function AddEventHandlers() {
 }
 
 function ChangePasswordHandler() {
-    var SerializedObj = $('#cd-form-ChangePass').serialize();
-    CallAjaxMethod("/User/ChangePassword", 'PUT', SerializedObj).then(function (result) {
-        if (result.Success) {
-            ShowResult(result.Message);
-            setTimeout(function () {
+    if (fn_FormValidation('#cd-form-ChangePass')) {
+        var SerializedObj = $('#cd-form-ChangePass').serialize();
+        CallAjaxMethod("/User/ChangePassword", 'PUT', SerializedObj).then(function (result) {
+            if (result.Success) {
+                ShowResult(result.Message);
+                setTimeout(function () {
                     window.location.href = result.RedirectURL;
-            }, 1500);
-        }
-        else {
-            ShowResult(result.Message);
-        }
-    });
+                }, 1500);
+            }
+            else {
+                ShowResult(result.Message);
+            }
+        });    
+    }
+    else {
+        fn_ShowValidationErrors();
+    }
 }

@@ -42,7 +42,7 @@ namespace JuzerWebsite.Controllers
                 else
                 {
                     ModelState.AddModelError("CredentialError", "Invalid Username or Password");
-                    return Json(new TransactionResult
+                    return Json(new TransactionResult<object>
                     {
                         Success = false,
                         Message = "Invalid Username or Password"
@@ -51,7 +51,7 @@ namespace JuzerWebsite.Controllers
                 FormsAuthentication.SetAuthCookie(p_UserLoginVM.LoginEmail, false);
                 Session["IsAdmin"] = IsAdmin;
                 Session["MST_UserInfo"] = MST_UserInfo;
-                return Json(new TransactionResult
+                return Json(new TransactionResult<object>
                 {
                     Success = true,
                     RedirectURL = Url.Action("List", "Notes")
@@ -59,7 +59,7 @@ namespace JuzerWebsite.Controllers
             }
             else
             {
-                return Json(new TransactionResult
+                return Json(new TransactionResult<object>
                 {
                     Success = false,
                     Message = "Invalid Username or Password"
@@ -77,7 +77,7 @@ namespace JuzerWebsite.Controllers
         [HttpPut]
         public ActionResult ValidatePasswordAndDeleteUser(string p_Password)
         {
-            TransactionResult result = BLUser.BL_ValidatePassword(new UserLoginVM { LoginEmail = (Session["MST_UserInfo"] as MST_UserInfo).Email, LoginPassword = p_Password });
+            TransactionResult<object> result = BLUser.BL_ValidatePassword(new UserLoginVM { LoginEmail = (Session["MST_UserInfo"] as MST_UserInfo).Email, LoginPassword = p_Password });
             if (result.Success)
             {
                 Session.Abandon();

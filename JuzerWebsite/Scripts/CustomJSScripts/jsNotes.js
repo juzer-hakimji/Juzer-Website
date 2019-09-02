@@ -123,27 +123,29 @@ function EditNoteHandler() {
 
 function DeleteNoteHandler() {
     var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
-
     //Ask For Confirmation using confirm box
-    //if (ShowConfirmBox("Delete Note?", "Note will be deleted.Are you sure?")) {
-    //}
-        CallAjaxMethod("/Notes/DeleteNote", 'PUT', { p_NoteId: CurrentRowdata.NoteId }).then(function (result) {
-            ShowResult(result.Message);
-            fn_InitDataTable();
-        });
-
-    //$.ajax(function () {
-    //    type: 'POST',
-    //        url : "Notes/Delete",
-    //            data: { p_NoteId: NoteId },
-    //    dataType: 'json',
-    //        success: function(result) {
-    //            if (result == true) {
-    //                alert("Note Successfully deleted");
-    //                DataTableInit();
-    //            }
-    //        }
-    //});
+    bootbox.confirm({
+        message: "Note will be deleted.Are you sure?",
+        buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {
+            if (result == true) {
+                CallAjaxMethod("/Notes/DeleteNote", 'PUT', { p_NoteId: CurrentRowdata.NoteId }).then(function (result) {
+                    ShowResult(result.Message);
+                    fn_InitDataTable();
+                });
+            }
+        }
+    });
+    $('.bootbox').removeClass("fade");
 }
 
 function OpenAddNoteModalHandler() {
@@ -157,22 +159,25 @@ function CloseModalHandler() {
 }
 
 function AddNoteHandler() {
-    //var formValid = $("#cd-form-Notes").validate().form();
-    //if (!formValid) return false;
-    var SerializedArray = $('#cd-form-Notes').serializeArray();
-    var SerializedObj = objectifyForm(SerializedArray);
-    //var SerializedObj = $('#cd-form-Notes').serialize();
-    SerializedObj["NoteId"] = $('#hdnEditNoteId').val() == "" ? null : $('#hdnEditNoteId').val();
-    CallAjaxMethod("/Notes/SaveNote", 'POST', SerializedObj).then(function (result) {
-        if (result.Success == true) {
-            ShowResult(result.Message);
-            fn_AfterSave();
-            //window.location.href = result.RedirectURL;
-        }
-        else {
-            ShowResult(result.Message);
-        }
-    });
+    if (fn_FormValidation('#cd-form-Notes')) {
+        var SerializedArray = $('#cd-form-Notes').serializeArray();
+        var SerializedObj = objectifyForm(SerializedArray);
+        //var SerializedObj = $('#cd-form-Notes').serialize();
+        SerializedObj["NoteId"] = $('#hdnEditNoteId').val() == "" ? null : $('#hdnEditNoteId').val();
+        CallAjaxMethod("/Notes/SaveNote", 'POST', SerializedObj).then(function (result) {
+            if (result.Success == true) {
+                ShowResult(result.Message);
+                fn_AfterSave();
+                //window.location.href = result.RedirectURL;
+            }
+            else {
+                ShowResult(result.Message);
+            }
+        });
+    }
+    else {
+        fn_ShowValidationErrors();
+    }
     //$.ajax(function () {
     //    type: 'POST',
     //        url : "Notes/Save",
