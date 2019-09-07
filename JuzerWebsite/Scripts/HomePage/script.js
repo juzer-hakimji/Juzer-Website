@@ -1,5 +1,5 @@
 jQuery(document).ready(function ($) {
-    InitializeForm('#cd-form-Login,#cd-form-SignUp,#cd-form-ResetPass');
+    InitializeForm('#cd-form-Login,#cd-form-SignUp,#cd-form-ResetPass,#contact-form');
     var $form_modal = $('.cd-user-modal'),
         $form_login = $form_modal.find('#cd-login'),
         $form_signup = $form_modal.find('#cd-signup'),
@@ -9,21 +9,21 @@ jQuery(document).ready(function ($) {
         $tab_signup = $form_modal_tab.children('li').eq(1).children('a'),
         $forgot_password_link = $form_login.find('.cd-form-bottom-message a'),
         $back_to_login_link = $form_forgot_password.find('.cd-form-bottom-message a'),
-        $main_nav = $('.main-nav');
+        $main_nav = $('.UserPopUp');
     //open modal
     $main_nav.on('click', function (event) {
 
-        if ($(event.target).is($main_nav)) {
-            // on mobile open the submenu
-            $(this).children('ul').toggleClass('is-visible');
-        } else {
-            // on mobile close submenu
-            $main_nav.children('ul').removeClass('is-visible');
-            //show modal layer
-            $form_modal.addClass('is-visible');
-            //show the selected form
-            ($(event.target).is('.cd-signup')) ? signup_selected() : login_selected();
-        }
+        //if ($(event.target).is($main_nav)) {
+        //    // on mobile open the submenu
+        //    $(this).children('ul').toggleClass('is-visible');
+        //} else {
+        //    // on mobile close submenu
+        //    $main_nav.children('ul').removeClass('is-visible');
+        //show modal layer
+        $form_modal.addClass('is-visible');
+        //show the selected form
+        ($(event.target).is('.cd-signup')) ? signup_selected() : login_selected();
+        //}
 
     });
 
@@ -31,12 +31,14 @@ jQuery(document).ready(function ($) {
     $('.cd-user-modal').on('click', function (event) {
         if ($(event.target).is($form_modal) || $(event.target).is('.cd-close-form')) {
             $form_modal.removeClass('is-visible');
+            fn_FormReset('form');
         }
     });
     //close modal when clicking the esc keyboard button
     $(document).keyup(function (event) {
         if (event.which == '27') {
             $form_modal.removeClass('is-visible');
+            fn_FormReset('form');
         }
     });
 
@@ -135,7 +137,7 @@ jQuery(document).ready(function ($) {
         "use strict";
 
         // PRE loader
-        $(window).on('load',function () {
+        $(window).on('load', function () {
             $('.preloader').fadeOut(1000); // set duration in brackets    
         });
 
@@ -187,6 +189,7 @@ jQuery(document).ready(function ($) {
                 success: function (result) {
                     if (result.Success == false) {
                         $('#LoginValidate').text(result.Message);
+                        fn_FormReset('#cd-form-Login');
                     }
                     else if (result.Success == true) {
                         window.location.href = result.RedirectURL;
@@ -222,7 +225,7 @@ jQuery(document).ready(function ($) {
                         ShowResult(result.Message);
                     }
                 }
-            });    
+            });
         }
         else {
             fn_ShowValidationErrors();
@@ -230,8 +233,6 @@ jQuery(document).ready(function ($) {
     });
 
     $('#btnResetPass').on('click', function () {
-        //var formValid = $("#cd-form-ResetPass").validate().form();
-        //if (!formValid) return false;
         if (fn_FormValidation('#cd-form-ResetPass')) {
             $.ajax({
                 type: 'PUT',
@@ -249,10 +250,31 @@ jQuery(document).ready(function ($) {
                         ShowResult(result.Message);
                     }
                 }
-            });    
+            });
         }
         else {
             fn_ShowValidationErrors();
+        }
+    });
+
+    $('.btnContact').on('click', function () {
+        if (fn_FormValidation('#contact-form')) {
+            var SerializedObj = $('#contact-form').serialize();
+            $.ajax({
+                type: 'POST',
+                url: "/Home/ContactMessage",
+                data: SerializedObj,
+                dataType: 'json',
+                success: function (result) {
+                    if (result.Success) {
+                        ShowResult(result.Message);
+                        fn_FormReset('#contact-form');
+                    }
+                    else {
+                        ShowResult(result.Message);
+                    }
+                }
+            });
         }
     });
 

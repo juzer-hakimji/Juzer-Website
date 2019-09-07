@@ -39,13 +39,13 @@
                 <!-- lOGO TEXT HERE -->
                 <a href="index.html" class="navbar-brand">Juzer Hakimji</a>
             </div>
-            <div class="collapse navbar-collapse main-nav">
+            <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="smoothScroll" href="#home">Home</a></li>
                     <li><a class="smoothScroll" href="#about">About Juzer Hakimji</a></li>
                     <li><a class="smoothScroll" href="#work">My Works</a></li>
                     <li><a class="smoothScroll" href="#contact">Contact</a></li>
-                    <li><a class="cd-signin" href="#0">Sign in/Sign up</a></li>
+                    <li><a class="UserPopUp" href="#">Sign in/Sign up</a></li>
                 </ul>
             </div>
         </div>
@@ -231,25 +231,7 @@
                 </div>
                 <div class="col-md-12 col-sm-12">
                     <!-- CONTACT FORM HERE -->
-                    <div class="wow fadeInUp" data-wow-delay="0.6s">
-                        <form id="contact-form">
-                            <div class="col-md-4 col-sm-4">
-                                <input type="text" class="form-control" name="name" placeholder="Name">
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <input type="email" class="form-control" name="email" placeholder="Email">
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <input type="text" class="form-control" name="name" placeholder="Subject">
-                            </div>
-                            <div class="col-md-12 col-sm-12">
-                                <textarea class="form-control" rows="5" name="message" placeholder="Message"></textarea>
-                            </div>
-                            <div class="col-md-offset-9 col-md-3 col-sm-offset-3 col-sm-6">
-                                <button id="submit" type="submit" class="form-control" name="submit">Send Message</button>
-                            </div>
-                        </form>
-                    </div>
+                    @Html.Partial("_ContactInfo", Model.ContactVM)
                 </div>
             </div>
         </div>

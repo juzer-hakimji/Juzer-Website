@@ -26,17 +26,6 @@ namespace BusinessLayer.Business_Logic_Classes
 
         public TransactionResult<MST_UserInfo> BL_SaveUser(UserDetailsVM p_UserVM)
         {
-            UserObj = new MST_UserInfo
-            {
-                FirstName = p_UserVM.FirstName,
-                LastName = p_UserVM.LastName,
-                CountryId = p_UserVM.CountryId,
-                Email = p_UserVM.SignUpEmail,
-                Password = new MD5Hashing().GetMd5Hash(p_UserVM.SignUpPassword),
-                IsActive = true,
-                IsAdmin = false,
-                CreatedDate = DateTime.UtcNow
-            };
             if (BL_CheckForEmailAvailability(p_UserVM.SignUpEmail))
             {
                 return new TransactionResult<MST_UserInfo>
@@ -51,21 +40,30 @@ namespace BusinessLayer.Business_Logic_Classes
                 return new TransactionResult<MST_UserInfo>
                 {
                     Success = true,
-                    Data = IUserObj.Insert(UserObj).Data
+                    Data = IUserObj.Insert(new MST_UserInfo
+                    {
+                        FirstName = p_UserVM.FirstName,
+                        LastName = p_UserVM.LastName,
+                        CountryId = p_UserVM.CountryId,
+                        Email = p_UserVM.SignUpEmail,
+                        Password = new MD5Hashing().GetMd5Hash(p_UserVM.SignUpPassword),
+                        IsActive = true,
+                        IsAdmin = false,
+                        CreatedDate = DateTime.UtcNow
+                    }).Data
                 };
             }
         }
 
         public bool BL_UpdateUser(UserDetailsVM p_UserVM)
         {
-            UserObj = new MST_UserInfo
+            return IUserObj.Update(new MST_UserInfo
             {
                 FirstName = p_UserVM.FirstName,
                 LastName = p_UserVM.LastName,
                 CountryId = p_UserVM.CountryId,
                 Email = p_UserVM.SignUpEmail
-            };
-            return IUserObj.Update(UserObj).TransactionResult;
+            }).TransactionResult;
         }
 
         public bool BL_DeleteUser(int p_UserId)
@@ -168,6 +166,32 @@ namespace BusinessLayer.Business_Logic_Classes
                 });
             }
             return CountryList;
+        }
+
+        public TransactionResult<object> BL_SaveContactInfo(ContactVM ContactVM)
+        {
+            if (new DAL_User().DAL_SaveContactInfo(new CustomerContactInfo
+            {
+                Name = ContactVM.Name,
+                Email = ContactVM.Email,
+                Subject = ContactVM.Subject,
+                Message = ContactVM.Message
+            }).Data)
+            {
+                return new TransactionResult<object>
+                {
+                    Success = true,
+                    Message = "Message sent Succesfully"
+                };
+            }
+            else
+            {
+                return new TransactionResult<object>
+                {
+                    Success = false,
+                    Message = "Something went wrong,Please try again"
+                };
+            }
         }
     }
 }

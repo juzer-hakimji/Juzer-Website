@@ -1,0 +1,29 @@
+﻿@model ViewModel.ContactVM
+
+<div class="wow fadeInUp" data-wow-delay="0.6s">
+    <form id="contact-form">
+        <div class="col-md-4 col-sm-4">
+            @*<input type="text" class="form-control" name="Name" placeholder="Name">*@
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Name" })
+            @Html.ValidationMessageFor(x => x.Name)
+        </div>
+        <div class="col-md-4 col-sm-4">
+            @*<input type="email" class="form-control" name="Email" placeholder="Email">*@
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email" })
+            @Html.ValidationMessageFor(x => x.Email)
+        </div>
+        <div class="col-md-4 col-sm-4">
+            @*<input type="text" class="form-control" name="Subject" placeholder="Subject">*@
+            @Html.TextBoxFor(x => x.Subject, new { @class = "form-control", placeholder = "Email" })
+            @Html.ValidationMessageFor(x => x.Subject)
+        </div>
+        <div class="col-md-12 col-sm-12">
+            @*<textarea class="form-control" rows="5" name="Message" placeholder="Message"></textarea>*@
+            @Html.TextAreaFor(x => x.Message, new { @class = "form-control", placeholder = "Message", rows = "5" })
+            @Html.ValidationMessageFor(x => x.Message)
+        </div>
+        <div class="col-md-offset-9 col-md-3 col-sm-offset-3 col-sm-6">
+            <button id="submit" type="submit" class="form-control btnContact" name="submit">Send Message</button>
+        </div>
+    </form>
+</div>

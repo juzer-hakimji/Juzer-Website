@@ -25,12 +25,12 @@
             <a href="#0" class="hide-password">Hide</a>
             @Html.ValidationMessageFor(x => x.LoginPassword, null, new { @class = "cd-error-message" })
         </p>
-        <p class="fieldset">
+        @*<p class="fieldset">
             <input type="checkbox" id="remember-me" checked>
-            <label for="remember-me">
+            <label for="remember-me">   
                 Remember me
             </label>
-        </p>
+        </p>*@
         <p class="fieldset">
                 <input class="full-width" id="btnLogin" type="submit" value="Login">
             @*<button type="submit" id="btnLogin" class="full-width">Login</button>*@

@@ -20,7 +20,7 @@
         </p>
         <p class="fieldset">
             <label class="image-replace cd-Note" for="txtNote">Note</label>
-            @Html.TextAreaFor(x => x.NoteText, new { @class = "full-width has-padding has-border", placeholder = "Note" })
+            @Html.TextAreaFor(x => x.NoteText, new { @class = "full-width has-padding has-border", placeholder = "Note", rows = "5" })
             @Html.ValidationMessageFor(x => x.NoteText, null, new { @class = "cd-error-message" })
             @*<textarea class="full-width has-padding has-border" id="txtNote" placeholder="Note"></textarea>*@
         </p>

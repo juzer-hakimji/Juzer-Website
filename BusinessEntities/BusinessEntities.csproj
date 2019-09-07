@@ -52,6 +52,9 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Entities\Entity Extra Properties\MST_UserInfo.cs" />
+    <Compile Include="Entities\Entity Model\CustomerContactInfo.cs">
+      <DependentUpon>JuzerWebsiteModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Entity Model\DEV_Category.cs">
       <DependentUpon>JuzerWebsiteModel.tt</DependentUpon>
     </Compile>

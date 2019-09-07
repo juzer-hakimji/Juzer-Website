@@ -19,7 +19,7 @@ namespace JuzerWebsite.Utilities.Filters
                 {
                     BaseViewModel bvm = VR.Model as BaseViewModel;
                     bvm.Title = "My Application";
-                    bvm.FirstName = (HttpContext.Current.Session["MST_UserInfo"] as MST_UserInfo).FirstName;
+                    //bvm.FirstName = (HttpContext.Current.Session["MST_UserInfo"] as MST_UserInfo).FirstName;
                     bvm.DeveloperName = "Juzer Hakimji";//Can be set to dynamic value
                     bvm.Year = DateTime.Now.Year.ToString();
                 }

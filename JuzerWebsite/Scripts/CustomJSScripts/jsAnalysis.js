@@ -76,6 +76,7 @@ function OpenRemoveAdminModalHandler() {
 function CloseModalHandler(event) {
     if ($(event.target).is($('.cd-user-modal')) || $(event.target).is('.cd-close-form')) {
         $('.cd-user-modal').removeClass('is-visible');
+        fn_FormReset('form');
     }
 }
 

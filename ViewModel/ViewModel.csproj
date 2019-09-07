@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AnalysisVM.cs" />
     <Compile Include="BaseViewModel.cs" />
+    <Compile Include="ContactVM.cs" />
     <Compile Include="CountryVM.cs" />
     <Compile Include="NotesVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="JuzerWebsiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CustomerContactInfo">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="DEV_Category">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -186,9 +196,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="AskMe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id" Type="int" Mode="In" />
-        </Function>
         <Function Name="usp_GetExpenseList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
@@ -199,6 +206,7 @@
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="JuzerWebsiteModelStoreContainer">
+          <EntitySet Name="CustomerContactInfo" EntityType="Self.CustomerContactInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DEV_Category" EntityType="Self.DEV_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DEV_Country" EntityType="Self.DEV_Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DEV_Menu" EntityType="Self.DEV_Menu" Schema="dbo" store:Type="Tables" />
@@ -291,6 +299,7 @@
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="WebsiteErrorLogs" EntityType="JuzerWebsiteModel.WebsiteErrorLog" />
+          <EntitySet Name="CustomerContactInfoes" EntityType="JuzerWebsiteModel.CustomerContactInfo" />
         </EntityContainer>
         <ComplexType Name="usp_GetExpenseList_Result">
           <Property Type="Int32" Name="ExpenseId" Nullable="false" />
@@ -511,6 +520,16 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
         </EntityType>
+        <EntityType Name="CustomerContactInfo">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -646,7 +665,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="AskMe" FunctionName="JuzerWebsiteModel.Store.AskMe" />
           <EntitySetMapping Name="WebsiteErrorLogs">
             <EntityTypeMapping TypeName="JuzerWebsiteModel.WebsiteErrorLog">
               <MappingFragment StoreEntitySet="WebsiteErrorLogs">
@@ -657,6 +675,17 @@
                 <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="LogId" ColumnName="LogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerContactInfoes">
+            <EntityTypeMapping TypeName="JuzerWebsiteModel.CustomerContactInfo">
+              <MappingFragment StoreEntitySet="CustomerContactInfo">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

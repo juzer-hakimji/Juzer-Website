@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Business_Logic_Classes;
+using BusinessLayer.TransactionResultModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,21 @@ namespace JuzerWebsite.Controllers
                     CountryList = new BL_User().BL_GetCountryList()
                 },
                 UserLoginVM = new UserLoginVM(),
-                ResetPasswordVM = new ResetPasswordVM()
+                ResetPasswordVM = new ResetPasswordVM(),
+                ContactVM = new ContactVM()
             });
+        }
+
+        [HttpPost]
+        public ActionResult ContactMessage(ContactVM ContactVM)
+        {
+            TransactionResult<object> result = new BL_User().BL_SaveContactInfo(ContactVM);
+            return Json(result);
+        }
+
+        public FileResult GetTermsAndConditions()
+        {
+            return File("~/Content/Documents/Resume.pdf", "application/pdf");
         }
     }
 }

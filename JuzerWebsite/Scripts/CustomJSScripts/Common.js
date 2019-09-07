@@ -36,18 +36,19 @@ function CloseModalWhenEsc(Selector) {
     $(document).keyup(function (event) {
         if (event.which == '27') {
             Selector.removeClass('is-visible');
+            fn_FormReset('form');
         }
     });
 }
 
-function ShowResult(message,type) {
+function ShowResult(message, type) {
     $.notify({
         icon: '',
         title: '',
         message: message,
     }, {
             //type: type,
-    });
+        });
 
     //alert(result);
 }
@@ -86,5 +87,9 @@ function fn_ShowValidationErrors() {
             $(this).addClass("is-visible");
         }
     });
+}
+
+function fn_FormReset(FormSelector) {
+    $(FormSelector).trigger("reset");
 }
 

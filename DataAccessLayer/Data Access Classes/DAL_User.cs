@@ -30,5 +30,10 @@ namespace DataAccessLayer.Data_Access_Classes
         {
             return GetCountryList();
         }
+
+        public DBContextResult<bool> DAL_SaveContactInfo(CustomerContactInfo InfoObj)
+        {
+            return SaveContactInfo(InfoObj);
+        }
     }
 }

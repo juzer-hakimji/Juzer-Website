@@ -12,6 +12,7 @@ namespace ViewModel
         public UserDetailsVM UserDetailsVM { get; set; }
         public UserLoginVM UserLoginVM { get; set; }
         public ResetPasswordVM ResetPasswordVM { get; set; }
+        public ContactVM ContactVM { get; set; }
     }
 
     public class UserDetailsVM
