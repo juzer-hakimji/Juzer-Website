@@ -33,9 +33,14 @@ namespace JuzerWebsite.Controllers
             return Json(result);
         }
 
-        public FileResult GetTermsAndConditions()
+        public void GetTermsAndConditions()
         {
-            return File("~/Content/Documents/Resume.pdf", "application/pdf");
+            Response.Redirect("~/Content/Documents/TermsAndConditions.html");
+        }
+
+        public void DownloadResume()
+        {
+             Response.Redirect("~/Content/Documents/Resume.pdf");
         }
     }
 }
