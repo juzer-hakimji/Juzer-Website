@@ -33,6 +33,7 @@ namespace JuzerWebsite.Areas.Notes.Controllers
         }
 
         //[Route("Notes/Save")]
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public JsonResult SaveNote(NotesVM P_NotesVM)
         {

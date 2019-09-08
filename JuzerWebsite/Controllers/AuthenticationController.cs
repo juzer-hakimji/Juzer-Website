@@ -30,39 +30,47 @@ namespace JuzerWebsite.Controllers
             if (ModelState.IsValid)
             {
                 bool IsAdmin = false;
-                MST_UserInfo MST_UserInfo = BLUser.BL_GetUserValidity(p_UserLoginVM);
-                if (MST_UserInfo.UserStatus == MST_UserInfo.EnumUserStatus.AuthenticatedAdmin)
+                TransactionResult<MST_UserInfo> result = BLUser.BL_GetUserValidity(p_UserLoginVM);
+                if (result.Success)
                 {
-                    IsAdmin = true;
-                }
-                else if (MST_UserInfo.UserStatus == MST_UserInfo.EnumUserStatus.AuthenticatedUser)
-                {
-                    IsAdmin = false;
+                    if (result.Data.UserStatus == MST_UserInfo.EnumUserStatus.AuthenticatedAdmin)
+                    {
+                        IsAdmin = true;
+                    }
+                    else if (result.Data.UserStatus == MST_UserInfo.EnumUserStatus.AuthenticatedUser)
+                    {
+                        IsAdmin = false;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("CredentialError", "Invalid Password");
+                        return Json(new TransactionResult<object>
+                        {
+                            Success = false,
+                            Message = "Invalid Password"
+                        });
+                    }
+                    FormsAuthentication.SetAuthCookie(p_UserLoginVM.LoginEmail, false);
+                    Session["IsAdmin"] = IsAdmin;
+                    Session["MST_UserInfo"] = result.Data;
+                    return Json(new TransactionResult<object>
+                    {
+                        Success = true,
+                        RedirectURL = Url.Action("List", "Notes")
+                    });
                 }
                 else
                 {
-                    ModelState.AddModelError("CredentialError", "Invalid Username or Password");
-                    return Json(new TransactionResult<object>
-                    {
-                        Success = false,
-                        Message = "Invalid Username or Password"
-                    });
+                    return Json(result);
                 }
-                FormsAuthentication.SetAuthCookie(p_UserLoginVM.LoginEmail, false);
-                Session["IsAdmin"] = IsAdmin;
-                Session["MST_UserInfo"] = MST_UserInfo;
-                return Json(new TransactionResult<object>
-                {
-                    Success = true,
-                    RedirectURL = Url.Action("List", "Notes")
-                });
+
             }
             else
             {
                 return Json(new TransactionResult<object>
                 {
                     Success = false,
-                    Message = "Invalid Username or Password"
+                    Message = "Please enter valid email and password"
                 });
             }
         }
@@ -77,7 +85,7 @@ namespace JuzerWebsite.Controllers
         [HttpPut]
         public ActionResult ValidatePasswordAndDeleteUser(string p_Password)
         {
-            TransactionResult<object> result = BLUser.BL_ValidatePassword(new UserLoginVM { LoginEmail = (Session["MST_UserInfo"] as MST_UserInfo).Email, LoginPassword = p_Password });
+            TransactionResult<object> result = BLUser.BL_ValidatePasswordAndDeleteUser(new UserLoginVM { LoginEmail = (Session["MST_UserInfo"] as MST_UserInfo).Email, LoginPassword = p_Password });
             if (result.Success)
             {
                 Session.Abandon();

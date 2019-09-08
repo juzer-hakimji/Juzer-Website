@@ -188,7 +188,8 @@ jQuery(document).ready(function ($) {
                 dataType: 'json',
                 success: function (result) {
                     if (result.Success == false) {
-                        $('#LoginValidate').text(result.Message);
+                        ShowResult(result.Message);
+                        //$('#LoginValidate').text(result.Message);
                         fn_FormReset('#cd-form-Login');
                     }
                     else if (result.Success == true) {

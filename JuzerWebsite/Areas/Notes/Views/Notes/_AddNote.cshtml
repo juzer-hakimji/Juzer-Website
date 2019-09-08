@@ -4,12 +4,13 @@
     <input type="hidden" id="hdnEditNoteId" />
     <!-- sign up form -->
     <form class="cd-form" id="cd-form-Notes">
+        @Html.AntiForgeryToken()
         <p class="fieldset">
             <label class="image-replace cd-Date">Date</label>
             @Html.TextBoxFor(x => x.CreatedDate, new { @class = "full-width has-padding has-border", placeholder = "Date" })
             @Html.ValidationMessageFor(x => x.CreatedDate, null, new { @class = "cd-error-message" })
             @*<input class="full-width has-padding has-border" id="txtDate" type="text" placeholder="Date">
-        <span class="cd-error-message">Error message here!</span>*@
+            <span class="cd-error-message">Error message here!</span>*@
         </p>
         <p class="fieldset">
             <label class="image-replace cd-Subject" for="txtSubject">Subject</label>

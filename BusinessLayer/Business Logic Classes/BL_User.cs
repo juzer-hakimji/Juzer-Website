@@ -71,25 +71,40 @@ namespace BusinessLayer.Business_Logic_Classes
             return IUserObj.Delete(p_UserId).TransactionResult;
         }
 
-        public MST_UserInfo BL_GetUserValidity(UserLoginVM p_UserLoginVM)
+        public TransactionResult<MST_UserInfo> BL_GetUserValidity(UserLoginVM p_UserLoginVM)
         {
             MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_UserLoginVM.LoginEmail).Data;
-            if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.LoginPassword).Equals(UserObj.Password) && UserObj.IsAdmin == true)
+            if (UserObj != null)
             {
-                UserObj.UserStatus = MST_UserInfo.EnumUserStatus.AuthenticatedAdmin;
-            }
-            else if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.LoginPassword).Equals(UserObj.Password) && UserObj.IsAdmin == false)
-            {
-                UserObj.UserStatus = MST_UserInfo.EnumUserStatus.AuthenticatedUser;
+                if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.LoginPassword).Equals(UserObj.Password) && UserObj.IsAdmin == true)
+                {
+                    UserObj.UserStatus = MST_UserInfo.EnumUserStatus.AuthenticatedAdmin;
+                }
+                else if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.LoginPassword).Equals(UserObj.Password) && UserObj.IsAdmin == false)
+                {
+                    UserObj.UserStatus = MST_UserInfo.EnumUserStatus.AuthenticatedUser;
+                }
+                else
+                {
+                    UserObj.UserStatus = MST_UserInfo.EnumUserStatus.NonAuthenticatedUser;
+                }
+                return new TransactionResult<MST_UserInfo>
+                {
+                    Success = true,
+                    Data = UserObj
+                };
             }
             else
             {
-                UserObj.UserStatus = MST_UserInfo.EnumUserStatus.NonAuthenticatedUser;
+                return new TransactionResult<MST_UserInfo>
+                {
+                    Success = false,
+                    Message = "Incorrect Email"
+                };
             }
-            return UserObj;
         }
 
-        public TransactionResult<object> BL_ValidatePassword(UserLoginVM p_UserLoginVM)
+        public TransactionResult<object> BL_ValidatePasswordAndDeleteUser(UserLoginVM p_UserLoginVM)
         {
             MST_UserInfo UserObj = new DAL_User().DAL_GetUserValidity(p_UserLoginVM.LoginEmail).Data;
             if (new MD5Hashing().GetMd5Hash(p_UserLoginVM.LoginPassword).Equals(UserObj.Password))
@@ -114,7 +129,7 @@ namespace BusinessLayer.Business_Logic_Classes
                 return new TransactionResult<object>
                 {
                     Success = false,
-                    Message = "Something went wrong.Please try again"
+                    Message = "Incorrect password"
                 };
             }
         }

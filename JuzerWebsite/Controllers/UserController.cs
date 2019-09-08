@@ -60,7 +60,6 @@ namespace JuzerWebsite.Controllers
 
         [HttpPut]
         [AllowAnonymous]
-        //[ValidateAntiForgeryToken]
         public ActionResult SendResetPasswordEmail(string p_Email)
         {
             if (ModelState.IsValid)
@@ -127,7 +126,7 @@ namespace JuzerWebsite.Controllers
         }
 
         [HttpPut]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ChangePasswordVM p_Obj)
         {
             TransactionResult<object> result = BLUser.BL_ChangePassword(p_Obj, (Session["MST_UserInfo"] as MST_UserInfo).Email);

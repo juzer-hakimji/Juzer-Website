@@ -3,16 +3,17 @@
 <div id="cd-AddAdmin">
     <!-- sign up form -->
     <form class="cd-form" id="cd-form-AddAdmin">
+        @Html.AntiForgeryToken()
         <p class="fieldset">
             <label class="image-replace cd-UserName" for="ddUserName">Select User</label>
             @*@Html.TextBoxFor(x => x.CreatedDate, new { @class = "full-width has-padding has-border", placeholder = "Date" })*@
-            @Html.DropDownList("UserListAdd",new SelectList(new List<string>()),"Select User", new { @class = "full-width has-padding has-border UserListAdd",  multiple = "multiple" })
+            @Html.DropDownList("UserListAdd", new SelectList(new List<string>()), "Select User", new { @class = "full-width has-padding has-border UserListAdd", multiple = "multiple" })
             @*<input class="full-width has-padding has-border" id="txtDate" type="text" placeholder="Date">
             <span class="cd-error-message">Error message here!</span>*@
         </p>
         <p class="fieldset">
             <input id="btnAddAdmin" class="full-width has-padding" type="submit" value="Add Admin">
-           @* <button id="btnAddAdmin" class="full-width has-padding">Add Admin</button>*@
+            @* <button id="btnAddAdmin" class="full-width has-padding">Add Admin</button>*@
             <span id="AddAdminValidate"></span>
         </p>
     </form>

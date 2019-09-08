@@ -10,9 +10,10 @@
     </div>
     <div>
         <form class="cd-form" id="cd-form-DltAccnt">
+            @Html.AntiForgeryToken()
             <p class="fieldset">
                 <label class="image-replace cd-password">Enter Password</label>
-                @Html.TextBox("txtPass","", new { @class = "full-width has-padding has-border", placeholder = "Password" })
+                @Html.TextBox("txtPass", "", new { @class = "full-width has-padding has-border", placeholder = "Password" })
             </p>
             <p class="fieldset">
                 @*<input class="full-width has-padding" type="submit" value="Add Note">*@
