@@ -4,7 +4,7 @@
 
 }
 
-<div class="Top-Content-Padding jumbotron">
+<div class="Top-Content-Padding">
     <div>
         <h6>Note: If you delete your account all your information will be permanently deleted</h6>
     </div>
@@ -18,7 +18,7 @@
             <p class="fieldset">
                 @*<input class="full-width has-padding" type="submit" value="Add Note">*@
                 @*<button id="btnClose" class="full-width has-padding">Close</button>*@
-                <button id="btnDeleteAccnt" class="full-width has-padding">Delete Account</button>
+                <button id="btnDeleteAccnt" class="full-width has-padding btn btn-primary">Delete Account</button>
                 <span id="DeleteAccountValidate"></span>
             </p>
         </form>
@@ -28,5 +28,7 @@
 
 @section scripts
 {
-    <script src="~/Scripts/CustomJSScripts/jsDeleteAccount.js"></script>
+    @*<script src="~/Scripts/CustomJSScripts/jsDeleteAccount.js"></script>*@
+    @Scripts.Render("~/ScriptBundle/DeleteAccount")
 }
+

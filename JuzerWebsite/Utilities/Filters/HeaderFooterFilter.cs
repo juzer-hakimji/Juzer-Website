@@ -18,7 +18,7 @@ namespace JuzerWebsite.Utilities.Filters
                 if (VR.Model is BaseViewModel)//bvm will be null when we want a view without Header and footer
                 {
                     BaseViewModel bvm = VR.Model as BaseViewModel;
-                    bvm.Title = "My Application";
+                    //bvm.Title = "My Application";
                     bvm.FirstName = (HttpContext.Current.Session["MST_UserInfo"] as MST_UserInfo).FirstName;
                     bvm.DeveloperName = "Juzer Hakimji";
                     bvm.Year = DateTime.Now.Year.ToString();

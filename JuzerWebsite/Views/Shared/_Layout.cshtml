@@ -7,18 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@Model.Title</title>
     @*@Styles.Render("~/Content/css")*@
-    @Scripts.Render("~/bundles/modernizr")
-    @RenderSection("styles", false)
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+    @*<link rel="stylesheet" href="~/Content/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/HomePage/animate.css">
     <link rel="stylesheet" href="~/Content/HomePage/magnific-popup.css">
-    <link rel="stylesheet" href="~/Content/HomePage/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/HomePage/font-awesome.min.css">*@
     @*<link href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>*@
-    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/reset.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    @*<link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/reset.css">*@
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">*@
+    @*<link href="~/Content/HomePage/reset.min.css" rel="stylesheet" />
     <link href="~/Content/CustomCss/Common.css" rel="stylesheet" />
-    <link href="~/Content/HomePage/style.css" rel="stylesheet" />
+    <link href="~/Content/HomePage/style.css" rel="stylesheet" />*@
+    @Styles.Render("~/StyleBundle/Layout")
+    @RenderSection("styles", false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -65,19 +67,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js"></script>
     @*<script src="~/Scripts/popper.min.js"></script>*@
     @*@Scripts.Render("~/bundles/bootstrap")*@
-    <script src="https://kit.fontawesome.com/6f0a81b667.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*<script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/bootbox.min.js"></script>
     <script src="~/Scripts/HomePage/smoothscroll.js"></script>
     <script src="~/Scripts/HomePage/jquery.magnific-popup.min.js"></script>
     <script src="~/Scripts/HomePage/magnific-popup-options.js"></script>
     <script src="~/Scripts/HomePage/wow.min.js"></script>
     <script src="~/Scripts/bootstrap-notify.min.js"></script>
-    <script src="~/Scripts/CustomJSScripts/Common.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/CustomJSScripts/Common.js"></script>*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>*@
+    @*<script src="~/Scripts/modernizr-2.8.3.js"></script>*@
     @*  <script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @*<script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+    @Scripts.Render("~/ScriptBundle/Layout")
     @RenderSection("scripts", required: false)
 </body>
 </html>

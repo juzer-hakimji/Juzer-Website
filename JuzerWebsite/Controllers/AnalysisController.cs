@@ -30,7 +30,7 @@ namespace JuzerWebsite.Controllers
         }
 
         [HttpPut]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult AddOrRemoveAdmin(string UserIds, bool IsAdmin)
         {
             TransactionResult<object> Result = BLAnalysis.BL_AddOrRemoveAdmin(UserIds, IsAdmin);

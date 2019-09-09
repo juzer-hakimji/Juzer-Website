@@ -23,7 +23,7 @@ namespace JuzerWebsite.Areas.Notes.Controllers
         [HeaderFooterFilter]
         public ActionResult List()
         {
-            return View("Notes", new NotesVM());
+            return View("Notes", new NotesVM { Title = "Notes" });
         }
 
         public JsonResult GetListData()
