@@ -111,18 +111,30 @@ namespace JuzerWebsite.Controllers
         }
 
         [Route("User/Delete")]
-        [HeaderFooterFilter]
+        //[HeaderFooterFilter]
         [HttpGet]
         public ActionResult DeleteAccount()
         {
-            return View("DeleteAccount", new BaseViewModel());
+            return View("DeleteAccount", new BaseViewModel
+            {
+                Title = "Delete Account",
+                FirstName = (Session["MST_UserInfo"] as MST_UserInfo).FirstName,
+                DeveloperName = "Juzer Hakimji",
+                Year = DateTime.Now.Year.ToString()
+            });
         }
 
         [HttpGet]
-        [HeaderFooterFilter]
+        //[HeaderFooterFilter]
         public ActionResult ChangePassword()
         {
-            return View("ChangePassword", new ChangePasswordVM());
+            return View("ChangePassword", new ChangePasswordVM
+            {
+                Title = "Delete Account",
+                FirstName = (Session["MST_UserInfo"] as MST_UserInfo).FirstName,
+                DeveloperName = "Juzer Hakimji",
+                Year = DateTime.Now.Year.ToString()
+            });
         }
 
         [HttpPut]

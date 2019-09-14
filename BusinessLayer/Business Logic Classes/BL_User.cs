@@ -115,7 +115,7 @@ namespace BusinessLayer.Business_Logic_Classes
                     {
                         Success = true,
                         RedirectURL = "/Home/Index",
-                        Message = "User Deletion successful"
+                        Message = "Account Deletion successful"
                     };
                 }
                 return new TransactionResult<object>

@@ -9,8 +9,9 @@
 {
     @*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">*@
     @*<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />*@
+        <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+        <link href="~/Content/font-awesome.min.css" rel="stylesheet" />*@
+    <link href="~/Content/css/all.css" rel="stylesheet" />
     @Styles.Render("~/StyleBundle/Notes")
 }
 
@@ -32,6 +33,7 @@
 </div>
 <div class="Top-Content-Padding">
     <div class="jumbotron ml-auto">
+        <h4>Here you can create your own notes ,Edit them,Delete them and also mark them important.</h4>
         <h3><a id="AddNote" class="btn btn-primary pull-right" href="#0">Add Note</a></h3>
     </div>
 </div>
@@ -54,9 +56,9 @@
 @section scripts
 {
     @*<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>*@
-    <script src="https://kit.fontawesome.com/6f0a81b667.js"></script>
+    @*<script src="https://kit.fontawesome.com/6f0a81b667.js"></script>*@
     @*<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
-    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-    <script src="~/Scripts/CustomJSScripts/jsNotes.js"></script>*@
+        <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+        <script src="~/Scripts/CustomJSScripts/jsNotes.js"></script>*@
     @Scripts.Render("~/ScriptBundle/Notes")
 }

@@ -11,7 +11,7 @@ namespace ViewModel
     {
         public int? NoteId { get; set; }
 
-        [Required(ErrorMessage = "Please enter Email")]
+        [Required(ErrorMessage = "Please enter Subject")]
         [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
         public string Subject { get; set; }
 

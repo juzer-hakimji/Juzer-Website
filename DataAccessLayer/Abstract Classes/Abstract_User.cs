@@ -60,7 +60,7 @@ namespace DataAccessLayer.Abstract_Classes
         {
             return ExecuteDALMethod(db, (DataContext, P_Email) =>
              {
-                 MST_UserInfo UserObj = DataContext.MST_UserInfo.SingleOrDefault(x => x.Email.Equals(P_Email));
+                 MST_UserInfo UserObj = DataContext.MST_UserInfo.SingleOrDefault(x => x.Email.Equals(P_Email) && x.IsActive == true);
                  return UserObj;
              }, p_Email);
         }

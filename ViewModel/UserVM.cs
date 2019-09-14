@@ -27,6 +27,7 @@ namespace ViewModel
         [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
         public string LastName { get; set; }
 
+        [Required(ErrorMessage = "Please enter Country")]
         public int CountryId { get; set; }
 
         [Required(ErrorMessage = "Please enter Email")]
@@ -34,6 +35,8 @@ namespace ViewModel
         public string SignUpEmail { get; set; }
 
         [Required(ErrorMessage = "Please enter Password")]
+        [MinLength(7, ErrorMessage = "Please enter more than 7 characters")]
+        [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
         public string SignUpPassword { get; set; }
 
         public List<CountryVM> CountryList { get; set; }
@@ -62,7 +65,8 @@ namespace ViewModel
         public string OldPassword { get; set; }
 
         [Required(ErrorMessage = "Please enter New Password")]
-        [Range(7,25, ErrorMessage = "Password should contain more than 7 characters")]
+        [MinLength(7, ErrorMessage = "Please enter more than 7 characters")]
+        [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
         public string NewPassword { get; set; }
     }
 }

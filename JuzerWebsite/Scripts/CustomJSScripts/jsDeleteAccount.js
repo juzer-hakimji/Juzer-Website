@@ -8,11 +8,13 @@ function AddEventHandlers() {
 }
 
 function DeleteAccountHandler() {
-    var Password = $("#txtPass").val();
-    CallAjaxMethod("/Authentication/ValidatePasswordAndDeleteUser", 'PUT', { p_Password: Password }).then(function (result) {
+    //var Password = $("#txtPass").val();
+    CallAjaxMethod("/Authentication/ValidatePasswordAndDeleteUser", 'PUT', { __RequestVerificationToken: $('#cd-form-DltAccnt input[name="__RequestVerificationToken"]').val(), p_Password: $("#txtPass").val() }).then(function (result) {
         if (result.Success) {
             ShowResult(result.Message);
-            window.location.href = result.RedirectURL;
+            setTimeout(function () {
+                window.location.href = result.RedirectURL;
+            }, 1500);
         }
         else {
             ShowResult(result.Message);

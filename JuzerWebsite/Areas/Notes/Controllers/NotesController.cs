@@ -20,10 +20,16 @@ namespace JuzerWebsite.Areas.Notes.Controllers
             BLObj = new BL_Notes();
         }
 
-        [HeaderFooterFilter]
+        //[HeaderFooterFilter]
         public ActionResult List()
         {
-            return View("Notes", new NotesVM { Title = "Notes" });
+            return View("Notes", new NotesVM
+            {
+                Title = "Notes",
+                FirstName = (Session["MST_UserInfo"] as MST_UserInfo).FirstName,
+                DeveloperName = "Juzer Hakimji",
+                Year = DateTime.Now.Year.ToString()
+            });
         }
 
         public JsonResult GetListData()

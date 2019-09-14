@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Business_Logic_Classes;
+﻿using BusinessEntities.Entities.Entity_Model;
+using BusinessLayer.Business_Logic_Classes;
 using BusinessLayer.TransactionResultModel;
 using JuzerWebsite.Utilities.Filters;
 using System;
@@ -19,18 +20,26 @@ namespace JuzerWebsite.Controllers
             BLAnalysis = new BL_Analysis();
         }
 
-        [HeaderFooterFilter]
+        //[HeaderFooterFilter]
         public ActionResult Index()
         {
-            AnalysisVM AnalysisVM = new AnalysisVM
+            //AnalysisVM AnalysisVM = new AnalysisVM
+            //{
+            //    RemoveAdminList = BLAnalysis.BL_GetAddOrRemoveAdminList(false)
+            //};
+            return View("Analysis", new AnalysisVM
             {
+
+                Title = "Analysis",
+                FirstName = (Session["MST_UserInfo"] as MST_UserInfo).FirstName,
+                DeveloperName = "Juzer Hakimji",
+                Year = DateTime.Now.Year.ToString(),
                 RemoveAdminList = BLAnalysis.BL_GetAddOrRemoveAdminList(false)
-            };
-            return View("Analysis", AnalysisVM);
+            });
         }
 
         [HttpPut]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult AddOrRemoveAdmin(string UserIds, bool IsAdmin)
         {
             TransactionResult<object> Result = BLAnalysis.BL_AddOrRemoveAdmin(UserIds, IsAdmin);
@@ -45,7 +54,7 @@ namespace JuzerWebsite.Controllers
                 id = x.UserId,
                 text = x.SignUpEmail
             }));
-            return Json(Adminlst , JsonRequestBehavior.AllowGet);
+            return Json(Adminlst, JsonRequestBehavior.AllowGet);
         }
     }
 }
