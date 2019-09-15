@@ -30,7 +30,7 @@ namespace JuzerWebsite
                       "~/Content/HomePage/style.css"));
 
             bundles.Add(new StyleBundle("~/StyleBundle/Notes").Include(
-                      "~/Content/DataTables/css/jquery.dataTables.min.css",
+                      "~/Content/DataTables/css/jquery.dataTables.css",
                       "~/Content/themes/base/jquery-ui.min.css",
                       "~/Content/font-awesome.min.css"
                       ));

@@ -12,7 +12,7 @@ namespace JuzerWebsite.Utilities.Filters
     {
         public override void OnException(ExceptionContext filterContext)
         {
-            new FileLogger().LogExceptionToFile(filterContext.Exception);
+            //new FileLogger().LogExceptionToFile(filterContext.Exception);
             new BL_Error().BL_LogExceptionToDataBase(filterContext.Exception);
             base.OnException(filterContext);
         }
