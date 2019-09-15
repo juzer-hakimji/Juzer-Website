@@ -221,7 +221,7 @@ function DataTableInit() {
             {
                 "data": "NoteId",
                 "render": function (data, type, row) {
-                    return '<span class=""><i class="fa fa-pencil EditNote" title="Edit" ></i>&nbsp;<i class="fa fa-trash DeleteNote" title="Delete"></i></span>';
+                    return '<a href="#"><i class="fa fa-pencil EditNote" title="Edit" ></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-trash DeleteNote" title="Delete"></i></a>';
                 }
             },
             {
