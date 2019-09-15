@@ -22,9 +22,7 @@ namespace JuzerWebsite.Controllers
             BLUser = new BL_User();
         }
 
-        //This method will be called when user user enters information and clicks login
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public ActionResult Login(UserLoginVM p_UserLoginVM)
         {
             if (ModelState.IsValid)

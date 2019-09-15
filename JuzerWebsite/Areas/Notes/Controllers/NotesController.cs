@@ -20,7 +20,6 @@ namespace JuzerWebsite.Areas.Notes.Controllers
             BLObj = new BL_Notes();
         }
 
-        //[HeaderFooterFilter]
         public ActionResult List()
         {
             return View("Notes", new NotesVM
@@ -38,7 +37,6 @@ namespace JuzerWebsite.Areas.Notes.Controllers
             return Json(NotesList, JsonRequestBehavior.AllowGet);
         }
 
-        //[Route("Notes/Save")]
         [ValidateAntiForgeryToken]
         [HttpPost]
         public JsonResult SaveNote(NotesVM P_NotesVM)
@@ -62,7 +60,6 @@ namespace JuzerWebsite.Areas.Notes.Controllers
             return Json(result);
         }
 
-        //[Route("Notes/Delete")]
         [HttpPut]
         public JsonResult DeleteNote(int p_NoteId)
         {

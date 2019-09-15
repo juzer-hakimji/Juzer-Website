@@ -21,7 +21,6 @@ namespace DataAccessLayer.Abstract_Classes
 
         protected DBContextResult<List<usp_GetExpenseList_Result>> SelectExpense(int p_UserId)
         {
-            //return db.usp_GetExpenseList(p_UserId).ToList();
             return ExecuteDALMethod(db, (DataContext, P_UserId) =>
             {
                 return DataContext.usp_GetExpenseList(P_UserId).ToList();

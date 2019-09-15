@@ -20,16 +20,10 @@ namespace JuzerWebsite.Controllers
             BLAnalysis = new BL_Analysis();
         }
 
-        //[HeaderFooterFilter]
         public ActionResult Index()
         {
-            //AnalysisVM AnalysisVM = new AnalysisVM
-            //{
-            //    RemoveAdminList = BLAnalysis.BL_GetAddOrRemoveAdminList(false)
-            //};
             return View("Analysis", new AnalysisVM
             {
-
                 Title = "Analysis",
                 FirstName = (Session["MST_UserInfo"] as MST_UserInfo).FirstName,
                 DeveloperName = "Juzer Hakimji",

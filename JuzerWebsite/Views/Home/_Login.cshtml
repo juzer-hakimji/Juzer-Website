@@ -6,8 +6,6 @@
             <label class="image-replace cd-email" for="LoginEmail">
                 E-mail
             </label>
-            @*<input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
-            <span class="cd-error-message">Error message here!</span>*@
             @Html.TextBoxFor(x => x.LoginEmail, new { @class = "full-width has-padding has-border", placeholder = "E-mail" })
             @Html.ValidationMessageFor(x => x.LoginEmail, null, new { @class = "cd-error-message" })
         </p>
@@ -15,31 +13,16 @@
             <label class="image-replace cd-password" for="LoginPassword">
                 Password
             </label>
-            @*<input class="full-width has-padding has-border" id="signin-password" type="text"
-                   placeholder="Password">
-            <a href="#0" class="hide-password">Hide</a> <span class="cd-error-message">
-                Error message
-                here!
-            </span>*@
             @Html.TextBoxFor(x => x.LoginPassword, new { @class = "full-width has-padding has-border", placeholder = "Password" })
             <a href="#0" class="hide-password">Hide</a>
             @Html.ValidationMessageFor(x => x.LoginPassword, null, new { @class = "cd-error-message" })
         </p>
-        @*<p class="fieldset">
-            <input type="checkbox" id="remember-me" checked>
-            <label for="remember-me">   
-                Remember me
-            </label>
-        </p>*@
         <p class="fieldset">
-                <input class="full-width" id="btnLogin" type="submit" value="Login">
-            @*<button type="submit" id="btnLogin" class="full-width">Login</button>*@
-            @*<button id="btnLogin" class="full-width">Login</button>*@
+            <input class="full-width" id="btnLogin" type="submit" value="Login">
             <span id="LoginValidate"></span>
         </p>
     </form>
     <p class="cd-form-bottom-message">
         <a href="#0">Forgot your password?</a>
     </p>
-    <!-- <a href="#0" class="cd-close-form">Close</a> -->
 </div>
