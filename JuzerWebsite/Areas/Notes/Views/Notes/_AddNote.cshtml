@@ -6,21 +6,21 @@
     <form class="cd-form" id="cd-form-Notes">
         @Html.AntiForgeryToken()
         <p class="fieldset">
-            <label class="image-replace cd-Date">Date</label>
+            <label class="image-replace cd-email">Date</label>
             @Html.TextBoxFor(x => x.CreatedDate, new { @class = "full-width has-padding has-border", placeholder = "Date" })
             @Html.ValidationMessageFor(x => x.CreatedDate, null, new { @class = "cd-error-message" })
             @*<input class="full-width has-padding has-border" id="txtDate" type="text" placeholder="Date">
             <span class="cd-error-message">Error message here!</span>*@
         </p>
         <p class="fieldset">
-            <label class="image-replace cd-Subject" for="txtSubject">Subject</label>
+            <label class="image-replace cd-email" for="txtSubject">Subject</label>
             @Html.TextBoxFor(x => x.Subject, new { @class = "full-width has-padding has-border", placeholder = "Subject", autofocus = "autofocus" })
             @Html.ValidationMessageFor(x => x.Subject, null, new { @class = "cd-error-message" })
             @*<input class="full-width has-padding has-border" id="txtSubject" type="email" placeholder="subject">
             <span class="cd-error-message">Error message here!</span>*@
         </p>
         <p class="fieldset">
-            <label class="image-replace cd-Note" for="txtNote">Note</label>
+            <label class="image-replace cd-email" for="txtNote">Note</label>
             @Html.TextAreaFor(x => x.NoteText, new { @class = "full-width has-padding has-border", placeholder = "Note", rows = "3" })
             @Html.ValidationMessageFor(x => x.NoteText, null, new { @class = "cd-error-message" })
             @*<textarea class="full-width has-padding has-border" id="txtNote" placeholder="Note"></textarea>*@
