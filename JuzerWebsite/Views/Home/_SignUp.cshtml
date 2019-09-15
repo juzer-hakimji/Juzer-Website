@@ -6,9 +6,6 @@
             <label class="image-replace cd-username" for="FirstName">
                 First Name
             </label>
-            @*<input class="full-width has-padding has-border" id="signup-username" type="text"
-                       placeholder="Username">
-                <span class="cd-error-message">Error message here!</span>*@
             @Html.TextBoxFor(x => x.FirstName, new { @class = "full-width has-padding has-border", placeholder = "First Name" })
             @Html.ValidationMessageFor(x => x.FirstName , null , new { @class = "cd-error-message" })
         </p>
@@ -16,9 +13,6 @@
             <label class="image-replace cd-username" for="LastName">
                 Last Name
             </label>
-            @*<input class="full-width has-padding has-border" id="signup-username" type="text"
-                       placeholder="Username">
-                <span class="cd-error-message">Error message here!</span>*@
             @Html.TextBoxFor(x => x.LastName, new { @class = "full-width has-padding has-border", placeholder = "Last Name" })
             @Html.ValidationMessageFor(x => x.LastName, null, new { @class = "cd-error-message" })
         </p>
@@ -26,9 +20,6 @@
             <label class="image-replace cd-username" for="CountryId">
                 Country
             </label>
-            @*<input class="full-width has-padding has-border" id="signup-username" type="text"
-               placeholder="Username">
-        <span class="cd-error-message">Error message here!</span>*@
             @Html.DropDownListFor(x => x.CountryId, new SelectList(Model.CountryList, "CountryId", "CountryName"), "Select Country", new { @class = "full-width has-padding has-border CountryList" })
             @Html.ValidationMessageFor(x => x.CountryId, null, new { @class = "cd-error-message" })
         </p>
@@ -36,8 +27,6 @@
             <label class="image-replace cd-email" for="Email">
                 E-mail
             </label>
-            @*<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
-        <span class="cd-error-message">Error message here!</span>*@
             @Html.TextBoxFor(x => x.SignUpEmail, new { @class = "full-width has-padding has-border", placeholder = "E-mail" })
             @Html.ValidationMessageFor(x => x.SignUpEmail, null, new { @class = "cd-error-message" })
         </p>
@@ -45,29 +34,18 @@
             <label class="image-replace cd-password" for="Password">
                 Password
             </label>
-            @*<input class="full-width has-padding has-border" id="signup-password" type="text"
-        placeholder="Password">*@
             @Html.TextBoxFor(x => x.SignUpPassword, new { @class = "full-width has-padding has-border", placeholder = "Password" })
             <a href="#0" class="hide-password">Hide</a>
             @Html.ValidationMessageFor(x => x.SignUpPassword, null, new { @class = "cd-error-message" })
-
-            @*<span class="cd-error-message">
-            Error message
-            here!
-        </span>*@
         </p>
         <p class="fieldset">
-            @*<input type="checkbox" id="accept-terms">*@
             <label for="accept-terms">
                 By clicking Create account you agree to the <a href="/Home/GetTermsAndConditions" target="_blank">Terms And Conditions</a>
             </label>
         </p>
         <p class="fieldset">
             <input class="full-width has-padding" id="btnCrtAcct" type="submit" value="Create account">
-            @*<button type="submit" id="btnCrtAcct" class="full-width has-padding">Create account</button>*@
-            @*<button id="btnCrtAcct" class="full-width has-padding">Create account</button>*@
         </p>
     </form>
-    <!-- <a href="#0" class="cd-close-form">Close</a> -->
 </div>
 

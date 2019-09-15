@@ -25,7 +25,6 @@ namespace JuzerWebsite.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        //[ValidateAntiForgeryToken]
         public ActionResult Save(UserDetailsVM p_UserVM)
         {
             if (ModelState.IsValid)
@@ -111,7 +110,6 @@ namespace JuzerWebsite.Controllers
         }
 
         [Route("User/Delete")]
-        //[HeaderFooterFilter]
         [HttpGet]
         public ActionResult DeleteAccount()
         {
@@ -125,7 +123,6 @@ namespace JuzerWebsite.Controllers
         }
 
         [HttpGet]
-        //[HeaderFooterFilter]
         public ActionResult ChangePassword()
         {
             return View("ChangePassword", new ChangePasswordVM

@@ -21,7 +21,6 @@ namespace DataAccessLayer.Abstract_Classes
 
         public DBContextResult<List<usp_GetNotesList_Result>> Select(int p_UserId)
         {
-            //return db.usp_GetNotesList(p_UserId).ToList();
             return ExecuteDALMethod<int, List<usp_GetNotesList_Result>>(db, (DataContext, P_UserId) =>
             {
                 return DataContext.usp_GetNotesList(P_UserId).ToList();

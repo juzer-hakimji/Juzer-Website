@@ -1,22 +1,6 @@
 ﻿$(document).ready(function () {
     AddEventHandlers();
     InitializeForm('#cd-form-AddAdmin , #cd-form-RemoveAdmin');
-
-        //$tab_signup = $('.cd-user-modal')_tab.children('li').eq(1).children('a'),
-    //    $AddAdminBtn = $('#AddAdmin');
-    //$RemoveAdminBtn = $('#btnRemoveAdmin');
-
-    //close modal
-    //$('.cd-user-modal').on('click', function (event) {
-    //if ($(event.target).is($('.cd-user-modal')) || $(event.target).is('.cd-close-form')) {
-    //    $('.cd-user-modal').removeClass('is-visible');
-    //}
-    //});
-
-    //$('.cd-switcher').on('click', function (event) {
-    //    event.preventDefault();
-    //    $(event.target).is($('.cd-switcher').children('li').eq(0).children('a')) ? OpenAddAdminModalHandler() : OpenRemoveAdminModalHandler();
-    //});
 });
 
 function AddEventHandlers() {
@@ -40,23 +24,6 @@ function OpenAddAdminModalHandler() {
     $('.cd-user-modal').find('#cd-RemoveAdmin').removeClass('is-selected');
     $('.cd-switcher').children('li').eq(0).children('a').addClass('selected');
     $('.cd-switcher').children('li').eq(1).children('a').removeClass('selected');
-    //$('.UserListAdd').select2({
-    //    ajax: {
-    //        url: '/Analysis/GetAddAdminList',
-    //        dataType: 'json',
-    //        type: "GET",
-    //        processResults: function (data) {
-    //            return {
-    //                results: $.map(data, function (item) {
-    //                    return {
-    //                        id: item.UserId,
-    //                        text: item.SignUpEmail
-    //                    }
-    //                })
-    //            };
-    //        }
-    //    }
-    //});
     CallAjaxMethod('/Analysis/GetAddAdminList', 'GET').then(function (result) {
         $('.UserListAdd').select2({
             data: result
@@ -81,7 +48,6 @@ function CloseModalHandler(event) {
 }
 
 function AddAdminHandler() {
-    //var UserIds = $('.UserListAdd').val().toString();
     CallAjaxMethod("/Analysis/AddOrRemoveAdmin", 'PUT', { __RequestVerificationToken : $('#cd-form-AddAdmin input[name="__RequestVerificationToken"]').val(), UserIds: $('.UserListAdd').val().toString(), IsAdmin: true }).then(function (result) {
         if (result.Success) {
             ShowResult(result.Message);
@@ -93,22 +59,9 @@ function AddAdminHandler() {
             ShowResult(result.Message);
         }
     });
-    //$.ajax(function () {
-    //    type: 'POST',
-    //        url : "Analysis/AddOrRemoveAdmin",
-    //            data: { UserIds: UserIds, IsAdmin : true },
-    //    dataType: 'json',
-    //        success: function(result) {
-    //            if (result == true) {
-    //                alert("Admin Creation successful");
-    //                $('.cd-user-modal').removeClass('is-visible');
-    //            }
-    //        }
-    //});
 }
 
 function RemoveAdminHandler() {
-    //var UserIds = $('.UserListRemove').val().toString();
     CallAjaxMethod("/Analysis/AddOrRemoveAdmin", 'PUT', { __RequestVerificationToken : $('#cd-form-RemoveAdmin input[name="__RequestVerificationToken"]').val(), UserIds: $('.UserListRemove').val().toString() , IsAdmin: false }).then(function (result) {
         if (result.Success) {
             ShowResult(result.Message);
@@ -120,15 +73,4 @@ function RemoveAdminHandler() {
             ShowResult(result.Message);
         }
     });
-    //$.ajax(function () {
-    //    type: 'POST',
-    //        url : "Analysis/AddOrRemoveAdmin",
-    //            data: { UserIds: UserIds, IsAdmin : false },
-    //    dataType: 'json',
-    //        success: function(result) {
-    //            if (result == true) {
-    //                alert("Admin Deletion successful");
-    //                $('.cd-user-modal').removeClass('is-visible');
-    //            }
-    //        });
 }

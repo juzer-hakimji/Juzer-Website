@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Entities\Entity Extra Properties\MST_UserInfo.cs" />
     <Compile Include="Entities\Entity Model\CustomerContactInfo.cs">
       <DependentUpon>JuzerWebsiteModel.tt</DependentUpon>

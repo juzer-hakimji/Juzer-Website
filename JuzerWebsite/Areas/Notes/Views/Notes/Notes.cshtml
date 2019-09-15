@@ -2,15 +2,10 @@
 
 @{
     ViewBag.Title = "Notes";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section styles
 {
-    @*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">*@
-    @*<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
-        <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
-        <link href="~/Content/font-awesome.min.css" rel="stylesheet" />*@
     <link href="~/Content/css/all.css" rel="stylesheet" />
     @Styles.Render("~/StyleBundle/Notes")
 }
@@ -21,8 +16,6 @@
         <!-- this is the container wrapper -->
         <ul class="cd-switcher">
             <li><a href="#0">Add Note</a></li>
-            @*
-                <li><a href="#0">New account</a></li>*@
         </ul>
         <!-- sign up form -->
         @Html.Partial("_AddNote", Model)
@@ -55,10 +48,5 @@
 
 @section scripts
 {
-    @*<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>*@
-    @*<script src="https://kit.fontawesome.com/6f0a81b667.js"></script>*@
-    @*<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
-        <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-        <script src="~/Scripts/CustomJSScripts/jsNotes.js"></script>*@
     @Scripts.Render("~/ScriptBundle/Notes")
 }

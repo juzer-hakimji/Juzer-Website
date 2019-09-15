@@ -1,9 +1,4 @@
 ﻿
-@section styles
-{
-
-}
-
 <div class="Top-Content-Padding">
     <div>
         <h6>Note: If you delete your account all your information will be permanently deleted</h6>
@@ -16,8 +11,6 @@
                 @Html.TextBox("txtPass", "", new { @class = "full-width has-padding has-border", placeholder = "Password" })
             </p>
             <p class="fieldset">
-                @*<input class="full-width has-padding" type="submit" value="Add Note">*@
-                @*<button id="btnClose" class="full-width has-padding">Close</button>*@
                 <button id="btnDeleteAccnt" class="full-width has-padding btn btn-primary">Delete Account</button>
                 <span id="DeleteAccountValidate"></span>
             </p>
@@ -28,7 +21,6 @@
 
 @section scripts
 {
-    @*<script src="~/Scripts/CustomJSScripts/jsDeleteAccount.js"></script>*@
     @Scripts.Render("~/ScriptBundle/DeleteAccount")
 }
 
