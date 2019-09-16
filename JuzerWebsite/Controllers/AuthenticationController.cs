@@ -80,7 +80,7 @@ namespace JuzerWebsite.Controllers
         }
 
         [ValidateAntiForgeryToken]
-        [HttpPut]
+        [HttpPost]
         public ActionResult ValidatePasswordAndDeleteUser(string p_Password)
         {
             TransactionResult<object> result = BLUser.BL_ValidatePasswordAndDeleteUser(new UserLoginVM { LoginEmail = (Session["MST_UserInfo"] as MST_UserInfo).Email, LoginPassword = p_Password });

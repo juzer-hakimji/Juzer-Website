@@ -57,7 +57,7 @@ namespace JuzerWebsite.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         [AllowAnonymous]
         public ActionResult SendResetPasswordEmail(string p_Email)
         {
@@ -134,7 +134,7 @@ namespace JuzerWebsite.Controllers
             });
         }
 
-        [HttpPut]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ChangePasswordVM p_Obj)
         {

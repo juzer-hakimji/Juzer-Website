@@ -166,6 +166,9 @@
     <Content Include="Content\HomePage\magnific-popup.css" />
     <Content Include="Content\HomePage\reset.min.css" />
     <Content Include="Content\HomePage\style.css" />
+    <Content Include="Content\Images\BikeRides.jpg" />
+    <Content Include="Content\Images\camping.jpg" />
+    <Content Include="Content\Images\Football.jpg" />
     <Content Include="Content\Images\Graphs.jpg" />
     <Content Include="Content\Images\ImportantNote.png" />
     <Content Include="Content\Images\IncomesAndExpenses.jpg" />
@@ -176,6 +179,8 @@
     <Content Include="Content\Images\instagram-image5.jpg" />
     <Content Include="Content\Images\Notes.png" />
     <Content Include="Content\Images\profile-image.jpg" />
+    <Content Include="Content\Images\Travelling.jpeg" />
+    <Content Include="Content\Images\WatchingMovies.jpg" />
     <Content Include="Content\Images\work-1.jpg" />
     <Content Include="Content\Images\work-2.jpg" />
     <Content Include="Content\Images\work-3.jpg" />
@@ -229,6 +234,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap-notify.js" />
     <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Areas\Notes\Views\web.config" />

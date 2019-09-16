@@ -8,7 +8,7 @@ function AddEventHandlers() {
 }
 
 function DeleteAccountHandler() {
-    CallAjaxMethod("/Authentication/ValidatePasswordAndDeleteUser", 'PUT', { __RequestVerificationToken: $('#cd-form-DltAccnt input[name="__RequestVerificationToken"]').val(), p_Password: $("#txtPass").val() }).then(function (result) {
+    CallAjaxMethod("/Authentication/ValidatePasswordAndDeleteUser", 'POST', { __RequestVerificationToken: $('#cd-form-DltAccnt input[name="__RequestVerificationToken"]').val(), p_Password: $("#txtPass").val() }).then(function (result) {
         if (result.Success) {
             ShowResult(result.Message);
             setTimeout(function () {

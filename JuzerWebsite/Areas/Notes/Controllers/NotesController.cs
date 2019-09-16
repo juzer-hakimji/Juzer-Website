@@ -53,14 +53,14 @@ namespace JuzerWebsite.Areas.Notes.Controllers
             return Json(result);
         }
 
-        [HttpPut]
+        [HttpPost]
         public JsonResult ChangeNoteImportance(int NoteId, bool IsImportant)
         {
             TransactionResult<object> result = BLObj.BL_ChangeNoteImportance(NoteId, IsImportant);
             return Json(result);
         }
 
-        [HttpPut]
+        [HttpPost]
         public JsonResult DeleteNote(int p_NoteId)
         {
             TransactionResult<object> result = BLObj.BL_DeleteNote(p_NoteId);

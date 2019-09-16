@@ -48,7 +48,7 @@ function CloseModalHandler(event) {
 }
 
 function AddAdminHandler() {
-    CallAjaxMethod("/Analysis/AddOrRemoveAdmin", 'PUT', { __RequestVerificationToken : $('#cd-form-AddAdmin input[name="__RequestVerificationToken"]').val(), UserIds: $('.UserListAdd').val().toString(), IsAdmin: true }).then(function (result) {
+    CallAjaxMethod("/Analysis/AddOrRemoveAdmin", 'POST', { __RequestVerificationToken : $('#cd-form-AddAdmin input[name="__RequestVerificationToken"]').val(), UserIds: $('.UserListAdd').val().toString(), IsAdmin: true }).then(function (result) {
         if (result.Success) {
             ShowResult(result.Message);
             setTimeout(function () {
@@ -62,7 +62,7 @@ function AddAdminHandler() {
 }
 
 function RemoveAdminHandler() {
-    CallAjaxMethod("/Analysis/AddOrRemoveAdmin", 'PUT', { __RequestVerificationToken : $('#cd-form-RemoveAdmin input[name="__RequestVerificationToken"]').val(), UserIds: $('.UserListRemove').val().toString() , IsAdmin: false }).then(function (result) {
+    CallAjaxMethod("/Analysis/AddOrRemoveAdmin", 'POST', { __RequestVerificationToken : $('#cd-form-RemoveAdmin input[name="__RequestVerificationToken"]').val(), UserIds: $('.UserListRemove').val().toString() , IsAdmin: false }).then(function (result) {
         if (result.Success) {
             ShowResult(result.Message);
             setTimeout(function () {
