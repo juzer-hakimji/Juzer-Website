@@ -16,7 +16,7 @@
             @Html.ValidationMessageFor(x => x.Subject, null, new { @class = "cd-error-message" })
         </p>
         <p class="fieldset">
-            <label class="image-replace cd-email" for="txtNote">Note</label>
+            <label class="image-replace" for="txtNote">Note</label>
             @Html.TextAreaFor(x => x.NoteText, new { @class = "full-width has-padding has-border", placeholder = "Note", rows = "3" })
             @Html.ValidationMessageFor(x => x.NoteText, null, new { @class = "cd-error-message" })
         </p>

@@ -12,19 +12,10 @@ jQuery(document).ready(function ($) {
         $main_nav = $('.UserPopUp');
     //open modal
     $main_nav.on('click', function (event) {
-
-        //if ($(event.target).is($main_nav)) {
-        //    // on mobile open the submenu
-        //    $(this).children('ul').toggleClass('is-visible');
-        //} else {
-        //    // on mobile close submenu
-        //    $main_nav.children('ul').removeClass('is-visible');
         //show modal layer
         $form_modal.addClass('is-visible');
         //show the selected form
         ($(event.target).is('.cd-signup')) ? signup_selected() : login_selected();
-        //}
-
     });
 
     //close modal
@@ -85,7 +76,6 @@ jQuery(document).ready(function ($) {
         $form_forgot_password.removeClass('is-selected');
         $tab_login.removeClass('selected');
         $tab_signup.addClass('selected');
-        //InitCountryDropdown();
     }
 
     function forgot_password_selected() {
@@ -138,7 +128,7 @@ jQuery(document).ready(function ($) {
 
         // PRE loader
         $(window).on('load', function () {
-            $('.preloader').fadeOut(1000); // set duration in brackets    
+            $('.preloader').fadeOut(); // set duration in brackets    
         });
 
 
@@ -175,10 +165,6 @@ jQuery(document).ready(function ($) {
     //homene style end
 
     $('#btnLogin').on('click', function () {
-        //var formValid = $("#cd-form-Login").validate().form();
-        //if (!formValid) return false;
-        //var SerializedArray = $('#cd-form-Login').serializeArray();
-        //var SerializedObj = objectifyForm(SerializedArray);
         if (fn_FormValidation('#cd-form-Login')) {
             var SerializedObj = $('#cd-form-Login').serialize();
             $.ajax({
@@ -189,7 +175,6 @@ jQuery(document).ready(function ($) {
                 success: function (result) {
                     if (result.Success == false) {
                         ShowResult(result.Message);
-                        //$('#LoginValidate').text(result.Message);
                         fn_FormReset('#cd-form-Login');
                     }
                     else if (result.Success == true) {
@@ -204,10 +189,6 @@ jQuery(document).ready(function ($) {
     });
 
     $('#btnCrtAcct').on('click', function () {
-        //var formValid = $("#cd-form-SignUp").validate().form();
-        //if (!formValid) return false;
-        //var SerializedArray = $('#cd-form-SignUp').serializeArray();
-        //var SerializedObj = objectifyForm(SerializedArray);
         if (fn_FormValidation('#cd-form-SignUp')) {
             var SerializedObj = $('#cd-form-SignUp').serialize();
             $.ajax({
