@@ -1,4 +1,5 @@
 jQuery(document).ready(function ($) {
+    $('.preloader').fadeOut(); // set duration in brackets    
     InitializeForm('#cd-form-Login,#cd-form-SignUp,#cd-form-ResetPass,#contact-form');
     var $form_modal = $('.cd-user-modal'),
         $form_login = $form_modal.find('#cd-login'),
@@ -127,9 +128,9 @@ jQuery(document).ready(function ($) {
         "use strict";
 
         // PRE loader
-        $(window).on('load', function () {
-            $('.preloader').fadeOut(); // set duration in brackets    
-        });
+        //$(window).on('load', function () {
+        //    $('.preloader').fadeOut(); // set duration in brackets    
+        //});
 
 
         //Navigation Section
@@ -217,7 +218,7 @@ jQuery(document).ready(function ($) {
     $('#btnResetPass').on('click', function () {
         if (fn_FormValidation('#cd-form-ResetPass')) {
             $.ajax({
-                type: 'PUT',
+                type: 'POST',
                 url: "/User/SendResetPasswordEmail",
                 data: { p_Email: $('#ResetEmail').val() },
                 dataType: 'json',
@@ -226,7 +227,7 @@ jQuery(document).ready(function ($) {
                         ShowResult(result.Message);
                         setTimeout(function () {
                             window.location.href = result.RedirectURL;
-                        }, 1500);
+                        }, 5000);
                     }
                     else {
                         ShowResult(result.Message);
