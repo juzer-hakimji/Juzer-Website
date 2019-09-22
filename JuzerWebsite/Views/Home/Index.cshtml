@@ -8,7 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700' type='text/css">
-    @Styles.Render("~/StyleBundle/HomePage")
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+        <link rel="stylesheet" href="~/Content/HomePage/animate.css">
+        <link rel="stylesheet" href="~/Content/HomePage/magnific-popup.css">
+        <link rel="stylesheet" href="~/Content/HomePage/font-awesome.min.css">
+        <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+        <link href="~/Content/HomePage/reset.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="~/Content/HomePage/style.css">
+    @*@Styles.Render("~/StyleBundle/HomePage")*@
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
     <!-- PRE LOADER -->
@@ -31,10 +38,10 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="smoothScroll" href="#home">Home</a></li>
-                    <li><a class="smoothScroll" href="#about">About Juzer Hakimji</a></li>
-                    <li><a class="smoothScroll" href="#work">About this website</a></li>
-                    <li><a class="smoothScroll" href="#contact">Contact</a></li>
+                    <li><a class="" href="#home">Home</a></li>
+                    <li><a class="" href="#about">About Juzer Hakimji</a></li>
+                    <li><a class="" href="#work">About this website</a></li>
+                    <li><a class="" href="#contact">Contact</a></li>
                     <li><a class="UserPopUp" href="#">Sign in/Sign up</a></li>
                 </ul>
             </div>
@@ -226,6 +233,19 @@
         </div>
     </section>
     <!-- SCRIPTS -->
-    @Scripts.Render("~/ScriptBundle/HomePage")
+    @Scripts.Render("~/bundles/jquery")
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/HomePage/smoothscroll.js"></script>
+        <script src="~/Scripts/HomePage/jquery.magnific-popup.min.js"></script>
+        <script src="~/Scripts/HomePage/magnific-popup-options.js"></script>
+        <script src="~/Scripts/HomePage/wow.min.js"></script>
+        <script src="~/Scripts/select2.min.js"></script>
+        <script src="~/Scripts/bootstrap-notify.min.js"></script>
+        <script src="~/Scripts/CustomJSScripts/Common.js"></script>
+        <script src="~/Scripts/HomePage/script.js"></script>
+        <script src="~/Scripts/modernizr-2.8.3.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @*@Scripts.Render("~/ScriptBundle/HomePage")*@
 </body>
 </html>
