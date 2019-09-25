@@ -23,32 +23,32 @@ namespace DataAccessLayer.Data_Access_Classes
 
         public DBContextResult<object> DAL_SaveExpense(TRN_Expense p_TRN_Expense)
         {
-            return this.InsertExpense(p_TRN_Expense);
+            return InsertExpense(p_TRN_Expense);
         }
 
         public DBContextResult<object> DAL_SaveIncome(TRN_Income p_TRN_Income)
         {
-            return this.InsertIncome(p_TRN_Income);
+            return InsertIncome(p_TRN_Income);
         }
 
         public DBContextResult<object> DAL_UpdateExpense(TRN_Expense p_TRN_Expense)
         {
-            return this.UpdateExpense(p_TRN_Expense);
+            return UpdateExpense(p_TRN_Expense);
         }
 
         public DBContextResult<object> DAL_UpdateIncome(TRN_Income p_TRN_Income)
         {
-            return this.UpdateIncome(p_TRN_Income);
+            return UpdateIncome(p_TRN_Income);
         }
 
         public DBContextResult<object> DAL_DeleteExpense(int p_ExpenseId)
         {
-            return this.DeleteExpense(p_ExpenseId);
+            return DeleteExpense(p_ExpenseId);
         }
 
         public DBContextResult<object> DAL_DeleteIncome(int p_IncomeId)
         {
-            return this.DeleteIncome(p_IncomeId);
+            return DeleteIncome(p_IncomeId);
         }
     }
 }

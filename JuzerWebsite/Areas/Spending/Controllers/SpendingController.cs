@@ -6,9 +6,8 @@ using System.Web.Mvc;
 
 namespace JuzerWebsite.Areas.Spending.Controllers
 {
-    public class ListController : Controller
+    public class SpendingController : Controller
     {
-        // GET: Spending/List
         public ActionResult Index()
         {
             return View();
