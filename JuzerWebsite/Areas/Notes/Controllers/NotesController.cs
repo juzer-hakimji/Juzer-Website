@@ -44,7 +44,7 @@ namespace JuzerWebsite.Areas.Notes.Controllers
             TransactionResult<object> result;
             if (P_NotesVM.NoteId != null)
             {
-                result = BLObj.BL_UpdateNote(P_NotesVM, (Session["MST_UserInfo"] as MST_UserInfo).UserId);
+                result = BLObj.BL_UpdateNote(P_NotesVM);
             }
             else
             {

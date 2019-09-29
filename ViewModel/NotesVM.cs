@@ -24,3 +24,4 @@ namespace ViewModel
         public bool IsImportant { get; set; }
     }
 }
+

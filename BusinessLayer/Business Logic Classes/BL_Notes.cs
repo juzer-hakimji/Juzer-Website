@@ -25,8 +25,8 @@ namespace BusinessLayer.Business_Logic_Classes
         public List<NotesVM> BL_GetNotesList(int p_UserId)
         {
             List<NotesVM> NotesVMList = new List<NotesVM>();
-            List<usp_GetNotesList_Result> NotesList = INotesObj.Select(p_UserId).Data;
-            foreach (usp_GetNotesList_Result Note in NotesList)
+            //List<usp_GetNotesList_Result> NotesList = INotesObj.Select(p_UserId).Data;
+            foreach (usp_GetNotesList_Result Note in INotesObj.Select(p_UserId).Data)
             {
                 NotesVM NotesObj = new NotesVM
                 {
@@ -43,7 +43,16 @@ namespace BusinessLayer.Business_Logic_Classes
 
         public TransactionResult<object> BL_SaveNote(NotesVM p_NotesVM,int p_UserId)
         {
-            NoteObj = new TRN_Notes
+            //NoteObj = new TRN_Notes
+            //{
+            //    Subject = p_NotesVM.Subject,
+            //    CreatedDate = Convert.ToDateTime(p_NotesVM.CreatedDate, CultureInfo.InvariantCulture),
+            //    NoteText = p_NotesVM.NoteText,
+            //    UserId = p_UserId,
+            //    IsActive = true,
+            //    IsImportant = false
+            //};
+            if (INotesObj.Insert(new TRN_Notes
             {
                 Subject = p_NotesVM.Subject,
                 CreatedDate = Convert.ToDateTime(p_NotesVM.CreatedDate, CultureInfo.InvariantCulture),
@@ -51,8 +60,7 @@ namespace BusinessLayer.Business_Logic_Classes
                 UserId = p_UserId,
                 IsActive = true,
                 IsImportant = false
-            };
-            if (INotesObj.Insert(NoteObj).TransactionResult)
+            }).TransactionResult)
             {
                 return new TransactionResult<object>
                 {
@@ -70,17 +78,24 @@ namespace BusinessLayer.Business_Logic_Classes
             }
         }
 
-        public TransactionResult<object> BL_UpdateNote(NotesVM p_NotesVM,int p_UserId)
+        public TransactionResult<object> BL_UpdateNote(NotesVM p_NotesVM)
         {
-            NoteObj = new TRN_Notes
+            //NoteObj = new TRN_Notes
+            //{
+            //    NoteId = p_NotesVM.NoteId ?? 0,
+            //    Subject = p_NotesVM.Subject,
+            //    CreatedDate = Convert.ToDateTime(p_NotesVM.CreatedDate, CultureInfo.InvariantCulture),
+            //    NoteText = p_NotesVM.NoteText,
+            //    ModifiedDate = DateTime.UtcNow
+            //};
+            if (INotesObj.Update(new TRN_Notes
             {
                 NoteId = p_NotesVM.NoteId ?? 0,
                 Subject = p_NotesVM.Subject,
                 CreatedDate = Convert.ToDateTime(p_NotesVM.CreatedDate, CultureInfo.InvariantCulture),
                 NoteText = p_NotesVM.NoteText,
                 ModifiedDate = DateTime.UtcNow
-            };
-            if (INotesObj.Update(NoteObj).TransactionResult)
+            }).TransactionResult)
             {
                 return new TransactionResult<object>
                 {
