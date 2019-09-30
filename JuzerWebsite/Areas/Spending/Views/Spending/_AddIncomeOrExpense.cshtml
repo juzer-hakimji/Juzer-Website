@@ -1,0 +1,33 @@
+﻿@model  ViewModel.SpendingVM
+
+<div id="cd-Spending">
+    <input type="hidden" id="hdnEditId" />
+    <!-- sign up form -->
+    <form class="cd-form" id="cd-form-Spending">
+        @Html.AntiForgeryToken()
+        <p class="fieldset">
+            <label class="image-replace cd-email">Date</label>
+            @Html.TextBoxFor(x => x.CreatedDate, new { @class = "full-width has-padding has-border", placeholder = "Date" })
+            @Html.ValidationMessageFor(x => x.CreatedDate, null, new { @class = "cd-error-message" })
+        </p>
+        <p class="fieldset">
+            <label class="image-replace cd-UserName" for="">Select Category</label>
+            @Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.CategoryList, "CategoryId", "CategoryName"), "Select Category", new { @class = "full-width has-padding has-border IncomeExpenseCategory", multiple = "multiple" })
+            @Html.ValidationMessageFor(x => x.CategoryId, null, new { @class = "cd-error-message" })
+        </p>
+        <p class="fieldset">
+            <label class="image-replace cd-email" for="txtAmount">Amount</label>
+            @Html.TextBoxFor(x => x.Amount, new { @class = "full-width has-padding has-border", placeholder = "Amount", autofocus = "autofocus" })
+            @Html.ValidationMessageFor(x => x.Amount, null, new { @class = "cd-error-message" })
+        </p>
+        <p class="fieldset">
+            <label class="image-replace" for="txtNote">Note</label>
+            @Html.TextAreaFor(x => x.Note, new { @class = "full-width has-padding has-border", placeholder = "Note", rows = "3" })
+            @Html.ValidationMessageFor(x => x.Note, null, new { @class = "cd-error-message" })
+        </p>
+        <p class="fieldset">
+            <input class="full-width has-padding" id="btnAdd" type="submit" value="Add/Edit">
+            <span id="SpendingSaveValidate"></span>
+        </p>
+    </form>
+</div>

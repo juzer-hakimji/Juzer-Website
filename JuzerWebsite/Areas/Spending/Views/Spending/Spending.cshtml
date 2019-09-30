@@ -1,6 +1,78 @@
-﻿
+﻿@model  ViewModel.SpendingVM
+
 @{
-    Layout = null;
+    ViewBag.Title = "Notes";
 }
 
+@section styles
+{
+    <link href="~/Content/css/all.css" rel="stylesheet" />
+    @Styles.Render("~/StyleBundle/Spending")
+}
 
+<div class="cd-user-modal">
+    <!-- this is the entire modal form, including the background -->
+    <div class="cd-user-modal-container">
+        <!-- this is the container wrapper -->
+        <ul class="cd-switcher">
+            <li><a href="#0">Add</a></li>
+        </ul>
+        <!-- sign up form -->
+        @Html.Partial("_AddIncomeOrExpense", Model)
+        <!-- cd-signup -->
+        <a href="#0" class="cd-close-form">Close</a>
+    </div>
+    <!-- cd-user-modal-container -->
+</div>
+<div class="Top-Content-Padding">
+    <div class="jumbotron ml-auto">
+        <h4>Here you can create a list of your incomes and expenses , Edit them , and Delete them.</h4>
+        <h3><a id="AddIncome" class="btn btn-primary pull-right" href="#0">Add Income</a></h3>
+        <h3><a id="AddExpense" class="btn btn-primary pull-right" href="#0">Add Expense</a></h3>
+    </div>
+</div>
+<div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#Incomes">Incomes</a></li>
+        <li><a data-toggle="tab" href="#Expenses">Expenses</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="Incomes" class="tab-pane fade in active">
+            <table id="tblIncomesList" class="display">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div id="Expenses" class="tab-pane fade">
+            <table id="tblExpenseList" class="display">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+
+   
+</div>
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/ScriptBundle/Spending")
+}

@@ -283,6 +283,7 @@
     <Content Include="Content\webfonts\fa-solid-900.woff" />
     <Content Include="Content\webfonts\fa-solid-900.woff2" />
     <Content Include="Areas\Spending\Views\Spending\Spending.cshtml" />
+    <Content Include="Areas\Spending\Views\Spending\_AddIncomeOrExpense.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\JuzerWebsiteProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
