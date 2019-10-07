@@ -50,5 +50,7 @@ namespace DataAccessLayer.Data_Access_Classes
         {
             return DeleteIncome(p_IncomeId);
         }
+
+        public DBContextResult<List<DEV_Category>> DAL_GetCategoryList(bool IsExpense) => GetCategoryList(IsExpense);
     }
 }

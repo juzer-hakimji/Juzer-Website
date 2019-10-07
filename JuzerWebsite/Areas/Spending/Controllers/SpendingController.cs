@@ -34,41 +34,41 @@ namespace JuzerWebsite.Areas.Spending.Controllers
         {
             List<SpendingVM> ExpenseList = BLObj.BL_GetExpenseList((Session["MST_UserInfo"] as MST_UserInfo).UserId);
             List<SpendingVM> IncomeList = BLObj.BL_GetIncomesList((Session["MST_UserInfo"] as MST_UserInfo).UserId);
-            return Json(new { ExpenseList, IncomeList }, JsonRequestBehavior.AllowGet);
+            return Json(new { Success = true, ExpenseList, IncomeList }, JsonRequestBehavior.AllowGet);
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public JsonResult SaveExpenseOrIncome(SpendingVM P_SpendingVM, bool IsExpense)
+        public JsonResult SaveExpenseOrIncome(SpendingVM p_SpendingVM, bool IsExpense)
         {
             TransactionResult<object> result;
-            if (P_SpendingVM.Id != null)
+            if (p_SpendingVM.Id != null)
             {
                 if (IsExpense)
                 {
-                    result = BLObj.BL_UpdateExpense(P_SpendingVM);
+                    result = BLObj.BL_UpdateExpense(p_SpendingVM);
                 }
                 else
                 {
-                    result = BLObj.BL_UpdateIncome(P_SpendingVM);
+                    result = BLObj.BL_UpdateIncome(p_SpendingVM);
                 }
             }
             else
             {
                 if (IsExpense)
                 {
-                    result = BLObj.BL_SaveExpense(P_SpendingVM, (Session["MST_UserInfo"] as MST_UserInfo).UserId);
+                    result = BLObj.BL_SaveExpense(p_SpendingVM, (Session["MST_UserInfo"] as MST_UserInfo).UserId);
                 }
                 else
                 {
-                    result = BLObj.BL_SaveIncome(P_SpendingVM, (Session["MST_UserInfo"] as MST_UserInfo).UserId);
+                    result = BLObj.BL_SaveIncome(p_SpendingVM, (Session["MST_UserInfo"] as MST_UserInfo).UserId);
                 }
             }
             return Json(result);
         }
 
         [HttpPost]
-        public JsonResult DeleteExpenseOrIncome(int Id,bool IsExpense)
+        public JsonResult DeleteExpenseOrIncome(int Id, bool IsExpense)
         {
             TransactionResult<object> result;
             if (IsExpense)
@@ -80,6 +80,18 @@ namespace JuzerWebsite.Areas.Spending.Controllers
                 result = BLObj.BL_DeleteIncome(Id);
             }
             return Json(result);
+        }
+
+        [HttpPost]
+        public JsonResult GetCategoryList(bool IsExpense)
+        {
+            List<object> Categorylst = new List<object>();
+            BLObj.BL_GetCategoryList(IsExpense).ForEach(x => Categorylst.Add(new
+            {
+                id = x.CategoryId,
+                text = x.CategoryName
+            }));
+            return Json(Categorylst, JsonRequestBehavior.AllowGet);
         }
     }
 }

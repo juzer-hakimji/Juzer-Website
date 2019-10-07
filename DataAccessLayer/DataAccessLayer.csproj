@@ -55,6 +55,7 @@
     <Compile Include="Data Access Classes\DAL_Spending.cs" />
     <Compile Include="Data Access Classes\DAL_User.cs" />
     <Compile Include="Data Model\DBContextResult.cs" />
+    <Compile Include="Database Utilities\Enums\Enum_Dev_Category.cs" />
     <Compile Include="Database Utilities\LogError.cs" />
     <Compile Include="Interfaces\IBasicOperationsNotes.cs" />
     <Compile Include="Interfaces\IBasicOperationsUser.cs" />

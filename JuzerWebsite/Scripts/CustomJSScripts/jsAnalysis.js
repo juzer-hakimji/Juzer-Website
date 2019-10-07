@@ -19,16 +19,16 @@ function fn_SwitchTabHandler(event){
 }
 
 function OpenAddAdminModalHandler() {
-    $('.cd-user-modal').addClass('is-visible');
-    $('.cd-user-modal').find('#cd-AddAdmin').addClass('is-selected');
-    $('.cd-user-modal').find('#cd-RemoveAdmin').removeClass('is-selected');
-    $('.cd-switcher').children('li').eq(0).children('a').addClass('selected');
-    $('.cd-switcher').children('li').eq(1).children('a').removeClass('selected');
     CallAjaxMethod('/Analysis/GetAddAdminList', 'GET').then(function (result) {
         $('.UserListAdd').select2({
             data: result
         })
     });
+    $('.cd-user-modal').addClass('is-visible');
+    $('.cd-user-modal').find('#cd-AddAdmin').addClass('is-selected');
+    $('.cd-user-modal').find('#cd-RemoveAdmin').removeClass('is-selected');
+    $('.cd-switcher').children('li').eq(0).children('a').addClass('selected');
+    $('.cd-switcher').children('li').eq(1).children('a').removeClass('selected');
 }
 
 function OpenRemoveAdminModalHandler() {

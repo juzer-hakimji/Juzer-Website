@@ -2,6 +2,7 @@
 
 <div id="cd-Spending">
     <input type="hidden" id="hdnEditId" />
+    <input type="hidden" id="IsExpense" />
     <!-- sign up form -->
     <form class="cd-form" id="cd-form-Spending">
         @Html.AntiForgeryToken()
@@ -12,7 +13,7 @@
         </p>
         <p class="fieldset">
             <label class="image-replace cd-UserName" for="">Select Category</label>
-            @Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.CategoryList, "CategoryId", "CategoryName"), "Select Category", new { @class = "full-width has-padding has-border IncomeExpenseCategory", multiple = "multiple" })
+            @Html.DropDownList("Category", new SelectList(Model.CategoryList, "CategoryId", "CategoryName"), "Select Category", new { @class = "full-width has-padding has-border IncomeExpenseCategory", multiple = "multiple" })
             @Html.ValidationMessageFor(x => x.CategoryId, null, new { @class = "cd-error-message" })
         </p>
         <p class="fieldset">

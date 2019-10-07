@@ -192,6 +192,7 @@ jQuery(document).ready(function ($) {
     $('#btnCrtAcct').on('click', function () {
         if (fn_FormValidation('#cd-form-SignUp')) {
             var SerializedObj = $('#cd-form-SignUp').serialize();
+            ShowResult("Registering , Please Wait!");
             $.ajax({
                 type: 'POST',
                 url: "/User/Save",

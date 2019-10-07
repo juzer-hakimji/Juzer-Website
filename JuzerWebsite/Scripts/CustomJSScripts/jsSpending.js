@@ -1,52 +1,52 @@
-﻿var IncomeDataTable,ExpenseDataTable;
+﻿var IncomeDataTable, ExpenseDataTable;
+var Columns =
 
-$(document).ready(function () {
-    AddEventHandlers();
-    InitializeForm('#cd-form-Notes');
-    DataTableInit();
-});
+    $(document).ready(function () {
+        AddEventHandlers();
+        InitializeForm('#cd-form-Spending');
+        fn_InitDataTable();
+    });
 
 function AddEventHandlers() {
-    $("body").on('click', '.IsImp', ChangeNoteImportanceHandler);
-    $("body").on('click', '.EditNote', EditNoteHandler);
-    $("body").on('click', '.DeleteNote', DeleteNoteHandler);
-    $("#AddNote").on('click', OpenAddNoteModalHandler);
+    $("body").on('click', '.EditIncome', EditHandler);
+    $("body").on('click', '.EditExpense', EditHandler);
+
+    $("body").on('click', '.DeleteIncome', DeleteHandler);
+    $("body").on('click', '.DeleteExpense', DeleteHandler);
+
+    $("#AddIncome").on('click', OpenAddModalHandler);
+    $("#AddExpense").on('click', OpenAddModalHandler);
+
     $(".cd-user-modal").on('click', CloseModalHandler);
-    $("#btnAddNote").on('click', AddNoteHandler);
+    $("#btnAdd").on('click', AddHandler);
     CloseModalWhenEsc($('.cd-user-modal'));
 }
 
-function ChangeNoteImportanceHandler() {
+function EditHandler() {
     var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
-    if ($(this).children('i').attr("class") == 'fas fa-star') {
-        //To mark not important
-        CallAjaxMethod("/Notes/ChangeNoteImportance", 'POST', { NoteId: CurrentRowdata.NoteId, IsImportant: false }).then(function (result) {
-            ShowResult(result.Message);
-        });
-        $(this).children('i').attr("class", "far fa-star");
+    if ($(this).attr('class') == 'EditExpense') {
+        fn_OpenModal(true);
     }
     else {
-        //To mark important
-        CallAjaxMethod("/Notes/ChangeNoteImportance", 'POST', { NoteId: CurrentRowdata.NoteId, IsImportant: true }).then(function (result) {
-            ShowResult(result.Message);
-        });
-        $(this).children('i').attr("class", "fas fa-star");
+        fn_OpenModal(false);
     }
-}
-
-function EditNoteHandler() {
-    var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
-    $('#hdnEditNoteId').val(CurrentRowdata.NoteId);
+    $('#hdnEditId').val(CurrentRowdata.Id);
     $('#CreatedDate').val(CurrentRowdata.CreatedDate);
-    $('#Subject').val(CurrentRowdata.Subject);
-    $('#NoteText').val(CurrentRowdata.NoteText);
-    fn_OpenModal();
+    $('#Category').val(CurrentRowdata.CategoryId);
+    $('#Amount').val(CurrentRowdata.Amount);
+    $('#Note').val(CurrentRowdata.Note);
 }
 
-function DeleteNoteHandler() {
+function DeleteHandler() {
+    if ($(this).attr('class') == 'DeleteExpense') {
+        $('#IsExpense').val(true);
+    }
+    else {
+        $('#IsExpense').val(false);
+    }
     var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
     bootbox.confirm({
-        message: "Note will be deleted.Are you sure?",
+        message: $('#IsExpense').val() ? "Expense will be deleted.Are you sure?" : "Income will be deleted.Are you sure?",
         buttons: {
             confirm: {
                 label: 'Yes',
@@ -59,7 +59,7 @@ function DeleteNoteHandler() {
         },
         callback: function (result) {
             if (result == true) {
-                CallAjaxMethod("/Notes/DeleteNote", 'POST', { p_NoteId: CurrentRowdata.NoteId }).then(function (result) {
+                CallAjaxMethod("/Notes/DeleteExpenseOrIncome", 'POST', { Id: CurrentRowdata.Id, IsExpense: $('#IsExpense').val() }).then(function (result) {
                     ShowResult(result.Message);
                     fn_InitDataTable();
                 });
@@ -69,8 +69,15 @@ function DeleteNoteHandler() {
     $('.bootbox').removeClass("fade");
 }
 
-function OpenAddNoteModalHandler() {
-    fn_OpenModal();
+function OpenAddModalHandler() {
+    var flag;
+    if ($(this).attr('id') == 'AddExpense') {
+        flag = true;
+    }
+    else {
+        flag = false;
+    }
+    fn_OpenModal(flag);
 }
 
 function CloseModalHandler() {
@@ -80,12 +87,12 @@ function CloseModalHandler() {
     }
 }
 
-function AddNoteHandler() {
-    if (fn_FormValidation('#cd-form-Notes')) {
-        var SerializedArray = $('#cd-form-Notes').serializeArray();
+function AddHandler() {
+    if (fn_FormValidation('#cd-form-Spending')) {
+        var SerializedArray = $('#cd-form-Spending').serializeArray();
         var SerializedObj = objectifyForm(SerializedArray);
-        SerializedObj["NoteId"] = $('#hdnEditNoteId').val() == "" ? null : $('#hdnEditNoteId').val();
-        CallAjaxMethod("/Notes/SaveNote", 'POST', SerializedObj).then(function (result) {
+        SerializedObj["Id"] = $('#hdnEditId').val() == "" ? null : $('#hdnEditId').val();
+        CallAjaxMethod("/Notes/SaveExpenseOrIncome", 'POST', { p_SpendingVM: SerializedObj, IsExpense: $('#IsExpense').val() }).then(function (result) {
             if (result.Success == true) {
                 ShowResult(result.Message);
                 fn_AfterSave();
@@ -101,9 +108,14 @@ function AddNoteHandler() {
 }
 
 
-function fn_OpenModal() {
+function fn_OpenModal(IsExpense) {
+    CallAjaxMethod('/Spending/GetCategoryList', 'POST', { IsExpense: IsExpense }).then(function (result) {
+        $('#Category').select2({
+            data: result
+        })
+    });
     $('.cd-user-modal').addClass('is-visible');
-    $('.cd-user-modal').find('#cd-Notes').addClass('is-selected');
+    $('.cd-user-modal').find('#cd-Spending').addClass('is-selected');
     $('#CreatedDate').datepicker({
         dateFormat: "dd/M/yy",
         changeMonth: true,
@@ -112,45 +124,49 @@ function fn_OpenModal() {
 }
 
 function DataTableInit() {
-    DataTable = $('#tblNotesList').DataTable({
-        "ajax": {
-            url: "/Notes/GetListData",
-            dataSrc: ''
-        },
-        "columns": [
-            {
-                "data": "NoteId",
-                "render": function (data, type, row) {
-                    return '<a href="#"><i class="fa fa-pencil EditNote" title="Edit" ></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-trash DeleteNote" title="Delete"></i></a>';
-                }
-            },
-            {
-                "data": "IsImportant",
-                "render": function (IsImportant, type, row) {
-                    var strData = "";
-                    if (IsImportant) {
-                        strData = '<span class="IsImp"><i class="fas fa-star" title="Mark Important"></i></span>';
+    CallAjaxMethod("/Notes/SaveExpenseOrIncome", 'GET').then(function (result) {
+        ExpenseDataTable = $('#tblExpenseList').DataTable({
+            data: result.ExpenseList,
+            "columns": [
+                {
+                    "data": "Id",
+                    "render": function (data, type, row) {
+                        return '<a href="#"><i class="fa fa-pencil EditExpense" title="Edit" ></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-trash DeleteExpense" title="Delete"></i></a>';
                     }
-                    else {
-                        strData = '<span class="IsImp"><i class="far fa-star" title="Mark Important"></i></span>';
+                },
+                { "data": "CreatedDate" },
+                { "data": "CategoryName" },
+                { "data": "Amount" },
+                { "data": "Note" }
+            ]
+        });
+
+        IncomeDataTable = $('#tblIncomesList').DataTable({
+            data: result.IncomeList,
+            "columns": [
+                {
+                    "data": "Id",
+                    "render": function (data, type, row) {
+                        return '<a href="#"><i class="fa fa-pencil EditIncome" title="Edit" ></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-trash DeleteIncome" title="Delete"></i></a>';
                     }
-                    return strData;
-                }
-            },
-            { "data": "CreatedDate" },
-            { "data": "Subject" },
-            { "data": "NoteText" },
-        ]
+                },
+                { "data": "CreatedDate" },
+                { "data": "CategoryName" },
+                { "data": "Amount" },
+                { "data": "Note" }
+            ]
+        });
     });
+
 }
 
 function fn_AfterSave() {
     fn_InitDataTable();
     $('.cd-user-modal').removeClass('is-visible');
-    fn_FormReset('#cd-form-Notes');
+    fn_FormReset('#cd-form-Spending');
 }
 
 function fn_InitDataTable() {
-    $('#tblNotesList').DataTable().destroy();
+    $('#tblIncomesList,#tblExpenseList').DataTable().destroy();
     DataTableInit();
 }

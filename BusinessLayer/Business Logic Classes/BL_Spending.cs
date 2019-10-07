@@ -211,5 +211,15 @@ namespace BusinessLayer.Business_Logic_Classes
                 };
             }
         }
+
+        public List<CategoryVM> BL_GetCategoryList(bool IsExpense)
+        {
+            List<CategoryVM> CategoryList = new List<CategoryVM>();
+            foreach (var Category in DALObj.DAL_GetCategoryList(IsExpense).Data)
+            {
+                CategoryList.Add(new CategoryVM { CategoryId = Category.CategoryId, CategoryName = Category.CategoryName });
+            }
+            return CategoryList;
+        }
     }
 }
