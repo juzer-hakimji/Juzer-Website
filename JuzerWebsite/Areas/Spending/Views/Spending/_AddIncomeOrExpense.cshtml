@@ -13,7 +13,7 @@
         </p>
         <p class="fieldset">
             <label class="image-replace cd-UserName" for="">Select Category</label>
-            @Html.DropDownList("Category", new SelectList(Model.CategoryList, "CategoryId", "CategoryName"), "Select Category", new { @class = "full-width has-padding has-border IncomeExpenseCategory", multiple = "multiple" })
+            @Html.DropDownList("CategoryId", new SelectList(Model.CategoryList, "CategoryId", "CategoryName"), "Select Category", new { @class = "full-width has-padding has-border IncomeExpenseCategory", multiple = "multiple" })
             @Html.ValidationMessageFor(x => x.CategoryId, null, new { @class = "cd-error-message" })
         </p>
         <p class="fieldset">

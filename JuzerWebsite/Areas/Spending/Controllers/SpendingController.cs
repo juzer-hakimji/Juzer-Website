@@ -39,12 +39,12 @@ namespace JuzerWebsite.Areas.Spending.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public JsonResult SaveExpenseOrIncome(SpendingVM p_SpendingVM, bool IsExpense)
+        public JsonResult SaveExpenseOrIncome(SpendingVM p_SpendingVM)
         {
             TransactionResult<object> result;
             if (p_SpendingVM.Id != null)
             {
-                if (IsExpense)
+                if (Convert.ToBoolean(p_SpendingVM.IsExpense))
                 {
                     result = BLObj.BL_UpdateExpense(p_SpendingVM);
                 }
@@ -55,7 +55,7 @@ namespace JuzerWebsite.Areas.Spending.Controllers
             }
             else
             {
-                if (IsExpense)
+                if (Convert.ToBoolean(p_SpendingVM.IsExpense))
                 {
                     result = BLObj.BL_SaveExpense(p_SpendingVM, (Session["MST_UserInfo"] as MST_UserInfo).UserId);
                 }

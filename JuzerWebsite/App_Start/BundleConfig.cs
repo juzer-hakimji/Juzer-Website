@@ -38,6 +38,12 @@ namespace JuzerWebsite
             bundles.Add(new StyleBundle("~/StyleBundle/Analysis").Include(
                       "~/Content/css/select2.min.css"));
 
+            bundles.Add(new StyleBundle("~/StyleBundle/Spending").Include(
+                     "~/Content/DataTables/css/jquery.dataTables.css",
+                     "~/Content/themes/base/jquery-ui.min.css",
+                     "~/Content/font-awesome.min.css",
+                     "~/Content/css/select2.min.css"
+                     ));
 
             #endregion
 
@@ -77,8 +83,8 @@ namespace JuzerWebsite
                       "~/Scripts/CustomJSScripts/jsNotes.js"));
 
             bundles.Add(new ScriptBundle("~/ScriptBundle/Analysis").Include(
-                      "~/Scripts/select2.min.js"
-                      , "~/Scripts/CustomJSScripts/jsAnalysis.js"
+                      "~/Scripts/select2.min.js",
+                      "~/Scripts/CustomJSScripts/jsAnalysis.js"
                       )
                       );
 
@@ -87,6 +93,14 @@ namespace JuzerWebsite
 
             bundles.Add(new ScriptBundle("~/ScriptBundle/ChangePassword").Include(
                       "~/Scripts/CustomJSScripts/jsChangePassword.js"));
+
+            bundles.Add(new ScriptBundle("~/ScriptBundle/Spending").Include(
+                      "~/Scripts/DataTables/jquery.dataTables.min.js",
+                      "~/Scripts/jquery-ui-1.12.1.min.js",
+                      "~/Scripts/select2.min.js"
+                      //,"~/Scripts/CustomJSScripts/jsSpending.js"
+                      )
+                      );
 
             #endregion
 

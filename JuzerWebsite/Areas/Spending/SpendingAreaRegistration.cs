@@ -16,8 +16,8 @@ namespace JuzerWebsite.Areas.Spending
         {
             context.MapRoute(
                 "Spending_default",
-                "Spending/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                "Spending/{action}/{id}",
+                new { controller = "Spending", action = "List", id = UrlParameter.Optional }
             );
         }
     }

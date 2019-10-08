@@ -32,7 +32,7 @@ function EditHandler() {
     }
     $('#hdnEditId').val(CurrentRowdata.Id);
     $('#CreatedDate').val(CurrentRowdata.CreatedDate);
-    $('#Category').val(CurrentRowdata.CategoryId);
+    $('#CategoryId').val(CurrentRowdata.CategoryId);
     $('#Amount').val(CurrentRowdata.Amount);
     $('#Note').val(CurrentRowdata.Note);
 }
@@ -59,7 +59,7 @@ function DeleteHandler() {
         },
         callback: function (result) {
             if (result == true) {
-                CallAjaxMethod("/Notes/DeleteExpenseOrIncome", 'POST', { Id: CurrentRowdata.Id, IsExpense: $('#IsExpense').val() }).then(function (result) {
+                CallAjaxMethod("/Spending/DeleteExpenseOrIncome", 'POST', { Id: CurrentRowdata.Id, IsExpense: $('#IsExpense').val() }).then(function (result) {
                     ShowResult(result.Message);
                     fn_InitDataTable();
                 });
@@ -92,7 +92,8 @@ function AddHandler() {
         var SerializedArray = $('#cd-form-Spending').serializeArray();
         var SerializedObj = objectifyForm(SerializedArray);
         SerializedObj["Id"] = $('#hdnEditId').val() == "" ? null : $('#hdnEditId').val();
-        CallAjaxMethod("/Notes/SaveExpenseOrIncome", 'POST', { p_SpendingVM: SerializedObj, IsExpense: $('#IsExpense').val() }).then(function (result) {
+        SerializedObj["IsExpense"] = $('#IsExpense').val() == "" ? null : $('#IsExpense').val();
+        CallAjaxMethod("/Spending/SaveExpenseOrIncome", 'POST', SerializedObj).then(function (result) {
             if (result.Success == true) {
                 ShowResult(result.Message);
                 fn_AfterSave();
@@ -110,7 +111,7 @@ function AddHandler() {
 
 function fn_OpenModal(IsExpense) {
     CallAjaxMethod('/Spending/GetCategoryList', 'POST', { IsExpense: IsExpense }).then(function (result) {
-        $('#Category').select2({
+        $('#CategoryId').select2({
             data: result
         })
     });
@@ -124,7 +125,7 @@ function fn_OpenModal(IsExpense) {
 }
 
 function DataTableInit() {
-    CallAjaxMethod("/Notes/SaveExpenseOrIncome", 'GET').then(function (result) {
+    CallAjaxMethod("/Spending/SaveExpenseOrIncome", 'GET').then(function (result) {
         ExpenseDataTable = $('#tblExpenseList').DataTable({
             data: result.ExpenseList,
             "columns": [

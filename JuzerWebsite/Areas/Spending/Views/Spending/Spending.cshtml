@@ -8,6 +8,9 @@
 {
     <link href="~/Content/css/all.css" rel="stylesheet" />
     @Styles.Render("~/StyleBundle/Spending")
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 }
 
 <div class="cd-user-modal">
@@ -66,13 +69,11 @@
         </div>
     </div>
 
-
-   
 </div>
-
 
 
 @section scripts
 {
     @Scripts.Render("~/ScriptBundle/Spending")
+    <script src="~/Scripts/CustomJSScripts/jsSpending.js"></script>
 }
