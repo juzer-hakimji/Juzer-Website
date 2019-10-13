@@ -101,7 +101,7 @@ namespace DataAccessLayer.Abstract_Classes
         {
             return ExecuteDALMethod(db, (DataContext, p_InfoObj) =>
             {
-                DataContext.CustomerContactInfo.Add(p_InfoObj);
+                DataContext.CustomerContactInfoes.Add(p_InfoObj);
                 DataContext.SaveChanges();
                 return true;
             }, InfoObj);

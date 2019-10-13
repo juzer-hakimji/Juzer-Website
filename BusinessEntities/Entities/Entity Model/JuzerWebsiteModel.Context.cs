@@ -36,7 +36,7 @@ namespace BusinessEntities.Entities.Entity_Model
         public virtual DbSet<TRN_Income> TRN_Income { get; set; }
         public virtual DbSet<TRN_Notes> TRN_Notes { get; set; }
         public virtual DbSet<WebsiteErrorLog> WebsiteErrorLogs { get; set; }
-        public virtual DbSet<CustomerContactInfo> CustomerContactInfo { get; set; }
+        public virtual DbSet<CustomerContactInfo> CustomerContactInfoes { get; set; }
     
         public virtual ObjectResult<usp_GetExpenseList_Result> usp_GetExpenseList(Nullable<int> userId)
         {

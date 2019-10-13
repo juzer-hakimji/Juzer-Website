@@ -27,15 +27,15 @@ namespace BusinessLayer.Business_Logic_Classes
         public List<SpendingVM> BL_GetExpenseList(int p_UserId)
         {
             SpendingVMList = new List<SpendingVM>();
-            //List<usp_GetExpenseList_Result> ExpenseListObj = DALObj.DAL_GetExpenseList(p_UserId).Data;
             foreach (usp_GetExpenseList_Result Expense in DALObj.DAL_GetExpenseList(p_UserId).Data)
             {
                 SpendingVM SpendingVMObj = new SpendingVM
                 {
                     Id = Expense.ExpenseId,
                     CategoryId = Expense.CategoryId,
+                    CategoryName = Expense.CategoryName,
                     Amount = Expense.Amount,
-                    CreatedDate = Expense.CreatedDate.ToString(),
+                    CreatedDate = Expense.CreatedDate.ToString("dd/MMM/yyyy"),
                     Note = Expense.Note
                 };
                 SpendingVMList.Add(SpendingVMObj);
@@ -46,15 +46,15 @@ namespace BusinessLayer.Business_Logic_Classes
         public List<SpendingVM> BL_GetIncomesList(int p_UserId)
         {
             SpendingVMList = new List<SpendingVM>();
-            //List<usp_GetIncomesList_Result> IncomesListObj = DALObj.DAL_GetIncomesList(p_UserId).Data;
             foreach (usp_GetIncomesList_Result Income in DALObj.DAL_GetIncomesList(p_UserId).Data)
             {
                 SpendingVM SpendingVMObj = new SpendingVM
                 {
                     Id = Income.IncomeId,
                     CategoryId = Income.CategoryId,
+                    CategoryName = Income.CategoryName,
                     Amount = Income.Amount,
-                    CreatedDate = Income.CreatedDate.ToString(),
+                    CreatedDate = Income.CreatedDate.ToString("dd/MMM/yyyy"),
                     Note = Income.Note
                 };
                 SpendingVMList.Add(SpendingVMObj);
@@ -67,7 +67,7 @@ namespace BusinessLayer.Business_Logic_Classes
             if (DALObj.DAL_SaveExpense(new TRN_Expense
             {
                 CategoryId = p_SpendingVMObj.CategoryId,
-                Amount = p_SpendingVMObj.Amount,
+                Amount = p_SpendingVMObj.Amount ?? 0,
                 CreatedDate = Convert.ToDateTime(p_SpendingVMObj.CreatedDate, CultureInfo.InvariantCulture),
                 Note = p_SpendingVMObj.Note,
                 UserId = p_UserId,
@@ -95,7 +95,7 @@ namespace BusinessLayer.Business_Logic_Classes
             if (DALObj.DAL_SaveIncome(new TRN_Income
             {
                 CategoryId = p_SpendingVMObj.CategoryId,
-                Amount = p_SpendingVMObj.Amount,
+                Amount = p_SpendingVMObj.Amount ?? 0,
                 CreatedDate = Convert.ToDateTime(p_SpendingVMObj.CreatedDate, CultureInfo.InvariantCulture),
                 Note = p_SpendingVMObj.Note,
                 UserId = p_UserId,
@@ -124,7 +124,7 @@ namespace BusinessLayer.Business_Logic_Classes
             {
                 ExpenseId = p_SpendingVMObj.Id ?? 0,
                 CategoryId = p_SpendingVMObj.CategoryId,
-                Amount = p_SpendingVMObj.Amount,
+                Amount = p_SpendingVMObj.Amount ?? 0,
                 CreatedDate = Convert.ToDateTime(p_SpendingVMObj.CreatedDate, CultureInfo.InvariantCulture),
                 Note = p_SpendingVMObj.Note
             }).TransactionResult)
@@ -151,7 +151,7 @@ namespace BusinessLayer.Business_Logic_Classes
             {
                 IncomeId = p_SpendingVMObj.Id ?? 0,
                 CategoryId = p_SpendingVMObj.CategoryId,
-                Amount = p_SpendingVMObj.Amount,
+                Amount = p_SpendingVMObj.Amount ?? 0,
                 CreatedDate = Convert.ToDateTime(p_SpendingVMObj.CreatedDate, CultureInfo.InvariantCulture),
                 Note = p_SpendingVMObj.Note
             }).TransactionResult)

@@ -25,7 +25,6 @@ namespace BusinessLayer.Business_Logic_Classes
         public List<NotesVM> BL_GetNotesList(int p_UserId)
         {
             List<NotesVM> NotesVMList = new List<NotesVM>();
-            //List<usp_GetNotesList_Result> NotesList = INotesObj.Select(p_UserId).Data;
             foreach (usp_GetNotesList_Result Note in INotesObj.Select(p_UserId).Data)
             {
                 NotesVM NotesObj = new NotesVM

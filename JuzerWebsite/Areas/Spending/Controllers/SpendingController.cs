@@ -85,7 +85,14 @@ namespace JuzerWebsite.Areas.Spending.Controllers
         [HttpPost]
         public JsonResult GetCategoryList(bool IsExpense)
         {
-            List<object> Categorylst = new List<object>();
+            List<object> Categorylst = new List<object>
+            {
+                new
+                {
+                    id = "",
+                    text = "Select Category"
+                }
+            };
             BLObj.BL_GetCategoryList(IsExpense).ForEach(x => Categorylst.Add(new
             {
                 id = x.CategoryId,

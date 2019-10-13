@@ -66,5 +66,6 @@ function fn_ShowValidationErrors() {
 
 function fn_FormReset(FormSelector) {
     $(FormSelector).trigger("reset");
+    $('#hdnEditId').val('');
 }
 

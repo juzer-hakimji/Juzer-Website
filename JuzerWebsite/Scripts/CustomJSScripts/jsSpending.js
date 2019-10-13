@@ -1,11 +1,14 @@
-﻿var IncomeDataTable, ExpenseDataTable;
-var Columns =
+﻿var IncomeDataTable, ExpenseDataTable, IsExpense;
 
-    $(document).ready(function () {
-        AddEventHandlers();
-        InitializeForm('#cd-form-Spending');
-        fn_InitDataTable();
-    });
+$(document).ready(function () {
+    AddEventHandlers();
+    InitializeForm('#cd-form-Spending');
+    fn_InitDataTable();
+    //$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    //    //$.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+    //    ExpenseDataTable.columns.adjust();
+    //});
+});
 
 function AddEventHandlers() {
     $("body").on('click', '.EditIncome', EditHandler);
@@ -23,30 +26,38 @@ function AddEventHandlers() {
 }
 
 function EditHandler() {
-    var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
-    if ($(this).attr('class') == 'EditExpense') {
-        fn_OpenModal(true);
+    if ($(this).attr('class').includes("EditExpense")) {
+        fn_SetIsExpense(true);
+        var CurrentRowdata = ExpenseDataTable.row($(this).parents('tr')).data();
+        fn_OpenModal(CurrentRowdata.CategoryId);
     }
     else {
-        fn_OpenModal(false);
+        fn_SetIsExpense(false);
+        var CurrentRowdata = IncomeDataTable.row($(this).parents('tr')).data();
+        fn_OpenModal(CurrentRowdata.CategoryId);
     }
     $('#hdnEditId').val(CurrentRowdata.Id);
     $('#CreatedDate').val(CurrentRowdata.CreatedDate);
-    $('#CategoryId').val(CurrentRowdata.CategoryId);
+    //$('#CategoryId').val(CurrentRowdata.CategoryId).trigger('change.select2');
     $('#Amount').val(CurrentRowdata.Amount);
     $('#Note').val(CurrentRowdata.Note);
 }
 
 function DeleteHandler() {
-    if ($(this).attr('class') == 'DeleteExpense') {
-        $('#IsExpense').val(true);
+    if ($(this).attr('class').includes("DeleteExpense")) {
+        fn_SetIsExpense(true);
+        //IsExpense = true;
+        //$('#IsExpense').val(true);
+        var CurrentRowdata = ExpenseDataTable.row($(this).parents('tr')).data();
     }
     else {
-        $('#IsExpense').val(false);
+        //IsExpense = false;
+        fn_SetIsExpense(false);
+        //$('#IsExpense').val(false);
+        var CurrentRowdata = IncomeDataTable.row($(this).parents('tr')).data();
     }
-    var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
     bootbox.confirm({
-        message: $('#IsExpense').val() ? "Expense will be deleted.Are you sure?" : "Income will be deleted.Are you sure?",
+        message: IsExpense ? "Expense will be deleted.Are you sure?" : "Income will be deleted.Are you sure?",
         buttons: {
             confirm: {
                 label: 'Yes',
@@ -59,7 +70,7 @@ function DeleteHandler() {
         },
         callback: function (result) {
             if (result == true) {
-                CallAjaxMethod("/Spending/DeleteExpenseOrIncome", 'POST', { Id: CurrentRowdata.Id, IsExpense: $('#IsExpense').val() }).then(function (result) {
+                CallAjaxMethod("/Spending/DeleteExpenseOrIncome", 'POST', { Id: CurrentRowdata.Id, IsExpense: IsExpense }).then(function (result) {
                     ShowResult(result.Message);
                     fn_InitDataTable();
                 });
@@ -70,14 +81,18 @@ function DeleteHandler() {
 }
 
 function OpenAddModalHandler() {
-    var flag;
+    //var flag;
     if ($(this).attr('id') == 'AddExpense') {
-        flag = true;
+        fn_SetIsExpense(true);
+        //IsExpense = true;
+        //flag = true;
     }
     else {
-        flag = false;
+        fn_SetIsExpense(false);
+        //IsExpense = false;
+        //flag = false;
     }
-    fn_OpenModal(flag);
+    fn_OpenModal();
 }
 
 function CloseModalHandler() {
@@ -92,7 +107,8 @@ function AddHandler() {
         var SerializedArray = $('#cd-form-Spending').serializeArray();
         var SerializedObj = objectifyForm(SerializedArray);
         SerializedObj["Id"] = $('#hdnEditId').val() == "" ? null : $('#hdnEditId').val();
-        SerializedObj["IsExpense"] = $('#IsExpense').val() == "" ? null : $('#IsExpense').val();
+        //SerializedObj["IsExpense"] = $('#IsExpense').val() == "" ? null : $('#IsExpense').val();
+        SerializedObj["IsExpense"] = IsExpense;
         CallAjaxMethod("/Spending/SaveExpenseOrIncome", 'POST', SerializedObj).then(function (result) {
             if (result.Success == true) {
                 ShowResult(result.Message);
@@ -108,12 +124,13 @@ function AddHandler() {
     }
 }
 
-
-function fn_OpenModal(IsExpense) {
+function fn_OpenModal(CategoryId) {
+    $('#CategoryId').empty();
     CallAjaxMethod('/Spending/GetCategoryList', 'POST', { IsExpense: IsExpense }).then(function (result) {
         $('#CategoryId').select2({
             data: result
         })
+        $('#CategoryId').val(CategoryId).trigger('change.select2');
     });
     $('.cd-user-modal').addClass('is-visible');
     $('.cd-user-modal').find('#cd-Spending').addClass('is-selected');
@@ -125,8 +142,9 @@ function fn_OpenModal(IsExpense) {
 }
 
 function DataTableInit() {
-    CallAjaxMethod("/Spending/SaveExpenseOrIncome", 'GET').then(function (result) {
+    CallAjaxMethod("/Spending/GetListData", 'GET').then(function (result) {
         ExpenseDataTable = $('#tblExpenseList').DataTable({
+            "bAutoWidth": false,
             data: result.ExpenseList,
             "columns": [
                 {
@@ -136,13 +154,22 @@ function DataTableInit() {
                     }
                 },
                 { "data": "CreatedDate" },
-                { "data": "CategoryName" },
+                {
+                    "data": "CategoryId",
+                    "render": function (data, type, row) {
+                        return row.CategoryName;
+                    }
+                },
+                //{ "data": "CategoryName" },
                 { "data": "Amount" },
                 { "data": "Note" }
+                //,
+                //{ "data": "CategoryId" }
             ]
         });
 
         IncomeDataTable = $('#tblIncomesList').DataTable({
+            "bAutoWidth": false,
             data: result.IncomeList,
             "columns": [
                 {
@@ -152,13 +179,18 @@ function DataTableInit() {
                     }
                 },
                 { "data": "CreatedDate" },
-                { "data": "CategoryName" },
+                {
+                    "data": "CategoryId",
+                    "render": function (data, type, row) {
+                        return row.CategoryName;
+                    }
+                },
+                //{ "data": "CategoryName" },
                 { "data": "Amount" },
                 { "data": "Note" }
             ]
         });
     });
-
 }
 
 function fn_AfterSave() {
@@ -170,4 +202,8 @@ function fn_AfterSave() {
 function fn_InitDataTable() {
     $('#tblIncomesList,#tblExpenseList').DataTable().destroy();
     DataTableInit();
+}
+
+function fn_SetIsExpense(p_IsExpense) {
+    IsExpense = p_IsExpense;
 }
