@@ -13,21 +13,25 @@ namespace BusinessLayer.Business_Logic_Classes
     {
         private DAL_Home DALObj { get; set; }
 
-        BL_Home()
+        public BL_Home()
         {
             DALObj = new DAL_Home();
         }
 
-        public void BL_GetDataForComparison(int p_UserId)
+        public UserHomeVM BL_GetDataForComparison(int p_UserId)
         {
-
+            List<usp_GetIESummary_Result> Summarylst = DALObj.DAL_GetDataForComparison(p_UserId).Data;
+            return new UserHomeVM
+            {
+                MonthVM = new MonthVM { MonthExpense = Summarylst[0].MonthExpense, MonthIncome = Summarylst[0].MonthIncome },
+                YearVM = new YearVM { YearExpense = Summarylst[0].YearExpense, YearIncome = Summarylst[0].YearIncome }
+            };
         }
 
         public List<NotesVM> BL_GetImportantNotes(int p_UserId)
         {
             List<NotesVM> NotesVMList = new List<NotesVM>();
-            List<TRN_Notes> NotesList = DALObj.DAL_GetImportantNotes(p_UserId).Data;
-            foreach (TRN_Notes Note in NotesList)
+            foreach (TRN_Notes Note in DALObj.DAL_GetImportantNotes(p_UserId).Data)
             {
                 NotesVM NotesObj = new NotesVM
                 {

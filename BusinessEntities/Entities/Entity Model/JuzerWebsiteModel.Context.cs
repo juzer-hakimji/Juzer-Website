@@ -73,5 +73,14 @@ namespace BusinessEntities.Entities.Entity_Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("AskMe", idParameter);
         }
+    
+        public virtual ObjectResult<usp_GetIESummary_Result> usp_GetIESummary(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetIESummary_Result>("usp_GetIESummary", userIdParameter);
+        }
     }
 }

@@ -11,9 +11,9 @@ namespace DataAccessLayer.Data_Access_Classes
 {
     public class DAL_Home: Abstract_Home
     {
-        public void DAL_GetDataForComparison(int p_UserId)
+        public DBContextResult<List<usp_GetIESummary_Result>> DAL_GetDataForComparison(int p_UserId)
         {
-
+            return GetDataForComparison(p_UserId);
         }
 
         public DBContextResult<List<TRN_Notes>> DAL_GetImportantNotes(int p_UserId)

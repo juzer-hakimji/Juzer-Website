@@ -84,6 +84,9 @@
     <Compile Include="Entities\Entity Model\MST_UserInfo.cs">
       <DependentUpon>JuzerWebsiteModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Entity Model\usp_GetIESummary_Result.cs">
+      <DependentUpon>JuzerWebsiteModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Entity Model\WebsiteErrorLog.cs">
       <DependentUpon>JuzerWebsiteModel.tt</DependentUpon>
     </Compile>

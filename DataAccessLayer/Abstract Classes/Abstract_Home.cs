@@ -18,14 +18,17 @@ namespace DataAccessLayer.Abstract_Classes
             db = new JuzerWebsiteEntities();
         }
 
-        protected void GetDataForComparison(int p_UserId)
+        protected DBContextResult<List<usp_GetIESummary_Result>> GetDataForComparison(int p_UserId)
         {
-            //get total of incomes and total of expenses for current month and year using stored procedure
+            return ExecuteDALMethod<int, List<usp_GetIESummary_Result>>(db, (DataContext, P_UserId) =>
+            {
+                return DataContext.usp_GetIESummary(P_UserId).ToList();
+            }, p_UserId);
         }
 
         protected DBContextResult<List<TRN_Notes>> GetImportantNotes(int p_UserId)
         {
-            return ExecuteDALMethod<int,List<TRN_Notes>>(db, (DataContext, P_UserId) =>
+            return ExecuteDALMethod(db, (DataContext, P_UserId) =>
             {
                 return db.TRN_Notes.Where(x => x.UserId == p_UserId && x.IsImportant == true && x.IsActive != false).ToList();
             }, p_UserId);

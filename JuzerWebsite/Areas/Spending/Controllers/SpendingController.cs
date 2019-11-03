@@ -23,7 +23,7 @@ namespace JuzerWebsite.Areas.Spending.Controllers
         {
             return View("Spending", new SpendingVM
             {
-                Title = "Notes",
+                Title = "Spending",
                 FirstName = (Session["MST_UserInfo"] as MST_UserInfo).FirstName,
                 DeveloperName = "Juzer Hakimji",
                 Year = DateTime.Now.Year.ToString()

@@ -49,6 +49,7 @@
     <Compile Include="NotesVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpendingVM.cs" />
+    <Compile Include="UserHomeVM.cs" />
     <Compile Include="UserVM.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

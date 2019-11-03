@@ -199,6 +199,9 @@
         <Function Name="usp_GetExpenseList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
+        <Function Name="usp_GetIESummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_GetIncomesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
@@ -300,6 +303,9 @@
           </FunctionImport>
           <EntitySet Name="WebsiteErrorLogs" EntityType="JuzerWebsiteModel.WebsiteErrorLog" />
           <EntitySet Name="CustomerContactInfoes" EntityType="JuzerWebsiteModel.CustomerContactInfo" />
+          <FunctionImport Name="usp_GetIESummary" ReturnType="Collection(JuzerWebsiteModel.usp_GetIESummary_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_GetExpenseList_Result">
           <Property Type="Int32" Name="ExpenseId" Nullable="false" />
@@ -532,6 +538,12 @@
           <Property Name="Subject" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="usp_GetIESummary_Result">
+          <Property Type="Int32" Name="MonthIncome" Nullable="true" />
+          <Property Type="Int32" Name="MonthExpense" Nullable="true" />
+          <Property Type="Int32" Name="YearIncome" Nullable="true" />
+          <Property Type="Int32" Name="YearExpense" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -693,6 +705,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetIESummary" FunctionName="JuzerWebsiteModel.Store.usp_GetIESummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JuzerWebsiteModel.usp_GetIESummary_Result">
+                <ScalarProperty Name="MonthIncome" ColumnName="MonthIncome" />
+                <ScalarProperty Name="MonthExpense" ColumnName="MonthExpense" />
+                <ScalarProperty Name="YearIncome" ColumnName="YearIncome" />
+                <ScalarProperty Name="YearExpense" ColumnName="YearExpense" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
