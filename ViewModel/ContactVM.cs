@@ -13,7 +13,7 @@ namespace ViewModel
         [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Please enter Email")]
-        [StringLength(30, ErrorMessage = "Do not enter more than 50 characters")]
+        [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Please enter Subject")]
         [StringLength(30, ErrorMessage = "Do not enter more than 100 characters")]

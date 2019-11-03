@@ -44,7 +44,7 @@ namespace JuzerWebsite.Areas.Notes.Controllers
             TransactionResult<object> result;
             if (P_NotesVM.NoteId != null)
             {
-                result = BLObj.BL_UpdateNote(P_NotesVM, (Session["MST_UserInfo"] as MST_UserInfo).UserId);
+                result = BLObj.BL_UpdateNote(P_NotesVM);
             }
             else
             {
@@ -53,14 +53,14 @@ namespace JuzerWebsite.Areas.Notes.Controllers
             return Json(result);
         }
 
-        [HttpPut]
+        [HttpPost]
         public JsonResult ChangeNoteImportance(int NoteId, bool IsImportant)
         {
             TransactionResult<object> result = BLObj.BL_ChangeNoteImportance(NoteId, IsImportant);
             return Json(result);
         }
 
-        [HttpPut]
+        [HttpPost]
         public JsonResult DeleteNote(int p_NoteId)
         {
             TransactionResult<object> result = BLObj.BL_DeleteNote(p_NoteId);

@@ -1,4 +1,5 @@
 jQuery(document).ready(function ($) {
+    $('.preloader').fadeOut(); // set duration in brackets    
     InitializeForm('#cd-form-Login,#cd-form-SignUp,#cd-form-ResetPass,#contact-form');
     var $form_modal = $('.cd-user-modal'),
         $form_login = $form_modal.find('#cd-login'),
@@ -12,19 +13,10 @@ jQuery(document).ready(function ($) {
         $main_nav = $('.UserPopUp');
     //open modal
     $main_nav.on('click', function (event) {
-
-        //if ($(event.target).is($main_nav)) {
-        //    // on mobile open the submenu
-        //    $(this).children('ul').toggleClass('is-visible');
-        //} else {
-        //    // on mobile close submenu
-        //    $main_nav.children('ul').removeClass('is-visible');
         //show modal layer
         $form_modal.addClass('is-visible');
         //show the selected form
         ($(event.target).is('.cd-signup')) ? signup_selected() : login_selected();
-        //}
-
     });
 
     //close modal
@@ -85,7 +77,6 @@ jQuery(document).ready(function ($) {
         $form_forgot_password.removeClass('is-selected');
         $tab_login.removeClass('selected');
         $tab_signup.addClass('selected');
-        //InitCountryDropdown();
     }
 
     function forgot_password_selected() {
@@ -137,9 +128,9 @@ jQuery(document).ready(function ($) {
         "use strict";
 
         // PRE loader
-        $(window).on('load', function () {
-            $('.preloader').fadeOut(1000); // set duration in brackets    
-        });
+        //$(window).on('load', function () {
+        //    $('.preloader').fadeOut(); // set duration in brackets    
+        //});
 
 
         //Navigation Section
@@ -157,15 +148,15 @@ jQuery(document).ready(function ($) {
 
 
          //Smoothscroll js
-        $(function () {
-            $('.custom-navbar a, #home a').bind('click', function (event) {
-                var $anchor = $(this);
-                $('html, body').stop().animate({
-                    scrollTop: $($anchor.attr('href')).offset().top - 49
-                }, 1000);
-                event.preventDefault();
-            });
-        });
+        //$(function () {
+        //    $('.custom-navbar a, #home a').bind('click', function (event) {
+        //        var $anchor = $(this);
+        //        $('html, body').stop().animate({
+        //            scrollTop: $($anchor.attr('href')).offset().top - 49
+        //        }, 1000);
+        //        event.preventDefault();
+        //    });
+        //});
 
 
         // WOW Animation js
@@ -175,10 +166,6 @@ jQuery(document).ready(function ($) {
     //homene style end
 
     $('#btnLogin').on('click', function () {
-        //var formValid = $("#cd-form-Login").validate().form();
-        //if (!formValid) return false;
-        //var SerializedArray = $('#cd-form-Login').serializeArray();
-        //var SerializedObj = objectifyForm(SerializedArray);
         if (fn_FormValidation('#cd-form-Login')) {
             var SerializedObj = $('#cd-form-Login').serialize();
             $.ajax({
@@ -189,7 +176,6 @@ jQuery(document).ready(function ($) {
                 success: function (result) {
                     if (result.Success == false) {
                         ShowResult(result.Message);
-                        //$('#LoginValidate').text(result.Message);
                         fn_FormReset('#cd-form-Login');
                     }
                     else if (result.Success == true) {
@@ -204,12 +190,9 @@ jQuery(document).ready(function ($) {
     });
 
     $('#btnCrtAcct').on('click', function () {
-        //var formValid = $("#cd-form-SignUp").validate().form();
-        //if (!formValid) return false;
-        //var SerializedArray = $('#cd-form-SignUp').serializeArray();
-        //var SerializedObj = objectifyForm(SerializedArray);
         if (fn_FormValidation('#cd-form-SignUp')) {
             var SerializedObj = $('#cd-form-SignUp').serialize();
+            ShowResult("Registering , Please Wait!");
             $.ajax({
                 type: 'POST',
                 url: "/User/Save",
@@ -236,7 +219,7 @@ jQuery(document).ready(function ($) {
     $('#btnResetPass').on('click', function () {
         if (fn_FormValidation('#cd-form-ResetPass')) {
             $.ajax({
-                type: 'PUT',
+                type: 'POST',
                 url: "/User/SendResetPasswordEmail",
                 data: { p_Email: $('#ResetEmail').val() },
                 dataType: 'json',
@@ -245,7 +228,7 @@ jQuery(document).ready(function ($) {
                         ShowResult(result.Message);
                         setTimeout(function () {
                             window.location.href = result.RedirectURL;
-                        }, 1500);
+                        }, 5000);
                     }
                     else {
                         ShowResult(result.Message);

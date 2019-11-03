@@ -1,6 +1,7 @@
 ﻿using BusinessEntities.Entities.Entity_Model;
 using DataAccessLayer.Base_Classes;
 using DataAccessLayer.Data_Model;
+using DataAccessLayer.Database_Utilities.Enums;
 using DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -105,6 +106,14 @@ namespace DataAccessLayer.Abstract_Classes
                 DataContext.SaveChanges();
                 return true;
             }, p_IncomeId);
+        }
+
+        protected DBContextResult<List<DEV_Category>> GetCategoryList(bool p_IsExpense)
+        {
+            return ExecuteDALMethod(db, (DataContext, P_IsExpense) =>
+            {
+                return P_IsExpense ? DataContext.DEV_Category.Where(x => x.TypeId == (int)Dev_Category.Expense).ToList() : DataContext.DEV_Category.Where(x => x.TypeId == (int)Dev_Category.Income).ToList();
+            }, p_IsExpense);
         }
 
         public void Dispose()

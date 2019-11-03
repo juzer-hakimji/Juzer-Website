@@ -122,7 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Notes\Controllers\NotesController.cs" />
     <Compile Include="Areas\Notes\NotesAreaRegistration.cs" />
-    <Compile Include="Areas\Spending\Controllers\ListController.cs" />
+    <Compile Include="Areas\Spending\Controllers\SpendingController.cs" />
     <Compile Include="Areas\Spending\SpendingAreaRegistration.cs" />
     <Compile Include="Controllers\AnalysisController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -166,6 +166,9 @@
     <Content Include="Content\HomePage\magnific-popup.css" />
     <Content Include="Content\HomePage\reset.min.css" />
     <Content Include="Content\HomePage\style.css" />
+    <Content Include="Content\Images\BikeRides.jpg" />
+    <Content Include="Content\Images\camping.jpg" />
+    <Content Include="Content\Images\Football.jpg" />
     <Content Include="Content\Images\Graphs.jpg" />
     <Content Include="Content\Images\ImportantNote.png" />
     <Content Include="Content\Images\IncomesAndExpenses.jpg" />
@@ -176,6 +179,8 @@
     <Content Include="Content\Images\instagram-image5.jpg" />
     <Content Include="Content\Images\Notes.png" />
     <Content Include="Content\Images\profile-image.jpg" />
+    <Content Include="Content\Images\Travelling.jpeg" />
+    <Content Include="Content\Images\WatchingMovies.jpg" />
     <Content Include="Content\Images\work-1.jpg" />
     <Content Include="Content\Images\work-2.jpg" />
     <Content Include="Content\Images\work-3.jpg" />
@@ -229,6 +234,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap-notify.js" />
     <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Areas\Notes\Views\web.config" />
@@ -276,6 +282,9 @@
     <Content Include="Content\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\webfonts\fa-solid-900.woff" />
     <Content Include="Content\webfonts\fa-solid-900.woff2" />
+    <Content Include="Areas\Spending\Views\Spending\Spending.cshtml" />
+    <Content Include="Areas\Spending\Views\Spending\_AddIncomeOrExpense.cshtml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\JuzerWebsiteProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\CustomJSScripts\Common.js" />
@@ -337,7 +346,6 @@
     <Folder Include="Areas\Notes\Models\" />
     <Folder Include="Areas\Notes\Views\Shared\" />
     <Folder Include="Areas\Spending\Models\" />
-    <Folder Include="Areas\Spending\Views\List\" />
     <Folder Include="Areas\Spending\Views\Shared\" />
     <Folder Include="Views\Error\" />
     <Folder Include="Views\Login\" />

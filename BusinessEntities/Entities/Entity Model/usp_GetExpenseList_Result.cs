@@ -19,5 +19,6 @@ namespace BusinessEntities.Entities.Entity_Model
         public string Note { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public int UserId { get; set; }
+        public string CategoryName { get; set; }
     }
 }

@@ -20,14 +20,14 @@ function ChangeNoteImportanceHandler() {
     var CurrentRowdata = DataTable.row($(this).parents('tr')).data();
     if ($(this).children('i').attr("class") == 'fas fa-star') {
         //To mark not important
-        CallAjaxMethod("/Notes/ChangeNoteImportance", 'PUT', { NoteId: CurrentRowdata.NoteId, IsImportant: false }).then(function (result) {
+        CallAjaxMethod("/Notes/ChangeNoteImportance", 'POST', { NoteId: CurrentRowdata.NoteId, IsImportant: false }).then(function (result) {
             ShowResult(result.Message);
         });
         $(this).children('i').attr("class", "far fa-star");
     }
     else {
         //To mark important
-        CallAjaxMethod("/Notes/ChangeNoteImportance", 'PUT', { NoteId: CurrentRowdata.NoteId, IsImportant: true }).then(function (result) {
+        CallAjaxMethod("/Notes/ChangeNoteImportance", 'POST', { NoteId: CurrentRowdata.NoteId, IsImportant: true }).then(function (result) {
             ShowResult(result.Message);
         });
         $(this).children('i').attr("class", "fas fa-star");
@@ -59,7 +59,7 @@ function DeleteNoteHandler() {
         },
         callback: function (result) {
             if (result == true) {
-                CallAjaxMethod("/Notes/DeleteNote", 'PUT', { p_NoteId: CurrentRowdata.NoteId }).then(function (result) {
+                CallAjaxMethod("/Notes/DeleteNote", 'POST', { p_NoteId: CurrentRowdata.NoteId }).then(function (result) {
                     ShowResult(result.Message);
                     fn_InitDataTable();
                 });

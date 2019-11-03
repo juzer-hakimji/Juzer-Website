@@ -32,7 +32,7 @@ namespace JuzerWebsite.Controllers
             });
         }
 
-        [HttpPut]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddOrRemoveAdmin(string UserIds, bool IsAdmin)
         {
