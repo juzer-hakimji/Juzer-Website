@@ -30,7 +30,7 @@ namespace DataAccessLayer.Abstract_Classes
         {
             return ExecuteDALMethod(db, (DataContext, P_UserId) =>
             {
-                return db.TRN_Notes.Where(x => x.UserId == p_UserId && x.IsImportant == true && x.IsActive != false).ToList();
+                return db.TRN_Notes.Where(x => x.UserId == p_UserId && x.IsImportant == true && x.IsActive != false).OrderByDescending(x => x.NoteId).ToList();
             }, p_UserId);
         }
 

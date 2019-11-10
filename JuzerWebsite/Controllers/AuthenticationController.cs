@@ -54,7 +54,7 @@ namespace JuzerWebsite.Controllers
                     return Json(new TransactionResult<object>
                     {
                         Success = true,
-                        RedirectURL = Url.Action("List", "Notes")
+                        RedirectURL = Url.Action("Summary", "UserHome")
                     });
                 }
                 else

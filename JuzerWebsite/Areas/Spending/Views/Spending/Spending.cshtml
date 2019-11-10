@@ -6,9 +6,9 @@
 
 @section styles
 {
-    <link href="~/Content/css/all.css" rel="stylesheet" />
+    @*<link href="~/Content/css/all.css" rel="stylesheet" />*@
     @Styles.Render("~/StyleBundle/Spending")
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">*@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 }
@@ -31,7 +31,7 @@
     <div class="jumbotron ml-auto">
         <h4>Here you can create a list of your incomes and expenses , Edit them , and Delete them.</h4>
         <h3><a id="AddIncome" class="btn btn-primary pull-right" href="#0">Add Income</a></h3>
-        <h3><a id="AddExpense" class="btn btn-primary pull-right" href="#0">Add Expense</a></h3>
+        <h3><a id="AddExpense" class="btn btn-primary pull-right MarginRight" href="#0">Add Expense</a></h3>
     </div>
 </div>
 <div>
@@ -75,5 +75,5 @@
 @section scripts
 {
     @Scripts.Render("~/ScriptBundle/Spending")
-    <script src="~/Scripts/CustomJSScripts/jsSpending.js"></script>
+    @*<script src="~/Scripts/CustomJSScripts/jsSpending.js"></script>*@
 }

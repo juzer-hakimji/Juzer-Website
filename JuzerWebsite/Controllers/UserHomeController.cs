@@ -20,12 +20,6 @@ namespace JuzerWebsite.Controllers
 
         public ActionResult Summary()
         {
-            //UserHomeVM UserHomeVM = BLObj.BL_GetDataForComparison((Session["MST_UserInfo"] as MST_UserInfo).UserId);
-            //UserHomeVM.Title = "Home";
-            //UserHomeVM.FirstName = (Session["MST_UserInfo"] as MST_UserInfo).FirstName;
-            //UserHomeVM.DeveloperName = "Juzer Hakimji";
-            //UserHomeVM.Year = DateTime.Now.Year.ToString();
-            //return View("UserHome", UserHomeVM);
             return View("UserHome", new UserHomeVM
             {
                 Title = "Home",
@@ -39,6 +33,12 @@ namespace JuzerWebsite.Controllers
         {
             List<NotesVM> ImpNotesList = BLObj.BL_GetImportantNotes((Session["MST_UserInfo"] as MST_UserInfo).UserId);
             return Json(ImpNotesList, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetGraphData()
+        {
+            UserHomeVM UserHomeVM = BLObj.BL_GetDataForComparison((Session["MST_UserInfo"] as MST_UserInfo).UserId);
+            return Json(UserHomeVM, JsonRequestBehavior.AllowGet);
         }
     }
 }

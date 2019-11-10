@@ -19,12 +19,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Juzer Website", "List", "Notes", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Juzer Website", "Summary", "UserHome", new { area = "" }, new { @class = "navbar-brand" })
                 <a class="navbar-brand pull-right" href="#">Hi @Model.FirstName</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav ml-auto">
-                    <li><a href="/UserHome/Summary">Notes</a></li>
+                    <li><a href="/UserHome/Summary">Home</a></li>
                     <li><a href="/Notes/List">Notes</a></li>
                     <li><a href="/Spending/List">Spending</a></li>
                     <li style="display:@(Convert.ToBoolean(Session["IsAdmin"]) ? "inline" : "none")"><a href="/Analysis/Index">Analysis</a></li>

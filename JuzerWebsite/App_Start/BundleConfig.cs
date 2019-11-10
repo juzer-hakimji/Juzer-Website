@@ -39,11 +39,17 @@ namespace JuzerWebsite
                       "~/Content/css/select2.min.css"));
 
             bundles.Add(new StyleBundle("~/StyleBundle/Spending").Include(
+                     "~/Content/css/all.css",
                      "~/Content/DataTables/css/jquery.dataTables.css",
                      "~/Content/themes/base/jquery-ui.min.css",
                      "~/Content/font-awesome.min.css",
                      "~/Content/css/select2.min.css"
                      ));
+
+            bundles.Add(new StyleBundle("~/StyleBundle/UserHome").Include(
+                     "~/Content/DataTables/css/jquery.dataTables.css"
+                     ));
+
 
             #endregion
 
@@ -58,11 +64,11 @@ namespace JuzerWebsite
                       "~/Scripts/HomePage/wow.min.js",
                       "~/Scripts/select2.min.js",
                       "~/Scripts/bootstrap-notify.min.js",
-                      "~/Scripts/CustomJSScripts/Common.js",
                       "~/Scripts/HomePage/script.js",
                       "~/Scripts/modernizr-2.8.3.js",
                       "~/Scripts/jquery.validate.min.js",
-                      "~/Scripts/jquery.validate.unobtrusive.min.js"));
+                      "~/Scripts/jquery.validate.unobtrusive.min.js",
+                      "~/Scripts/CustomJSScripts/Common.js"));
 
             bundles.Add(new ScriptBundle("~/ScriptBundle/Layout").Include(
                       "~/Scripts/bootstrap.min.js",
@@ -72,10 +78,10 @@ namespace JuzerWebsite
                       "~/Scripts/HomePage/magnific-popup-options.js",
                       "~/Scripts/HomePage/wow.min.js",
                       "~/Scripts/bootstrap-notify.min.js",
-                      "~/Scripts/CustomJSScripts/Common.js",
                       "~/Scripts/modernizr-2.8.3.js",
                       "~/Scripts/jquery.validate.min.js",
-                      "~/Scripts/jquery.validate.unobtrusive.min.js"));
+                      "~/Scripts/jquery.validate.unobtrusive.min.js",
+                      "~/Scripts/CustomJSScripts/Common.js"));
 
             bundles.Add(new ScriptBundle("~/ScriptBundle/Notes").Include(
                       "~/Scripts/DataTables/jquery.dataTables.min.js",
@@ -98,9 +104,14 @@ namespace JuzerWebsite
                       "~/Scripts/DataTables/jquery.dataTables.min.js",
                       "~/Scripts/jquery-ui-1.12.1.min.js",
                       "~/Scripts/select2.min.js"
-                      //,"~/Scripts/CustomJSScripts/jsSpending.js"
-                      )
-                      );
+                      , "~/Scripts/CustomJSScripts/jsSpending.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/ScriptBundle/UserHome").Include(
+                      "~/Scripts/Chart.min.js",
+                      "~/Scripts/DataTables/jquery.dataTables.min.js"
+                     ,"~/Scripts/CustomJSScripts/jsUserHome.js"
+                      ));
 
             #endregion
 
