@@ -73,7 +73,7 @@ namespace JuzerWebsite.Controllers
                         EnableSsl = true,
                         DeliveryMethod = SmtpDeliveryMethod.Network,
                         UseDefaultCredentials = false,
-                        Credentials = new NetworkCredential("hakimjuzer@gmail.com", "juzernahi#")
+                        Credentials = new NetworkCredential("hakimjuzer@gmail.com", "")
                     };
                     using (var message = new MailMessage(new MailAddress("hakimjuzer@gmail.com", "Juzer"), new MailAddress(p_Email, "user"))
                     {
