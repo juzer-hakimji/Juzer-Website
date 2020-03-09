@@ -38,7 +38,7 @@ namespace JuzerWebsite.Controllers
                     return Json(new TransactionResult<object>
                     {
                         Success = true,
-                        RedirectURL = "/Notes/List",
+                        RedirectURL = "/UserHome/Summary",
                         Message = "Registration Successful"
                     });
                 }

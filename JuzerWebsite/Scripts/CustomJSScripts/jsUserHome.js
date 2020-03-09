@@ -23,6 +23,13 @@ function InitializeGraphs() {
             }
             , options: {
                 responsive: true
+                //tooltips: {
+                //    callbacks: {
+                //        label: function (tooltipItem, data) {
+                //            return tooltipItem.yLabel;
+                //        }
+                //    }
+                //}
                 //, maintainAspectRatio: false
             }
         });
