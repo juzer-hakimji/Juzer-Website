@@ -4,6 +4,7 @@ using BusinessLayer.TransactionResultModel;
 using JuzerWebsite.Utilities.Filters;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -73,9 +74,9 @@ namespace JuzerWebsite.Controllers
                         EnableSsl = true,
                         DeliveryMethod = SmtpDeliveryMethod.Network,
                         UseDefaultCredentials = false,
-                        Credentials = new NetworkCredential("hakimjuzer@gmail.com", "")
+                        Credentials = new NetworkCredential(ConfigurationManager.AppSettings["FromAddress"], ConfigurationManager.AppSettings["FromAddressPass"])
                     };
-                    using (var message = new MailMessage(new MailAddress("hakimjuzer@gmail.com", "Juzer"), new MailAddress(p_Email, "user"))
+                    using (var message = new MailMessage(new MailAddress(ConfigurationManager.AppSettings["FromAddress"], ConfigurationManager.AppSettings["FromAddressName"]), new MailAddress(p_Email, "user"))
                     {
                         Subject = "Reset Password Request",
                         Body = "Hello \n\nyour new password is : " + NewPassword + "\n\n\nThank you"

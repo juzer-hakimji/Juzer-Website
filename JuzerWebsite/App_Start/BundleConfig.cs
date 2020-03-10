@@ -64,11 +64,11 @@ namespace JuzerWebsite
                       "~/Scripts/HomePage/wow.min.js",
                       "~/Scripts/select2.min.js",
                       "~/Scripts/bootstrap-notify.min.js",
+                      "~/Scripts/CustomJSScripts/Common.js",
                       "~/Scripts/HomePage/script.js",
                       "~/Scripts/modernizr-2.8.3.js",
                       "~/Scripts/jquery.validate.min.js",
-                      "~/Scripts/jquery.validate.unobtrusive.min.js",
-                      "~/Scripts/CustomJSScripts/Common.js"));
+                      "~/Scripts/jquery.validate.unobtrusive.min.js"));
 
             bundles.Add(new ScriptBundle("~/ScriptBundle/Layout").Include(
                       "~/Scripts/bootstrap.min.js",

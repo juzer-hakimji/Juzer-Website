@@ -172,15 +172,22 @@ namespace BusinessLayer.Business_Logic_Classes
         public List<CountryVM> BL_GetCountryList()
         {
             List<CountryVM> CountryList = new List<CountryVM>();
-            foreach (var Country in new DAL_User().DAL_GetCountryList().Data.ToList())
+            try
             {
-                CountryList.Add(new CountryVM
+                foreach (var Country in new DAL_User().DAL_GetCountryList().Data.ToList())
                 {
-                    CountryId = Country.CountryId,
-                    CountryName = Country.CountryName
-                });
+                    CountryList.Add(new CountryVM
+                    {
+                        CountryId = Country.CountryId,
+                        CountryName = Country.CountryName
+                    });
+                }
+                return CountryList;
             }
-            return CountryList;
+            catch (Exception e)
+            {
+                return CountryList;
+            }
         }
 
         public TransactionResult<object> BL_SaveContactInfo(ContactVM ContactVM)
