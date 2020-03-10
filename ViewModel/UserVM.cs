@@ -40,6 +40,11 @@ namespace ViewModel
         public string SignUpPassword { get; set; }
 
         public List<CountryVM> CountryList { get; set; }
+
+        public UserDetailsVM()
+        {
+            CountryList = new List<CountryVM>();
+        }
     }
 
     public class UserLoginVM
