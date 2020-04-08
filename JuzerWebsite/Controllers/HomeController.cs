@@ -12,6 +12,7 @@ namespace JuzerWebsite.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
+        [OutputCache(Duration = 86400)]
         public ActionResult Index()
         {
             return View("Index", new MainUserVM
