@@ -175,7 +175,6 @@
     <Content Include="Content\Images\Football.jpg" />
     <Content Include="Content\Images\Graphs.jpg" />
     <Content Include="Content\Images\ImportantNote.jpg" />
-    <Content Include="Content\Images\ImportantNote.png" />
     <Content Include="Content\Images\IncomesAndExpenses.jpg" />
     <Content Include="Content\Images\instagram-image1.jpg" />
     <Content Include="Content\Images\instagram-image2.jpg" />
@@ -183,9 +182,7 @@
     <Content Include="Content\Images\instagram-image4.jpg" />
     <Content Include="Content\Images\instagram-image5.jpg" />
     <Content Include="Content\Images\Notes.jpg" />
-    <Content Include="Content\Images\Notes.png" />
     <Content Include="Content\Images\Juzer-Hakimji.jpg" />
-    <Content Include="Content\Images\Travelling.jpeg" />
     <Content Include="Content\Images\Travelling.jpg" />
     <Content Include="Content\Images\WatchingMovies.jpg" />
     <Content Include="Content\Images\work-1.jpg" />
