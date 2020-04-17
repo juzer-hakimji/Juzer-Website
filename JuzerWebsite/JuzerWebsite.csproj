@@ -292,6 +292,7 @@
     <Content Include="Areas\Spending\Views\Spending\_AddIncomeOrExpense.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\JuzerWebsite - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\JuzerWebsiteProfile.pubxml" />
     <None Include="Properties\PublishProfiles\JuzerWebsiteVM - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -403,7 +404,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49953</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49953/</IISUrl>
+          <IISUrl>http://localhost:48953/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
