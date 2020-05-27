@@ -76,6 +76,7 @@ namespace JuzerWebsite.Controllers
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
+            Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
             return RedirectToAction("Index", "Home");
         }
 
@@ -87,6 +88,8 @@ namespace JuzerWebsite.Controllers
             if (result.Success)
             {
                 Session.Abandon();
+                FormsAuthentication.SignOut();
+                Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
             }
             return Json(result);
         }

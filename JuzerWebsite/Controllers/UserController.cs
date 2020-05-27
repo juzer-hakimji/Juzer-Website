@@ -17,6 +17,7 @@ namespace JuzerWebsite.Controllers
 {
     public class UserController : Controller
     {
+        //Include Email confirmation feature and alternatives and best standards in it.
         private BL_User BLUser { get; set; }
 
         public UserController()
