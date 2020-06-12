@@ -218,12 +218,14 @@ jQuery(document).ready(function ($) {
 
     $('#btnResetPass').on('click', function () {
         if (fn_FormValidation('#cd-form-ResetPass')) {
+            $(".preloader").css("display", "flex");
             $.ajax({
                 type: 'POST',
                 url: "/User/SendResetPasswordEmail",
                 data: { p_Email: $('#ResetEmail').val() },
                 dataType: 'json',
                 success: function (result) {
+                    $(".preloader").css("display", "none");
                     if (result.Success) {
                         ShowResult(result.Message);
                         setTimeout(function () {

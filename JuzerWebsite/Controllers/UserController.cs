@@ -70,7 +70,7 @@ namespace JuzerWebsite.Controllers
                     string NewPassword = BLUser.BL_GenerateNewPassword(p_Email);
                     var smtp = new SmtpClient
                     {
-                        Host = "smtp.gmail.com",
+                        Host = "smtpout.secureserver.net",
                         Port = 587,
                         EnableSsl = true,
                         DeliveryMethod = SmtpDeliveryMethod.Network,
